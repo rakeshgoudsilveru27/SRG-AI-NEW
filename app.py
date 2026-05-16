@@ -151,14 +151,13 @@ else:
 
     )
 
-    # RETURN RESPONSE
+     # RETURN RESPONSE
 
-    return jsonify({
+     return jsonify({
 
         'reply': ai_reply
 
     })
-
 # RUN APP
 
 if __name__ == '__main__':
