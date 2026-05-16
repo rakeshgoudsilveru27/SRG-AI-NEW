@@ -21,7 +21,7 @@ def home():
 def chat():
 
     user_message = request.form['message']
-    selected_model = request.form.get('model', 'llama3-8b-8192')
+    selected_model = request.form.get('model', 'llama-3.1-8b-instant')
     image = request.files.get('image')
 
     # SAVE IMAGE
@@ -82,7 +82,7 @@ Assistant:
         "https://api.groq.com/openai/v1/chat/completions",
         headers=headers,
         json={
-            "model": "llama-3.1-8b-instant",
+            "model": selected_model,
             "messages": [
                 {
                     "role": "system",
