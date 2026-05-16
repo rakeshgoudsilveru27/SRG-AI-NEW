@@ -151,11 +151,21 @@ else:
 
     )
 
-     # RETURN RESPONSE
+    # SAVE AI RESPONSE
+
+    conversation_history.append(
+
+        f"Assistant: {ai_reply}"
+
+    )
+
+    # RETURN RESPONSE
+
     return jsonify({
         'reply': ai_reply
+    })
 
-     })
+
 # RUN APP
 
 if __name__ == '__main__':
