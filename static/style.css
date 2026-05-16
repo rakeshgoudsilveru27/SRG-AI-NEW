@@ -219,7 +219,7 @@ body{
 
 .main{
     flex:1;
-    display:flex;
+    display:relative;
     flex-direction:column;
     overflow:hidden;
     width:100%;
@@ -519,4 +519,40 @@ body{
     .tagline{
         display:none;
     }
+}
+/* FINAL FIX */
+
+.main{
+    position:relative;
+}
+
+.chat-area{
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    width:100%;
+    max-width:1100px;
+    margin:auto;
+    display:flex;
+    flex-direction:column;
+}
+
+.chat-messages{
+    flex:1;
+    overflow-y:auto;
+    width:100%;
+    padding:20px;
+}
+
+.chat-input-area{
+    width:100%;
+    padding:15px;
+    background:#111827;
+}
+
+.welcome,
+.features{
+    display:none;
 }
