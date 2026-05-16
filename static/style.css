@@ -244,10 +244,10 @@ body{
     flex:1;
     display:flex;
     flex-direction:column;
-    justify-content:center;
     align-items:center;
     padding:30px;
     overflow-y:auto;
+    width: 100%;
 }
 /* HIDE MOBILE MENU ON DESKTOP */
 
@@ -310,7 +310,8 @@ body{
 /* CHAT */
 
 .chat-area{
-    padding:20px 30px;
+    width: 100%;
+    max-width: 1000px;
     display: flex;
     flex-direction: column;
     min-height: 100%;
@@ -320,8 +321,8 @@ body{
 .chat-messages{
     flex:1;
     overflow-y:auto;
-    margin-bottom:15px;
-    scroll-behavior:smooth;
+    width: 100%;
+    padding-bottom: 20px;
 }
 
 .user-msg{
