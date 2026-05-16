@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>SRG.ai</title>
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="mobile-menu"
+onclick="toggleSidebar()">
+
+☰
+
+</div>
+
+<div class="sidebar">
+
+    <div class="logo-area">
+
+        <img src="{{ url_for('static',
+        filename='logo.png') }}"
+        class="logo">
+
+        <div>
+
+            <div class="logo-text">
+                SRG<span>.ai</span>
+            </div>
+
+            <div class="tagline">
+                Smart. Reliable. Genius.
+            </div>
+
+        </div>
+
+    </div>
+
+    <button class="new-chat"
+    onclick="newChat()">
+
+        + New Chat
+
+    </button>
+
+    <div class="history-section">
+
+        <div class="history-title">
+            🕘 Chats
+        </div>
+
+        <div id="historyList"></div>
+
+    </div>
+
+    <button class="mode-btn"
+    id="themeButton">
+
+        ☀ Light / Dark
+
+    </button>
+
+    <div class="status-box">
+
+        <div class="status-dot"></div>
+
+        <span>
+            SRG.ai Online
+        </span>
+
+    </div>
+
+    <div class="clock"
+    id="clock"></div>
+
+</div>
+
+<div class="main-container">
+
+    <div class="topbar">
+
+        <select id="modelSelect"
+        class="model-select">
+
+            <option value="phi3">
+                Phi 3 Fast
+            </option>
+
+            <option value="mistral">
+                Mistral
+            </option>
+
+            <option value="llama3">
+                Llama 3 Smart
+            </option>
+
+        </select>
+
+    </div>
+
+    <div class="main">
+
+        <div class="welcome">
+
+            <h1>
+                Welcome to
+                <span>SRG.ai</span>
+            </h1>
+
+            <p>
+                Your intelligent AI assistant
+                for electronics and coding.
+            </p>
+
+        </div>
+
+        <div class="features">
+
+            <div class="card">
+                <h3>⚡ Explain Circuits</h3>
+                <p>
+                    Understand electronic circuits easily.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>💻 Arduino Coding</h3>
+                <p>
+                    Generate Arduino and ESP32 code.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>🤖 Embedded Systems</h3>
+                <p>
+                    Build robotics and embedded projects.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="chat-area">
+
+        <div class="chat-messages"
+        id="chatMessages"></div>
+
+        <div class="input-box">
+
+            <button class="icon-btn"
+            onclick="document.getElementById('imageInput').click()">
+
+                📷
+
+            </button>
+
+            <input type="file"
+            id="imageInput"
+            hidden>
+
+            <button class="mic-btn">
+
+                🎤
+
+            </button>
+
+            <input type="text"
+            id="userInput"
+            placeholder="Type your message...">
+
+            <button class="send-btn"
+            onclick="sendMessage()">
+
+                ➜
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+const themeButton =
+document.getElementById(
+    "themeButton"
+);
+
+let savedTheme =
+localStorage.getItem(
+    "theme"
+);
+
+if(savedTheme === "light"){
+
+    document.body.classList.add(
+        "light-mode"
+    );
+}
+
+themeButton.onclick = function(){
+
+    document.body.classList.toggle(
+        "light-mode"
+    );
+
+    if(document.body.classList.contains(
+        "light-mode"
+    )){
+
+        localStorage.setItem(
+            "theme",
+            "light"
+        );
+
+    }
+
+    else{
+
+        localStorage.setItem(
+            "theme",
+            "dark"
+        );
+
+    }
+};
+
+function updateClock(){
+
+    let now = new Date();
+
+    document.getElementById(
+        "clock"
+    ).innerHTML =
+    now.toLocaleTimeString();
+}
+
+setInterval(updateClock,1000);
+
+updateClock();
+
+let currentChat = [];
+
+let currentChatTitle = null;
+
+async function sendMessage(){
+
+    let input =
+    document.getElementById(
+        "userInput"
+    );
+
+    let message =
+    input.value.trim();
+
+    if(message === ""){
+        return;
+    }
+
+    let chatBox =
+    document.getElementById(
+        "chatMessages"
+    );
+
+    document.querySelector(
+        ".welcome"
+    ).style.display = "none";
+
+    document.querySelector(
+        ".features"
+    ).style.display = "none";
+
+    chatBox.innerHTML += `
+    <div class="user-msg">
+        ${message}
+    </div>
+    `;
+
+    chatBox.scrollTop =
+    chatBox.scrollHeight;
+
+    currentChat.push({
+        type:"user",
+        text:message
+    });
+
+    if(currentChatTitle === null){
+        currentChatTitle = message;
+    }
+
+    input.value = "";
+
+    let typingDiv =
+    document.createElement("div");
+
+    typingDiv.className = "ai-msg";
+
+    typingDiv.id = "typing";
+
+    typingDiv.innerHTML = `
+    <div class="dot-loader">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    `;
+
+    chatBox.appendChild(
+        typingDiv
+    );
+
+    chatBox.scrollTop =
+    chatBox.scrollHeight;
+
+    let formData =
+    new FormData();
+
+    formData.append(
+        "message",
+        message
+    );
+
+    formData.append(
+        "model",
+        document.getElementById(
+            "modelSelect"
+        ).value
+    );
+
+    const imageInput =
+    document.getElementById(
+        "imageInput"
+    );
+
+    if(imageInput.files[0]){
+
+        formData.append(
+            "image",
+            imageInput.files[0]
+        );
+    }
+
+    try{
+
+        const response =
+        await fetch("/chat",{
+
+            method:"POST",
+            body:formData
+
+        });
+
+        const data =
+        await response.json();
+
+        document.getElementById(
+            "typing"
+        ).remove();
+
+        chatBox.innerHTML += `
+        <div class="ai-msg">
+            ${data.reply}
+        </div>
+        `;
+
+        chatBox.scrollTop =
+        chatBox.scrollHeight;
+
+        currentChat.push({
+
+            type:"ai",
+            text:data.reply
+
+        });
+
+        saveChat();
+
+    }
+
+    catch(error){
+
+        document.getElementById(
+            "typing"
+        ).remove();
+    }
+}
+
+function saveChat(){
+
+    let chats =
+    JSON.parse(
+        localStorage.getItem(
+            "srg_chats"
+        )
+    ) || [];
+
+    let existingChat =
+    chats.find(
+        chat =>
+        chat.title === currentChatTitle
+    );
+
+    if(existingChat){
+
+        existingChat.messages =
+        [...currentChat];
+    }
+
+    else{
+
+        chats.unshift({
+
+            title:currentChatTitle,
+            messages:[...currentChat]
+
+        });
+    }
+
+    localStorage.setItem(
+        "srg_chats",
+        JSON.stringify(chats)
+    );
+
+    loadHistory();
+}
+
+function loadHistory(){
+
+    let historyBox =
+    document.getElementById(
+        "historyList"
+    );
+
+    historyBox.innerHTML = "";
+
+    let chats =
+    JSON.parse(
+        localStorage.getItem(
+            "srg_chats"
+        )
+    ) || [];
+
+    chats.forEach(chat => {
+
+        let item =
+        document.createElement(
+            "button"
+        );
+
+        item.className =
+        "history-item";
+
+        item.innerText =
+        chat.title;
+
+        item.onclick =
+        function(){
+
+            currentChat =
+            [...chat.messages];
+
+            currentChatTitle =
+            chat.title;
+
+            document.querySelector(
+                ".welcome"
+            ).style.display =
+            "none";
+
+            document.querySelector(
+                ".features"
+            ).style.display =
+            "none";
+
+            let chatBox =
+            document.getElementById(
+                "chatMessages"
+            );
+
+            chatBox.innerHTML = "";
+
+            chat.messages.forEach(
+            msg => {
+
+                if(msg.type === "user"){
+
+                    chatBox.innerHTML += `
+                    <div class="user-msg">
+                        ${msg.text}
+                    </div>
+                    `;
+                }
+
+                else{
+
+                    chatBox.innerHTML += `
+                    <div class="ai-msg">
+                        ${msg.text}
+                    </div>
+                    `;
+                }
+            });
+
+            document.querySelector(
+                ".sidebar"
+            ).classList.remove(
+                "active"
+            );
+        };
+
+        historyBox.appendChild(
+            item
+        );
+    });
+}
+
+function newChat(){
+
+    currentChat = [];
+
+    currentChatTitle = null;
+
+    document.getElementById(
+        "chatMessages"
+    ).innerHTML = "";
+
+    document.querySelector(
+        ".welcome"
+    ).style.display = "block";
+
+    document.querySelector(
+        ".features"
+    ).style.display = "flex";
+
+    document.querySelector(
+        ".sidebar"
+    ).classList.remove(
+        "active"
+    );
+}
+
+function toggleSidebar(){
+
+    const sidebar =
+    document.querySelector(
+        ".sidebar"
+    );
+
+    sidebar.classList.toggle(
+        "active"
+    );
+}
+
+/* SWIPE TO CLOSE SIDEBAR */
+
+let touchStartX = 0;
+
+let touchEndX = 0;
+
+const sidebar =
+document.querySelector(
+    ".sidebar"
+);
+
+sidebar.addEventListener(
+"touchstart",
+
+function(e){
+
+    touchStartX =
+    e.changedTouches[0].screenX;
+});
+
+sidebar.addEventListener(
+"touchend",
+
+function(e){
+
+    touchEndX =
+    e.changedTouches[0].screenX;
+
+    if(touchEndX < touchStartX - 50){
+
+        sidebar.classList.remove(
+            "active"
+        );
+    }
+});
+
+loadHistory();
+
+document
+.getElementById(
+"userInput"
+)
+.addEventListener(
+"keypress",
+
+function(event){
+
+    if(event.key === "Enter"){
+
+        sendMessage();
+    }
+});
+
+</script>
+
+</body>
+
+</html>
