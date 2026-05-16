@@ -1,4 +1,76 @@
 from flask import Flask, render_template, request, jsonify
+import requests
+import os
+
+app = Flask(__name__)
+
+# UPLOAD FOLDER
+UPLOAD_FOLDER = 'uploads'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+# CHAT MEMORY
+conversation_history = []
+
+# HOME PAGE
+@app.route('/')
+def home():
+    return render_template('index.html')
+
+# CHAT ROUTE
+@app.route('/chat', methods=['POST'])
+def chat():
+
+    user_message = request.form['message']
+    selected_model = request.form.get('model', 'llama3-8b-8192')
+    image = request.files.get('image')
+
+    # SAVE IMAGE
+    if image:
+
+        os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
+        image_path = os.path.join(
+            app.config['UPLOAD_FOLDER'],
+            image.filename
+        )
+
+        image.save(image_path)
+
+    # SAVE USER MESSAGE
+    conversation_history.append(
+        f"User: {user_message}"
+    )
+
+    # FULL HISTORY
+    history = "\n".join(conversation_history)
+
+    # AI PROMPT
+    prompt = f"""
+You are SRG.ai.
+
+A smart AI assistant for:
+- Electronics
+- Arduino
+- PCB Design
+- Embedded Systems
+- Robotics
+- Engineering
+- Coding
+- Circuit Analysis
+- Microcontrollers
+
+Continue the conversation naturally.
+
+If the user uploaded an image,
+mention that the image was received successfully.
+
+Conversation History:
+
+{history}
+
+Assistant:
+"""
+
     # GROQ API REQUEST
 
     headers = {
