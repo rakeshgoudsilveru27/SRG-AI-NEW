@@ -190,7 +190,7 @@ body{
 .main-container{
     flex:1;
     display:flex;
-    width:100%;
+    width:85%;
     height:100vh;
     overflow:hidden;
 }
@@ -222,7 +222,7 @@ body{
     display:flex;
     flex-direction:column;
     overflow:hidden;
-    width:100%;
+    width:85%;
     height:100%;
     
 }
