@@ -1,4 +1,6 @@
 from flask import Flask, render_template, request, jsonify
+    # GROQ API REQUEST
+
     headers = {
         "Authorization": f"Bearer {os.environ.get('GROQ_API_KEY')}",
         "Content-Type": "application/json"
