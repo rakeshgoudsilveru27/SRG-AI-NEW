@@ -158,7 +158,7 @@ body{
 }
 
 .history-item{
-    background:#10213a;
+    background:transparent;
     padding:12px;
     border-radius:12px;
     margin-bottom:10px;
@@ -171,7 +171,7 @@ body{
 }
 
 .history-item:hover{
-    background:#16304f;
+    background:transparent;
 }
 
 /* STATUS */
@@ -374,7 +374,7 @@ justify-content:flex-start;
 .chat-input-area{
     width:100%;
     padding:14px 20px;
-    background:#0f172a;
+    background:transparent;
     border-top:1px solid rgba(255,255,255,0.06);
     position:sticky;
     bottom:0;
@@ -384,7 +384,7 @@ justify-content:flex-start;
 
 .input-box{
     width:100%;
-    background:#0f1e35;
+    background:white;
     border-radius:22px;
     display:flex;
     align-items:center;
