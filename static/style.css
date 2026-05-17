@@ -16,6 +16,7 @@ body{
     color:white;
     display:flex;
     transition:0.3s;
+    scroll-behavior:smooth;
 }
 
 /* LIGHT MODE */
@@ -101,7 +102,7 @@ body{
 }
 
 .tagline{
-    font-size:12px;
+    font-size:10px;
     opacity:0.75;
     margin-top:4px;
     white-space:nowrap;
@@ -195,17 +196,17 @@ body{
 }
 
 .status-dot{
-    width:12px;
-    height:12px;
+    width:9px;
+    height:9px;
     border-radius:50%;
     background:#00ff66;
     box-shadow:0 0 12px #00ff66;
 }
 
 .clock{
-    margin-top:15px;
+    margin-top:12px;
     text-align:center;
-    opacity:0.7;
+    opacity:0.5;
 }
 
 /* MAIN CONTAINER */
@@ -237,7 +238,15 @@ body{
     padding:10px 14px;
     border-radius:12px;
     outline:none;
+    border:1px solid rgba(255,255,255,0.06);
+
+transition:0.3s;
 }
+
+.model-select:hover{
+    background:#16304f;
+}
+
 
 /* MAIN */
 
@@ -265,7 +274,7 @@ body{
 .welcome{
     text-align:center;
 
-    margin-top:40px;
+    margin-top:20px;
 
     padding:20px;
 }
@@ -334,6 +343,7 @@ body{
     flex-direction:column;
     overflow:hidden;
     position:relative;
+    padding-bottom:140px;
 }
 
 /* CHAT MESSAGES */
@@ -485,7 +495,12 @@ body{
     background:linear-gradient(to right,#007bff,#2ab0ff);
     color:white;
     font-size:18px;
+    transition:0.3s;
     cursor:pointer;
+}
+
+.send-btn:hover{
+    transform:scale(1.05);
 }
 
 /* MOBILE MENU */
