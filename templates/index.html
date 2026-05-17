@@ -13,6 +13,7 @@ content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet"
 href="{{ url_for('static', filename='style.css') }}">
 
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 
 <body>
@@ -373,11 +374,11 @@ async function sendMessage(){
             "typing"
         ).remove();
 
-        chatBox.innerHTML += `
-        <div class="ai-msg">
-            ${data.reply}
-        </div>
-        `;
+      chatBox.innerHTML += `
+<div class="ai-msg">
+    ${marked.parse(data.reply)}
+</div>
+`;
 
         chatBox.scrollTop =
         chatBox.scrollHeight;
