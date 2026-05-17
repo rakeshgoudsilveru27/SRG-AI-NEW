@@ -387,31 +387,47 @@ justify-content:flex-start;
 }
 
 .user-msg{
+
     align-self:flex-end;
+
     padding:14px 18px;
+
     border-radius:18px;
+
     max-width:68%;
+
     color:#f1f5f9;
-    background:rgba(255,255,255,0.05);
-    border:1px solid rgba(255,255,255,0.08);
-    backdrop-filter:blur(6px);
+
+    background:#111827;
+
+    border:1px solid rgba(255,255,255,0.05);
+
     line-height:1.6;
+
     white-space:pre-wrap;
+
     animation:fadeIn 0.25s ease;
 }
-
 .ai-msg{
+
     align-self:flex-start;
-    background:rgba(255,255,255,0.06);
+
+    background:#111827;
+
     color:#f1f5f9;
+
     border:1px solid rgba(255,255,255,0.05);
+
     border-radius:18px;
-    border-bottom-left-radius:6px;
-    width:fit-content;
-    max-width:92%;
+
+    max-width:68%;
+
     padding:14px 18px;
+
     line-height:1.6;
+
     white-space:pre-wrap;
+
     animation:fadeIn 0.25s ease;
 }
 
