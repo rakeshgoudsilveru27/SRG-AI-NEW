@@ -302,6 +302,7 @@ body{
     display:flex;
     flex-direction:column;
     gap:14px;
+    align-items:center;
     padding-bottom:120px;
 }
 
@@ -309,24 +310,20 @@ body{
 
 .user-msg{
     align-self:flex-end;
-    background:#1ea0ff;
-    padding:14px 18px;
-    border-radius:18px;
-    max-width:75%;
-    word-break:break-word;
-    line-height:1.5;
+    background:linear-gradient(135deg,#00bfff,#007bff);
+    color:white;
+    border-bottom-right-radius:6px;
+    margin-left:auto;
 }
-
 /* AI MESSAGE */
 
-.ai-msg{
+.bot-msg{
     align-self:flex-start;
-    background:#10213a;
-    padding:14px 18px;
-    border-radius:18px;
-    max-width:75%;
-    word-break:break-word;
-    line-height:1.5;
+    background:rgba(255,255,255,0.06);
+    color:#f1f5f9;
+    border:1px solid rgba(255,255,255,0.05);
+    border-bottom-left-radius:6px;
+    margin-right:auto;
 }
 
 /* INPUT AREA */
@@ -484,12 +481,17 @@ body{
         padding-bottom:110px;
     }
 
-    .user-msg,
-    .ai-msg{
-        max-width:88%;
-        font-size:14px;
-        line-height:1.5;
-    }
+.user-msg,
+.bot-msg{
+    max-width:75%;
+    padding:16px 20px;
+    border-radius:18px;
+    line-height:1.6;
+    font-size:15px;
+    word-wrap:break-word;
+    overflow-wrap:break-word;
+    white-space:pre-wrap;
+}
 
     .chat-input-area{
         position:sticky;
