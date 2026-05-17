@@ -566,4 +566,75 @@ body{
         opacity:1;
         transform:translateY(0);
     }
+}*{
+
+    .welcome{
+        padding-top:20px;
+    }
+
+    .welcome h1{
+        font-size:34px;
+    }
+
+    .features{
+        flex-direction:column;
+        align-items:center;
+    }
+
+    .card{
+        width:100%;
+        max-width:340px;
+    }
+
+    .chat-messages{
+        padding:16px;
+    }
+
+    .user-msg,
+    .ai-msg{
+        max-width:82%;
+        font-size:15px;
+    }
+
+    .chat-input-area{
+        padding:10px 12px;
+    }
+
+    .tagline{
+        display:none;
+    }
+}
+
+.ai-msg pre{
+    background:#020617;
+    padding:14px;
+    border-radius:12px;
+    overflow-x:auto;
+    margin-top:10px;
+}
+
+.ai-msg code{
+    color:#7dd3fc;
+    font-family:Consolas,monospace;
+}
+
+::-webkit-scrollbar{
+    width:8px;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#334155;
+    border-radius:10px;
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(8px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 }
