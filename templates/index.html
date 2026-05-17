@@ -86,6 +86,8 @@ onclick="toggleSidebar()">
 
 </div>
 
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
 <div class="main-container">
 
     <div class="topbar">
@@ -512,7 +514,7 @@ function loadHistory(){
 
                     chatBox.innerHTML += `
                     <div class="ai-msg">
-                        ${msg.text}
+                        ${marked.parse(msg.text)}
                     </div>
                     `;
                 }
@@ -556,28 +558,30 @@ function newChat(){
     );
 }
 
+const sidebar = document.querySelector(".sidebar");
+
+const overlay = document.getElementById("sidebarOverlay");
+
 function toggleSidebar(){
 
-    const sidebar =
-    document.querySelector(
-        ".sidebar"
-    );
+    sidebar.classList.toggle("active");
 
-    sidebar.classList.toggle(
-        "active"
-    );
+    overlay.classList.toggle("active");
 }
 
+overlay.onclick = ()=>{
+
+    sidebar.classList.remove("active");
+
+    overlay.classList.remove("active");
+};
 /* SWIPE TO CLOSE SIDEBAR */
 
 let touchStartX = 0;
 
 let touchEndX = 0;
 
-const sidebar =
-document.querySelector(
-    ".sidebar"
-);
+
 
 sidebar.addEventListener(
 "touchstart",

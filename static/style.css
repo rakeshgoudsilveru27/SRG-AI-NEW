@@ -767,3 +767,14 @@ transition:0.3s;
         transform:translateY(0);
     }
 }
+.sidebar-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.45);
+    z-index:1200;
+    display:none;
+}
+
+.sidebar-overlay.active{
+    display:block;
+}
