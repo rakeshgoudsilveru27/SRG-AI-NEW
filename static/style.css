@@ -160,8 +160,6 @@ body{
 .history-item{
     background:transparent;
     padding:12px;
-    border-radius:12px;
-    margin-bottom:10px;
     cursor:pointer;
     font-size:14px;
     transition:0.3s;
@@ -170,9 +168,7 @@ body{
     white-space:nowrap;
 }
 
-.history-item:hover{
-    background:transparent;
-}
+
 
 /* STATUS */
 
