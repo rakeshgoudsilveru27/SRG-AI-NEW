@@ -21,13 +21,22 @@ def home():
 def chat():
 
     user_message = request.form['message']
-    selected_model = request.form.get('model', 'llama-3.1-8b-instant')
+
+    selected_model = request.form.get(
+        'model',
+        'llama-3.1-8b-instant'
+    )
+
     image = request.files.get('image')
 
     # SAVE IMAGE
+
     if image:
 
-        os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+        os.makedirs(
+            UPLOAD_FOLDER,
+            exist_ok=True
+        )
 
         image_path = os.path.join(
             app.config['UPLOAD_FOLDER'],
@@ -37,14 +46,19 @@ def chat():
         image.save(image_path)
 
     # SAVE USER MESSAGE
+
     conversation_history.append(
         f"User: {user_message}"
     )
 
     # FULL HISTORY
-    history = "\n".join(conversation_history)
+
+    history = "\n".join(
+        conversation_history
+    )
 
     # AI PROMPT
+
     prompt = f"""
 You are SRG.ai.
 
@@ -71,25 +85,41 @@ Conversation History:
 Assistant:
 """
 
-    # GROQ API REQUEST
+    # GROQ API HEADERS
 
     headers = {
-        "Authorization": f"Bearer {os.environ.get('GROQ_API_KEY')}",
-        "Content-Type": "application/json"
+
+        "Authorization":
+        f"Bearer {os.environ.get('GROQ_API_KEY')}",
+
+        "Content-Type":
+        "application/json"
     }
 
+    # MAIN AI RESPONSE
+
     response = requests.post(
+
         "https://api.groq.com/openai/v1/chat/completions",
+
         headers=headers,
+
         json={
+
             "model": selected_model,
+
             "messages": [
+
                 {
                     "role": "system",
-                    "content": "You are SRG.ai, an intelligent AI assistant for electronics, coding, Arduino, embedded systems, robotics, PCB design and engineering."
+
+                    "content":
+                    "You are SRG.ai, an intelligent AI assistant for electronics, coding, Arduino, embedded systems, robotics, PCB design and engineering."
                 },
+
                 {
                     "role": "user",
+
                     "content": prompt
                 }
             ]
@@ -100,13 +130,87 @@ Assistant:
 
     print(data)
 
+    # SUCCESS RESPONSE
+
     if "choices" in data:
 
-        ai_reply = data["choices"][0]["message"]["content"]
+        ai_reply = (
+            data["choices"][0]
+            ["message"]["content"]
+        )
+
+        # AI TITLE GENERATION
+
+        title_prompt = f"""
+Generate a short professional title
+for this chat.
+
+User message:
+{user_message}
+
+Rules:
+- Maximum 6 words
+- No quotes
+- No emojis
+- Professional
+- Clear and readable
+"""
+
+        title_response = requests.post(
+
+            "https://api.groq.com/openai/v1/chat/completions",
+
+            headers=headers,
+
+            json={
+
+                "model": selected_model,
+
+                "messages": [
+
+                    {
+                        "role": "system",
+
+                        "content":
+                        "Generate short professional chat titles."
+                    },
+
+                    {
+                        "role": "user",
+
+                        "content": title_prompt
+                    }
+                ]
+            }
+        )
+
+        title_data = title_response.json()
+
+        print(title_data)
+
+        # TITLE SUCCESS
+
+        if "choices" in title_data:
+
+            chat_title = (
+
+                title_data["choices"][0]
+                ["message"]["content"]
+
+                .strip()
+            )
+
+        else:
+
+            chat_title = "New Chat"
+
+    # API ERROR
 
     else:
 
         ai_reply = f"Groq API Error: {data}"
+
+        chat_title = "New Chat"
 
     # SAVE AI RESPONSE
 
@@ -117,17 +221,24 @@ Assistant:
     # RETURN RESPONSE
 
     return jsonify({
-        'reply': ai_reply
-    })
 
+        'reply': ai_reply,
+
+        'title': chat_title,
+    })
 
 # RUN APP
 
 if __name__ == '__main__':
 
-    os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+    os.makedirs(
+        UPLOAD_FOLDER,
+        exist_ok=True
+    )
 
-    port = int(os.environ.get("PORT", 5000))
+    port = int(
+        os.environ.get("PORT", 5000)
+    )
 
     app.run(
         host="0.0.0.0",
