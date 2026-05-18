@@ -547,42 +547,7 @@ item.innerHTML = `
 </div>
 `;
 
-item.querySelector(".history-item").onclick = function(){
 
-    currentChat = [...chat.messages];
-
-    currentChatTitle = chat.title;
-
-    document.querySelector(".welcome").style.display = "none";
-
-    document.querySelector(".features").style.display = "none";
-
-    let chatBox =
-    document.getElementById("chatMessages");
-
-    chatBox.innerHTML = "";
-
-    chat.messages.forEach(msg => {
-
-        if(msg.type === "user"){
-
-            chatBox.innerHTML += `
-            <div class="user-msg">
-                ${msg.text}
-            </div>
-            `;
-        }
-
-        else{
-
-            chatBox.innerHTML += `
-            <div class="ai-msg">
-                ${marked.parse(msg.text)}
-            </div>
-            `;
-        }
-    });
-};
 
 const menuBtn =
 item.querySelector(".history-menu-btn");
@@ -718,6 +683,38 @@ item.querySelector(".share-chat").onclick = function(e){
     alert("Chat copied!");
 };
 
+item.querySelector(".export-chat").onclick = function(e){
+
+    e.stopPropagation();
+
+    let text = chat.messages
+    .map(m =>
+        `${m.type.toUpperCase()}:\n${m.text}`
+    )
+    .join("\n\n");
+
+    let blob = new Blob(
+        [text],
+        {type:"text/plain"}
+    );
+
+    let link =
+    document.createElement("a");
+
+    link.href =
+    URL.createObjectURL(blob);
+
+    link.download =
+    `${chat.title
+    .replace(/[^a-z0-9]/gi,"_")}.txt`;
+
+    link.click();
+
+    dropdown.classList.remove(
+        "show-dropdown"
+    );
+};
+
 item.querySelector(".group-chat").onclick = function(e){
 
     e.stopPropagation();
@@ -843,9 +840,7 @@ item.querySelector(".export-chat").onclick = function(e){
     URL.createObjectURL(blob);
 
     link.download =
-${chat.title
-.replace(/[^a-z0-9]/gi,"_")}
-.txt
+'${chat.title.replace(/[^a-z0-9]/gi,"_")}.txt'
     link.click();
 
     dropdown.classList.remove(
