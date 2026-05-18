@@ -1127,3 +1127,29 @@ body.light-mode .history-dropdown button:hover{
     background:
     rgba(0,0,0,0.04);
 }
+.copy-ai-btn{
+
+    margin-top:10px;
+
+    background:transparent;
+
+    border:none;
+
+    color:#9ca3af;
+
+    cursor:pointer;
+
+    font-size:13px;
+
+    transition:0.2s;
+}
+
+.copy-ai-btn:hover{
+
+    color:white;
+}
+
+.light-mode .copy-ai-btn:hover{
+
+    color:#111827;
+}

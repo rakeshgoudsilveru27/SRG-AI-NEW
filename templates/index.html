@@ -320,10 +320,55 @@ async function sendMessage(){
         document.getElementById("typing").remove();
 
         chatBox.innerHTML += `
+
         <div class="ai-msg">
-            ${marked.parse(data.reply)}
+
+            <div class="message-content">
+
+                ${marked.parse(data.reply)}
+
+            </div>
+
+            <button class="copy-ai-btn">
+
+                📋 Copy
+
+            </button>
+
         </div>
         `;
+
+        const copyButtons =
+        document.querySelectorAll(
+        ".copy-ai-btn"
+        );
+
+        copyButtons.forEach(btn => {
+
+            btn.onclick = function(){
+
+                const text =
+                btn.parentElement
+                .querySelector(
+                    ".message-content"
+                )
+                .innerText;
+
+                navigator.clipboard.writeText(
+                    text
+                );
+
+                btn.innerText =
+                "✅ Copied";
+
+                setTimeout(()=>{
+
+                    btn.innerText =
+                    "📋 Copy";
+
+                },1500);
+            };
+        });
 
         chatBox.scrollTop = chatBox.scrollHeight;
 
@@ -404,7 +449,15 @@ function loadHistory(){
         return titleMatch || messageMatch;
     });
 
-    chats.forEach(chat => {
+    const pinnedChats =
+    chats.filter(chat => chat.pinned);
+
+    const normalChats =
+    chats.filter(chat => !chat.pinned);
+
+    function renderChats(chatArray){
+
+    chatArray.forEach(chat => {
 
         let item =
         document.createElement("div");
@@ -506,7 +559,19 @@ function loadHistory(){
 
                     chatBox.innerHTML += `
                     <div class="ai-msg">
-                        ${marked.parse(msg.text)}
+
+                        <div class="message-content">
+
+                            ${marked.parse(msg.text)}
+
+                        </div>
+
+                        <button class="copy-ai-btn">
+
+                            📋 Copy
+
+                        </button>
+
                     </div>
                     `;
                 }
@@ -549,6 +614,17 @@ function loadHistory(){
 
             e.stopPropagation();
 
+            document
+            .querySelectorAll(".share-dropdown")
+            .forEach(menu => {
+
+                if(menu !== shareDropdown){
+                    menu.classList.remove(
+                        "show-share"
+                    );
+                }
+            });
+
             shareDropdown.classList.toggle(
                 "show-share"
             );
@@ -561,9 +637,12 @@ function loadHistory(){
 
             let text = chat.messages
             .map(m =>
-                `${m.type.toUpperCase()}:\n${m.text}`
+                `${m.type.toUpperCase()}:
+${m.text}`
             )
-            .join("\n\n");
+            .join("
+
+");
 
             navigator.clipboard.writeText(text);
 
@@ -581,9 +660,12 @@ function loadHistory(){
 
             let text = chat.messages
             .map(m =>
-                `${m.type.toUpperCase()}:\n${m.text}`
+                `${m.type.toUpperCase()}:
+${m.text}`
             )
-            .join("\n\n");
+            .join("
+
+");
 
             let blob = new Blob(
                 [text],
@@ -740,6 +822,31 @@ function loadHistory(){
 
         historyBox.appendChild(item);
     });
+    }
+
+    if(pinnedChats.length > 0){
+
+        historyBox.innerHTML += `
+
+        <div class="history-category">
+            📌 Pinned
+        </div>
+        `;
+    }
+
+    renderChats(pinnedChats);
+
+    if(normalChats.length > 0){
+
+        historyBox.innerHTML += `
+
+        <div class="history-category">
+            🕘 Recent
+        </div>
+        `;
+    }
+
+    renderChats(normalChats);
 }
 
 document.addEventListener(
