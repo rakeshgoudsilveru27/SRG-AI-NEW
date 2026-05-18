@@ -774,11 +774,15 @@ justify-content:flex-start;
     flex-direction:column;
 
     z-index:2000;
-    .light-mode .history-dropdown{
 
-    background:white;
+    box-shadow:0 10px 30px rgba(0,0,0,0.3);
+}
 
-    border:1px solid rgba(0,0,0,0.08);
+body.light-mode .history-dropdown{
+
+    background:white !important;
+
+    border:1px solid rgba(0,0,0,0.08) !important;
 
     box-shadow:0 10px 25px rgba(0,0,0,0.08);
 }
@@ -791,7 +795,6 @@ justify-content:flex-start;
 .light-mode .history-dropdown button:hover{
 
     background:rgba(0,0,0,0.05);
-}
 }
 
 .show-dropdown{
@@ -814,9 +817,20 @@ justify-content:flex-start;
     border-radius:8px;
 
     cursor:pointer;
+
+    transition:0.2s;
 }
 
+body.light-mode .history-dropdown button{
+
+    color:#111827 !important;
+}
 .history-dropdown button:hover{
 
     background:rgba(255,255,255,0.08);
+}
+
+body.light-mode .history-dropdown button:hover{
+
+    background:rgba(0,0,0,0.05);
 }
