@@ -551,6 +551,18 @@ menuBtn.onclick = function(e){
 
     e.stopPropagation();
 
+    document
+    .querySelectorAll(".history-dropdown")
+    .forEach(menu => {
+
+        if(menu !== dropdown){
+
+            menu.classList.remove(
+                "show-dropdown"
+            );
+        }
+    });
+
     dropdown.classList.toggle(
         "show-dropdown"
     );
@@ -580,6 +592,20 @@ item.querySelector(".delete-chat").onclick = function(e){
 
     });
 }
+document.addEventListener(
+"click",
+
+function(){
+
+    document
+    .querySelectorAll(".history-dropdown")
+    .forEach(menu => {
+
+        menu.classList.remove(
+            "show-dropdown"
+        );
+    });
+});
 
 function newChat(){
 
