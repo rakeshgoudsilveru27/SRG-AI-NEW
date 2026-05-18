@@ -681,9 +681,7 @@ historyCopyBtns.forEach(btn => {
                 `${m.type.toUpperCase()}:
 ${m.text}`
             )
-            .join("
-
-");
+            .join("");
 
             navigator.clipboard.writeText(text);
 
@@ -704,9 +702,7 @@ ${m.text}`
                 `${m.type.toUpperCase()}:
 ${m.text}`
             )
-            .join("
-
-");
+            .join("");
 
             let blob = new Blob(
                 [text],
@@ -867,25 +863,37 @@ ${m.text}`
 
     if(pinnedChats.length > 0){
 
-        historyBox.innerHTML += `
+    let pinnedTitle =
+    document.createElement("div");
 
-        <div class="history-category">
-            📌 Pinned
-        </div>
-        `;
-    }
+    pinnedTitle.className =
+    "history-category";
+
+    pinnedTitle.innerText =
+    "📌 Pinned";
+
+    historyBox.appendChild(
+        pinnedTitle
+    );
+}
 
     renderChats(pinnedChats);
 
     if(normalChats.length > 0){
 
-        historyBox.innerHTML += `
+    let recentTitle =
+    document.createElement("div");
 
-        <div class="history-category">
-            🕘 Recent
-        </div>
-        `;
-    }
+    recentTitle.className =
+    "history-category";
+
+    recentTitle.innerText =
+    "🕘 Recent";
+
+    historyBox.appendChild(
+        recentTitle
+    );
+}
 
     renderChats(normalChats);
 }
