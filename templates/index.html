@@ -59,6 +59,12 @@ onclick="toggleSidebar()">
         <div class="history-title">
             🕘 Chats
         </div>
+        <input
+type="text"
+id="historySearch"
+class="history-search"
+placeholder="Search chats..."
+>
 
         <div id="historyList"></div>
 
@@ -458,6 +464,20 @@ function loadHistory(){
         )
     ) || [];
 
+    const searchInput =
+document.getElementById(
+    "historySearch"
+);
+
+const searchText =
+searchInput.value.toLowerCase();
+
+chats = chats.filter(chat =>
+    chat.title
+    .toLowerCase()
+    .includes(searchText)
+);
+
     chats.forEach(chat => {
         let item = document.createElement("div");
 
@@ -596,6 +616,16 @@ item.querySelector(".pin-chat").onclick = function(e){
     );
 
     loadHistory();
+
+    document
+.getElementById("historySearch")
+.addEventListener(
+"input",
+
+function(){
+
+    loadHistory();
+});
 };
 
 item.querySelector(".rename-chat").onclick = function(e){
