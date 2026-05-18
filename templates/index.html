@@ -459,72 +459,79 @@ function loadHistory(){
     ) || [];
 
     chats.forEach(chat => {
+        let item = document.createElement("div");
 
-        let item =
-        document.createElement(
-            "button"
-        );
+item.className = "history-wrapper";
 
-        item.className =
-        "history-item";
+item.innerHTML = `
 
-        item.innerText =
-        chat.title;
+    <button class="history-item">
+        ${chat.title}
+    </button>
 
-        item.onclick =
-        function(){
+    <button class="delete-chat">
+        ✕
+    </button>
+`;
 
-            currentChat =
-            [...chat.messages];
+item.querySelector(".history-item").onclick = function(){
 
-            currentChatTitle =
-            chat.title;
+    currentChat = [...chat.messages];
 
-            document.querySelector(
-                ".welcome"
-            ).style.display =
-            "none";
+    currentChatTitle = chat.title;
 
-            document.querySelector(
-                ".features"
-            ).style.display =
-            "none";
+    document.querySelector(".welcome").style.display = "none";
 
-            let chatBox =
-            document.getElementById(
-                "chatMessages"
-            );
+    document.querySelector(".features").style.display = "none";
 
-            chatBox.innerHTML = "";
+    let chatBox =
+    document.getElementById("chatMessages");
 
-            chat.messages.forEach(
-            msg => {
+    chatBox.innerHTML = "";
 
-                if(msg.type === "user"){
+    chat.messages.forEach(msg => {
 
-                    chatBox.innerHTML += `
-                    <div class="user-msg">
-                        ${msg.text}
-                    </div>
-                    `;
-                }
+        if(msg.type === "user"){
 
-                else{
+            chatBox.innerHTML += `
+            <div class="user-msg">
+                ${msg.text}
+            </div>
+            `;
+        }
 
-                    chatBox.innerHTML += `
-                    <div class="ai-msg">
-                        ${marked.parse(msg.text)}
-                    </div>
-                    `;
-                }
-            });
+        else{
 
-            document.querySelector(
-                ".sidebar"
-            ).classList.remove(
-                "active"
-            );
-        };
+            chatBox.innerHTML += `
+            <div class="ai-msg">
+                ${marked.parse(msg.text)}
+            </div>
+            `;
+        }
+    });
+};
+
+item.querySelector(".delete-chat").onclick = function(e){
+
+    e.stopPropagation();
+
+    let chats = JSON.parse(
+        localStorage.getItem("srg_chats")
+    ) || [];
+
+    chats = chats.filter(
+        c => c.title !== chat.title
+    );
+
+    localStorage.setItem(
+        "srg_chats",
+        JSON.stringify(chats)
+    );
+
+    loadHistory();
+};
+
+historyBox.appendChild(item);
 
         historyBox.appendChild(
             item

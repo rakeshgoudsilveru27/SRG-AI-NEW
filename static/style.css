@@ -208,6 +208,14 @@ body{
     text-overflow:ellipsis;
 
     white-space:nowrap;
+
+    display:block;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+    white-space:nowrap;
 }
 .history-item:hover{
 
@@ -679,4 +687,42 @@ justify-content:flex-start;
         opacity:1;
         transform:translateY(0);
     }
+}
+.history-wrapper{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:8px;
+
+    margin-bottom:8px;
+}
+
+.delete-chat{
+
+    background:transparent;
+
+    border:none;
+
+    color:#888;
+
+    cursor:pointer;
+
+    font-size:14px;
+
+    padding:4px;
+
+    border-radius:6px;
+
+    transition:0.2s;
+}
+
+.delete-chat:hover{
+
+    background:rgba(255,255,255,0.08);
+
+    color:#ff4d4d;
 }
