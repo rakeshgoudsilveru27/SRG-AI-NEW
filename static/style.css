@@ -911,3 +911,168 @@ body.light-mode .history-dropdown button:hover{
 
     padding-left:38px;
 }
+.share-container{
+
+    position:relative;
+}
+
+.share-dropdown{
+
+    position:absolute;
+
+    left:100%;
+
+    top:0;
+
+    background:#111827;
+
+    border:1px solid rgba(255,255,255,0.08);
+
+    border-radius:12px;
+
+    min-width:180px;
+
+    padding:6px;
+
+    display:none;
+
+    flex-direction:column;
+
+    z-index:3000;
+
+    box-shadow:0 10px 30px rgba(0,0,0,0.3);
+}
+
+.share-dropdown button{
+
+    background:transparent;
+
+    border:none;
+
+    color:white;
+
+    text-align:left;
+
+    padding:10px 12px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    transition:0.2s;
+}
+
+.share-dropdown button:hover{
+
+    background:rgba(255,255,255,0.08);
+}
+
+.show-share{
+
+    display:flex;
+}
+
+.light-mode .share-dropdown{
+
+    background:white;
+
+    border:1px solid rgba(0,0,0,0.08);
+}
+
+.light-mode .share-dropdown button{
+
+    color:#111827;
+}
+
+.light-mode .share-dropdown button:hover{
+
+    background:rgba(0,0,0,0.05);
+}
+/* SHARE SUBMENU */
+
+.share-container{
+
+    position:relative;
+
+    width:100%;
+}
+
+.share-dropdown{
+
+    position:absolute;
+
+    left:105%;
+
+    top:0;
+
+    background:#111827;
+
+    border:1px solid rgba(255,255,255,0.08);
+
+    border-radius:12px;
+
+    min-width:190px;
+
+    padding:6px;
+
+    display:none;
+
+    flex-direction:column;
+
+    gap:4px;
+
+    z-index:5000;
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,0.35);
+}
+
+.share-dropdown button{
+
+    background:transparent;
+
+    border:none;
+
+    color:white;
+
+    text-align:left;
+
+    padding:10px 12px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    font-size:14px;
+
+    transition:0.2s;
+}
+
+.share-dropdown button:hover{
+
+    background:rgba(255,255,255,0.08);
+}
+
+.show-share{
+
+    display:flex;
+}
+
+/* LIGHT MODE */
+
+.light-mode .share-dropdown{
+
+    background:white;
+
+    border:1px solid rgba(0,0,0,0.08);
+}
+
+.light-mode .share-dropdown button{
+
+    color:#111827;
+}
+
+.light-mode .share-dropdown button:hover{
+
+    background:rgba(0,0,0,0.05);
+}
