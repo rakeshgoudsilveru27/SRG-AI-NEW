@@ -59,7 +59,7 @@ onclick="toggleSidebar()">
         <div class="history-title">
             🕘 Chats
         </div>
-        <<div class="search-wrapper">
+        <div class="search-wrapper">
 
     <span class="search-icon">
         🔍
@@ -637,15 +637,6 @@ item.querySelector(".pin-chat").onclick = function(e){
 
     loadHistory();
 
-    document
-.getElementById("historySearch")
-.addEventListener(
-"input",
-
-function(){
-
-    loadHistory();
-});
 };
 
 item.querySelector(".rename-chat").onclick = function(e){
@@ -826,6 +817,16 @@ function(e){
 });
 
 loadHistory();
+
+document
+.getElementById("historySearch")
+.addEventListener(
+"input",
+
+function(){
+
+    loadHistory();
+});
 
 document
 .getElementById(
