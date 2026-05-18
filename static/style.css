@@ -721,3 +721,81 @@ justify-content:flex-start;
 
     color:#ff4d4d;
 }
+.history-menu-container{
+
+    position:relative;
+}
+
+.history-menu-btn{
+
+    background:transparent;
+
+    border:none;
+
+    color:#888;
+
+    font-size:18px;
+
+    cursor:pointer;
+
+    padding:4px 8px;
+
+    border-radius:6px;
+}
+
+.history-menu-btn:hover{
+
+    background:rgba(255,255,255,0.08);
+}
+
+.history-dropdown{
+
+    position:absolute;
+
+    right:0;
+
+    top:32px;
+
+    background:#111827;
+
+    border:1px solid rgba(255,255,255,0.08);
+
+    border-radius:12px;
+
+    min-width:160px;
+
+    padding:6px;
+
+    display:none;
+
+    flex-direction:column;
+
+    z-index:2000;
+}
+
+.show-dropdown{
+
+    display:flex;
+}
+
+.history-dropdown button{
+
+    background:transparent;
+
+    border:none;
+
+    color:white;
+
+    text-align:left;
+
+    padding:10px 12px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+}
+
+.history-dropdown button:hover{
+
+    background:rgba(255,255,255,0.08);
+}

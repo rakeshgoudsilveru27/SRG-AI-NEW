@@ -465,13 +465,43 @@ item.className = "history-wrapper";
 
 item.innerHTML = `
 
-    <button class="history-item">
-        ${chat.title}
+<div class="history-item">
+
+    ${chat.pinned ? "📌 " : ""}${chat.title}
+
+</div>
+
+<div class="history-menu-container">
+
+    <button class="history-menu-btn">
+        ⋮
     </button>
 
-    <button class="delete-chat">
-        ✕
-    </button>
+    <div class="history-dropdown">
+
+        <button class="pin-chat">
+            📌 Pin
+        </button>
+
+        <button class="rename-chat">
+            ✏ Rename
+        </button>
+
+        <button class="share-chat">
+            📤 Share
+        </button>
+
+        <button class="group-chat">
+            👥 Group
+        </button>
+
+        <button class="delete-chat">
+            🗑 Delete
+        </button>
+
+    </div>
+
+</div>
 `;
 
 item.querySelector(".history-item").onclick = function(){
@@ -509,6 +539,21 @@ item.querySelector(".history-item").onclick = function(){
             `;
         }
     });
+};
+
+const menuBtn =
+item.querySelector(".history-menu-btn");
+
+const dropdown =
+item.querySelector(".history-dropdown");
+
+menuBtn.onclick = function(e){
+
+    e.stopPropagation();
+
+    dropdown.classList.toggle(
+        "show-dropdown"
+    );
 };
 
 item.querySelector(".delete-chat").onclick = function(e){
