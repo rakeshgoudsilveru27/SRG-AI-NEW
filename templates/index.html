@@ -530,10 +530,7 @@ item.innerHTML = `
         <button class="share-chat">
             📤 Share
         </button>
-        <button class="export-chat">
-            📄 Export
-        </button>
-
+        
         <button class="group-chat">
             👥 Group
         </button>
@@ -668,9 +665,20 @@ item.querySelector(".delete-chat").onclick = function(e){
     loadHistory();
 };
 
-item.querySelector(".share-chat").onclick = function(e){
+item.querySelector(".share-chat").onclick = async function(e){
 
     e.stopPropagation();
+
+    let choice = prompt(
+
+`Choose option:
+
+1 = Copy Chat
+2 = Export TXT
+3 = Share as Image
+4 = Share Link`
+
+    );
 
     let text = chat.messages
     .map(m =>
@@ -678,9 +686,54 @@ item.querySelector(".share-chat").onclick = function(e){
     )
     .join("\n\n");
 
-    navigator.clipboard.writeText(text);
+    if(choice === "1"){
 
-    alert("Chat copied!");
+        navigator.clipboard.writeText(
+            text
+        );
+
+        alert("Chat copied!");
+    }
+
+    else if(choice === "2"){
+
+        let blob = new Blob(
+            [text],
+            {type:"text/plain"}
+        );
+
+        let link =
+        document.createElement("a");
+
+        link.href =
+        URL.createObjectURL(blob);
+
+        link.download =
+        `${chat.title
+        .replace(/[^a-z0-9]/gi,"_")}.txt`;
+
+        link.click();
+
+        alert("TXT exported!");
+    }
+
+    else if(choice === "3"){
+
+        alert(
+        "Screenshot feature coming soon!"
+        );
+    }
+
+    else if(choice === "4"){
+
+        alert(
+        "Shareable links need cloud database integration."
+        );
+    }
+
+    dropdown.classList.remove(
+        "show-dropdown"
+    );
 };
 
 item.querySelector(".export-chat").onclick = function(e){
