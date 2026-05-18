@@ -266,17 +266,31 @@ async function sendMessage(){
     });
 if(currentChatTitle === null){
 
-    currentChatTitle =
+    let cleanMessage =
     message
     .replace(/[^\w\s]/gi,"")
+    .trim();
+
+    cleanMessage =
+    cleanMessage
+    .replace(/^how to /i,"")
+    .replace(/^what is /i,"")
+    .replace(/^can you /i,"")
+    .replace(/^please /i,"")
+    .replace(/^tell me /i,"");
+
+    currentChatTitle =
+    cleanMessage
     .split(" ")
-    .slice(0,4)
+    .slice(0,6)
     .join(" ");
 
-    if(message.split(" ").length > 4){
-
-        currentChatTitle += "...";
-    }
+    currentChatTitle =
+    currentChatTitle
+    .charAt(0)
+    .toUpperCase()
+    +
+    currentChatTitle.slice(1);
 }
 
     input.value = "";
