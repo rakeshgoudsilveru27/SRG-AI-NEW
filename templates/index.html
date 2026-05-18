@@ -264,10 +264,20 @@ async function sendMessage(){
         type:"user",
         text:message
     });
+if(currentChatTitle === null){
 
-    if(currentChatTitle === null){
-        currentChatTitle = message;
+    currentChatTitle =
+    message
+    .replace(/[^\w\s]/gi,"")
+    .split(" ")
+    .slice(0,4)
+    .join(" ");
+
+    if(message.split(" ").length > 4){
+
+        currentChatTitle += "...";
     }
+}
 
     input.value = "";
 
@@ -575,6 +585,37 @@ function loadHistory(){
                     </div>
                     `;
                 }
+                const historyCopyBtns =
+chatBox.querySelectorAll(
+".copy-ai-btn"
+);
+
+historyCopyBtns.forEach(btn => {
+
+    btn.onclick = function(){
+
+        const text =
+        btn.parentElement
+        .querySelector(
+            ".message-content"
+        )
+        .innerText;
+
+        navigator.clipboard.writeText(
+            text
+        );
+
+        btn.innerText =
+        "✅ Copied";
+
+        setTimeout(()=>{
+
+            btn.innerText =
+            "📋 Copy";
+
+        },1500);
+    };
+});
             });
         };
 
