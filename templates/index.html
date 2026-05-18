@@ -567,6 +567,73 @@ menuBtn.onclick = function(e){
         "show-dropdown"
     );
 };
+item.querySelector(".pin-chat").onclick = function(e){
+
+    e.stopPropagation();
+
+    let chats = JSON.parse(
+        localStorage.getItem("srg_chats")
+    ) || [];
+
+    chats = chats.map(c => {
+
+        if(c.title === chat.title){
+
+            c.pinned = !c.pinned;
+        }
+
+        return c;
+    });
+
+    chats.sort((a,b)=>
+        (b.pinned===true) -
+        (a.pinned===true)
+    );
+
+    localStorage.setItem(
+        "srg_chats",
+        JSON.stringify(chats)
+    );
+
+    loadHistory();
+};
+
+item.querySelector(".rename-chat").onclick = function(e){
+
+    e.stopPropagation();
+
+    let newName = prompt(
+        "Enter new chat name:",
+        chat.title
+    );
+
+    if(!newName || newName.trim()===""){
+        return;
+    }
+
+    let chats = JSON.parse(
+        localStorage.getItem("srg_chats")
+    ) || [];
+
+    chats = chats.map(c => {
+
+        if(c.title === chat.title){
+
+            c.title = newName;
+        }
+
+        return c;
+    });
+
+    localStorage.setItem(
+        "srg_chats",
+        JSON.stringify(chats)
+    );
+
+    currentChatTitle = newName;
+
+    loadHistory();
+};
 
 item.querySelector(".delete-chat").onclick = function(e){
 
@@ -585,7 +652,33 @@ item.querySelector(".delete-chat").onclick = function(e){
         JSON.stringify(chats)
     );
 
+    dropdown.classList.remove(
+    "show-dropdown"
+    );
+
     loadHistory();
+};
+
+item.querySelector(".share-chat").onclick = function(e){
+
+    e.stopPropagation();
+
+    let text = chat.messages
+    .map(m =>
+        `${m.type.toUpperCase()}:\n${m.text}`
+    )
+    .join("\n\n");
+
+    navigator.clipboard.writeText(text);
+
+    alert("Chat copied!");
+};
+
+item.querySelector(".group-chat").onclick = function(e){
+
+    e.stopPropagation();
+
+    alert("Group chat feature coming soon!");
 };
 
     historyBox.appendChild(item);
