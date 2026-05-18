@@ -4,9 +4,7 @@
 <head>
 
 <meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>SRG.ai</title>
 
@@ -14,23 +12,20 @@ content="width=device-width, initial-scale=1.0">
 href="{{ url_for('static', filename='style.css') }}">
 
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
 </head>
 
 <body>
 
-<div class="mobile-menu"
-onclick="toggleSidebar()">
-
+<div class="mobile-menu" onclick="toggleSidebar()">
 ☰
-
 </div>
 
 <div class="sidebar">
 
     <div class="logo-area">
 
-        <img src="{{ url_for('static',
-        filename='logo.png') }}"
+        <img src="{{ url_for('static', filename='logo.png') }}"
         class="logo">
 
         <div>
@@ -47,11 +42,8 @@ onclick="toggleSidebar()">
 
     </div>
 
-    <button class="new-chat"
-    onclick="newChat()">
-
+    <button class="new-chat" onclick="newChat()">
         + New Chat
-
     </button>
 
     <div class="history-section">
@@ -59,30 +51,28 @@ onclick="toggleSidebar()">
         <div class="history-title">
             🕘 Chats
         </div>
+
         <div class="search-wrapper">
 
-    <span class="search-icon">
-        🔍
-    </span>
+            <span class="search-icon">
+                🔍
+            </span>
 
-    <input
-    type="text"
-    id="historySearch"
-    class="history-search"
-    placeholder="Search chats..."
-    >
+            <input
+            type="text"
+            id="historySearch"
+            class="history-search"
+            placeholder="Search chats..."
+            >
 
-</div>
+        </div>
 
         <div id="historyList"></div>
 
     </div>
 
-    <button class="mode-btn"
-    id="themeButton">
-
+    <button class="mode-btn" id="themeButton">
         ☀ Light / Dark
-
     </button>
 
     <div class="status-box">
@@ -95,8 +85,7 @@ onclick="toggleSidebar()">
 
     </div>
 
-    <div class="clock"
-    id="clock"></div>
+    <div class="clock" id="clock"></div>
 
 </div>
 
@@ -106,8 +95,7 @@ onclick="toggleSidebar()">
 
     <div class="topbar">
 
-        <select id="modelSelect"
-        class="model-select">
+        <select id="modelSelect" class="model-select">
 
             <option value="llama-3.1-8b-instant">
                 Llama 3.1 fast
@@ -118,7 +106,7 @@ onclick="toggleSidebar()">
             </option>
 
             <option value="gemma2-9b-it">
-                gemma AI
+                Gemma AI
             </option>
 
         </select>
@@ -166,45 +154,37 @@ onclick="toggleSidebar()">
 
         </div>
 
+        <div class="chat-area">
 
-    <div class="chat-area">
+            <div class="chat-messages" id="chatMessages"></div>
 
-        <div class="chat-messages"
-        id="chatMessages"></div>
+            <div class="chat-input-area">
 
-        <div class="chat-input-area">
+                <div class="input-box">
 
-        <div class="input-box">
+                    <button class="icon-btn"
+                    onclick="document.getElementById('imageInput').click()">
+                        📷
+                    </button>
 
-            <button class="icon-btn"
-            onclick="document.getElementById('imageInput').click()">
+                    <input type="file" id="imageInput" hidden>
 
-                📷
+                    <button class="mic-btn">
+                        🎤
+                    </button>
 
-            </button>
+                    <input type="text"
+                    id="userInput"
+                    placeholder="Type your message...">
 
-            <input type="file"
-            id="imageInput"
-            hidden>
+                    <button class="send-btn" onclick="sendMessage()">
+                        ➜
+                    </button>
 
-            <button class="mic-btn">
+                </div>
 
-                🎤
+            </div>
 
-            </button>
-
-            <input type="text"
-            id="userInput"
-            placeholder="Type your message...">
-
-            <button class="send-btn"
-            onclick="sendMessage()">
-
-                ➜
-
-            </button>
-
-        </div>
         </div>
 
     </div>
@@ -214,46 +194,27 @@ onclick="toggleSidebar()">
 <script>
 
 const themeButton =
-document.getElementById(
-    "themeButton"
-);
+document.getElementById("themeButton");
 
 let savedTheme =
-localStorage.getItem(
-    "theme"
-);
+localStorage.getItem("theme");
 
 if(savedTheme === "light"){
-
-    document.body.classList.add(
-        "light-mode"
-    );
+    document.body.classList.add("light-mode");
 }
 
 themeButton.onclick = function(){
 
-    document.body.classList.toggle(
-        "light-mode"
-    );
+    document.body.classList.toggle("light-mode");
 
-    if(document.body.classList.contains(
-        "light-mode"
-    )){
+    if(document.body.classList.contains("light-mode")){
 
-        localStorage.setItem(
-            "theme",
-            "light"
-        );
-
+        localStorage.setItem("theme","light");
     }
 
     else{
 
-        localStorage.setItem(
-            "theme",
-            "dark"
-        );
-
+        localStorage.setItem("theme","dark");
     }
 };
 
@@ -261,46 +222,35 @@ function updateClock(){
 
     let now = new Date();
 
-    document.getElementById(
-        "clock"
-    ).innerHTML =
-    now.toLocaleTimeString();
+    document.getElementById("clock")
+    .innerHTML = now.toLocaleTimeString();
 }
 
 setInterval(updateClock,1000);
-
 updateClock();
 
 let currentChat = [];
-
 let currentChatTitle = null;
 
 async function sendMessage(){
 
     let input =
-    document.getElementById(
-        "userInput"
-    );
+    document.getElementById("userInput");
 
-    let message =
-    input.value.trim();
+    let message = input.value.trim();
 
     if(message === ""){
         return;
     }
 
     let chatBox =
-    document.getElementById(
-        "chatMessages"
-    );
+    document.getElementById("chatMessages");
 
-    document.querySelector(
-        ".welcome"
-    ).style.display = "none";
+    document.querySelector(".welcome")
+    .style.display = "none";
 
-    document.querySelector(
-        ".features"
-    ).style.display = "none";
+    document.querySelector(".features")
+    .style.display = "none";
 
     chatBox.innerHTML += `
     <div class="user-msg">
@@ -308,8 +258,7 @@ async function sendMessage(){
     </div>
     `;
 
-    chatBox.scrollTop =
-    chatBox.scrollHeight;
+    chatBox.scrollTop = chatBox.scrollHeight;
 
     currentChat.push({
         type:"user",
@@ -326,7 +275,6 @@ async function sendMessage(){
     document.createElement("div");
 
     typingDiv.className = "ai-msg";
-
     typingDiv.id = "typing";
 
     typingDiv.innerHTML = `
@@ -337,32 +285,19 @@ async function sendMessage(){
     </div>
     `;
 
-    chatBox.appendChild(
-        typingDiv
-    );
+    chatBox.appendChild(typingDiv);
 
-    chatBox.scrollTop =
-    chatBox.scrollHeight;
+    let formData = new FormData();
 
-    let formData =
-    new FormData();
-
-    formData.append(
-        "message",
-        message
-    );
+    formData.append("message",message);
 
     formData.append(
         "model",
-        document.getElementById(
-            "modelSelect"
-        ).value
+        document.getElementById("modelSelect").value
     );
 
     const imageInput =
-    document.getElementById(
-        "imageInput"
-    );
+    document.getElementById("imageInput");
 
     if(imageInput.files[0]){
 
@@ -376,75 +311,56 @@ async function sendMessage(){
 
         const response =
         await fetch("/chat",{
-
             method:"POST",
             body:formData
-
         });
 
-        const data =
-        await response.json();
+        const data = await response.json();
 
-        document.getElementById(
-            "typing"
-        ).remove();
+        document.getElementById("typing").remove();
 
-      chatBox.innerHTML += `
-<div class="ai-msg">
-    ${marked.parse(data.reply)}
-</div>
-`;
+        chatBox.innerHTML += `
+        <div class="ai-msg">
+            ${marked.parse(data.reply)}
+        </div>
+        `;
 
-        chatBox.scrollTop =
-        chatBox.scrollHeight;
+        chatBox.scrollTop = chatBox.scrollHeight;
 
         currentChat.push({
-
             type:"ai",
             text:data.reply
-
         });
 
         saveChat();
-
     }
 
     catch(error){
 
-        document.getElementById(
-            "typing"
-        ).remove();
+        document.getElementById("typing").remove();
     }
 }
 
 function saveChat(){
 
-    let chats =
-    JSON.parse(
-        localStorage.getItem(
-            "srg_chats"
-        )
+    let chats = JSON.parse(
+        localStorage.getItem("srg_chats")
     ) || [];
 
-    let existingChat =
-    chats.find(
-        chat =>
-        chat.title === currentChatTitle
+    let existingChat = chats.find(
+        chat => chat.title === currentChatTitle
     );
 
     if(existingChat){
 
-        existingChat.messages =
-        [...currentChat];
+        existingChat.messages = [...currentChat];
     }
 
     else{
 
         chats.unshift({
-
             title:currentChatTitle,
             messages:[...currentChat]
-
         });
     }
 
@@ -459,298 +375,375 @@ function saveChat(){
 function loadHistory(){
 
     let historyBox =
-    document.getElementById(
-        "historyList"
-    );
+    document.getElementById("historyList");
 
     historyBox.innerHTML = "";
 
-    let chats =
-    JSON.parse(
-        localStorage.getItem(
-            "srg_chats"
-        )
+    let chats = JSON.parse(
+        localStorage.getItem("srg_chats")
     ) || [];
 
     const searchInput =
-document.getElementById(
-    "historySearch"
-);
+    document.getElementById("historySearch");
 
-const searchText =
-searchInput.value.toLowerCase();
+    const searchText =
+    searchInput.value.toLowerCase();
 
-chats = chats.filter(chat => {
+    chats = chats.filter(chat => {
 
-    const titleMatch =
-    chat.title
-    .toLowerCase()
-    .includes(searchText);
+        const titleMatch =
+        chat.title.toLowerCase()
+        .includes(searchText);
 
-    const messageMatch =
-    chat.messages.some(msg =>
+        const messageMatch =
+        chat.messages.some(msg =>
+            msg.text.toLowerCase()
+            .includes(searchText)
+        );
 
-        msg.text
-        .toLowerCase()
-        .includes(searchText)
-    );
-
-    return titleMatch || messageMatch;
-});
+        return titleMatch || messageMatch;
+    });
 
     chats.forEach(chat => {
-        let item = document.createElement("div");
 
-item.className = "history-wrapper";
+        let item =
+        document.createElement("div");
 
-item.innerHTML = `
+        item.className = "history-wrapper";
 
-<div class="history-item">
+        item.innerHTML = `
 
-    ${chat.pinned ? "📌 " : ""}${chat.title}
+        <div class="history-item">
+            ${chat.pinned ? "📌 " : ""}${chat.title}
+        </div>
 
-</div>
+        <div class="history-menu-container">
 
-<div class="history-menu-container">
+            <button class="history-menu-btn">
+                ⋮
+            </button>
 
-    <button class="history-menu-btn">
-        ⋮
-    </button>
+            <div class="history-dropdown">
 
-    <div class="history-dropdown">
+                <button class="pin-chat">
+                    📌 Pin
+                </button>
 
-        <button class="pin-chat">
-            📌 Pin
-        </button>
+                <button class="rename-chat">
+                    ✏ Rename
+                </button>
 
-        <button class="rename-chat">
-            ✏ Rename
-        </button>
+                <div class="share-container">
 
-        <button class="share-chat">
-            📤 Share
-        </button>
-        
-        <button class="group-chat">
-            👥 Group
-        </button>
+                    <button class="share-chat">
+                        📤 Share
+                    </button>
 
-        <button class="delete-chat">
-            🗑 Delete
-        </button>
+                    <div class="share-dropdown">
 
-    </div>
+                        <button class="copy-chat">
+                            📋 Copy Chat
+                        </button>
 
-</div>
-`;
+                        <button class="export-txt">
+                            📄 Export TXT
+                        </button>
 
+                        <button class="share-image">
+                            🖼 Share as Image
+                        </button>
 
+                        <button class="share-link">
+                            🔗 Share Link
+                        </button>
 
-const menuBtn =
-item.querySelector(".history-menu-btn");
+                    </div>
 
-const dropdown =
-item.querySelector(".history-dropdown");
+                </div>
 
-menuBtn.onclick = function(e){
+                <button class="group-chat">
+                    👥 Group
+                </button>
 
-    e.stopPropagation();
+                <button class="delete-chat">
+                    🗑 Delete
+                </button>
 
-    document
-    .querySelectorAll(".history-dropdown")
-    .forEach(menu => {
+            </div>
 
-        if(menu !== dropdown){
+        </div>
+        `;
 
-            menu.classList.remove(
+        item.querySelector(".history-item")
+        .onclick = function(){
+
+            currentChat = [...chat.messages];
+            currentChatTitle = chat.title;
+
+            document.querySelector(".welcome")
+            .style.display = "none";
+
+            document.querySelector(".features")
+            .style.display = "none";
+
+            let chatBox =
+            document.getElementById("chatMessages");
+
+            chatBox.innerHTML = "";
+
+            chat.messages.forEach(msg => {
+
+                if(msg.type === "user"){
+
+                    chatBox.innerHTML += `
+                    <div class="user-msg">
+                        ${msg.text}
+                    </div>
+                    `;
+                }
+
+                else{
+
+                    chatBox.innerHTML += `
+                    <div class="ai-msg">
+                        ${marked.parse(msg.text)}
+                    </div>
+                    `;
+                }
+            });
+        };
+
+        const menuBtn =
+        item.querySelector(".history-menu-btn");
+
+        const dropdown =
+        item.querySelector(".history-dropdown");
+
+        menuBtn.onclick = function(e){
+
+            e.stopPropagation();
+
+            document
+            .querySelectorAll(".history-dropdown")
+            .forEach(menu => {
+
+                if(menu !== dropdown){
+                    menu.classList.remove(
+                        "show-dropdown"
+                    );
+                }
+            });
+
+            dropdown.classList.toggle(
                 "show-dropdown"
             );
-        }
-    });
+        };
 
-    dropdown.classList.toggle(
-        "show-dropdown"
-    );
-};
-item.querySelector(".pin-chat").onclick = function(e){
+        const shareBtn =
+        item.querySelector(".share-chat");
 
-    e.stopPropagation();
+        const shareDropdown =
+        item.querySelector(".share-dropdown");
 
-    let chats = JSON.parse(
-        localStorage.getItem("srg_chats")
-    ) || [];
+        shareBtn.onclick = function(e){
 
-    chats = chats.map(c => {
+            e.stopPropagation();
 
-        if(c.title === chat.title){
+            shareDropdown.classList.toggle(
+                "show-share"
+            );
+        };
 
-            c.pinned = !c.pinned;
-        }
+        item.querySelector(".copy-chat")
+        .onclick = function(e){
 
-        return c;
-    });
+            e.stopPropagation();
 
-    chats.sort((a,b)=>
-        (b.pinned===true) -
-        (a.pinned===true)
-    );
+            let text = chat.messages
+            .map(m =>
+                `${m.type.toUpperCase()}:\n${m.text}`
+            )
+            .join("\n\n");
 
-    localStorage.setItem(
-        "srg_chats",
-        JSON.stringify(chats)
-    );
+            navigator.clipboard.writeText(text);
 
-    loadHistory();
+            alert("Chat copied!");
 
-};
+            shareDropdown.classList.remove(
+                "show-share"
+            );
+        };
 
-item.querySelector(".rename-chat").onclick = function(e){
+        item.querySelector(".export-txt")
+        .onclick = function(e){
 
-    e.stopPropagation();
+            e.stopPropagation();
 
-    let newName = prompt(
-        "Enter new chat name:",
-        chat.title
-    );
+            let text = chat.messages
+            .map(m =>
+                `${m.type.toUpperCase()}:\n${m.text}`
+            )
+            .join("\n\n");
 
-    if(!newName || newName.trim()===""){
-        return;
-    }
+            let blob = new Blob(
+                [text],
+                {type:"text/plain"}
+            );
 
-    let chats = JSON.parse(
-        localStorage.getItem("srg_chats")
-    ) || [];
+            let link =
+            document.createElement("a");
 
-    chats = chats.map(c => {
+            link.href =
+            URL.createObjectURL(blob);
 
-        if(c.title === chat.title){
+            link.download =
+            `${chat.title
+            .replace(/[^a-z0-9]/gi,"_")}.txt`;
 
-            c.title = newName;
-        }
+            link.click();
 
-        return c;
-    });
+            shareDropdown.classList.remove(
+                "show-share"
+            );
+        };
 
-    localStorage.setItem(
-        "srg_chats",
-        JSON.stringify(chats)
-    );
+        item.querySelector(".share-image")
+        .onclick = function(e){
 
-    currentChatTitle = newName;
+            e.stopPropagation();
 
-    loadHistory();
-};
+            alert(
+                "Image export coming soon!"
+            );
+        };
 
-item.querySelector(".delete-chat").onclick = function(e){
+        item.querySelector(".share-link")
+        .onclick = function(e){
 
-    e.stopPropagation();
+            e.stopPropagation();
 
-    let chats = JSON.parse(
-        localStorage.getItem("srg_chats")
-    ) || [];
+            alert(
+                "Cloud sharing coming soon!"
+            );
+        };
 
-    chats = chats.filter(
-        c => c.title !== chat.title
-    );
+        item.querySelector(".pin-chat")
+        .onclick = function(e){
 
-    localStorage.setItem(
-        "srg_chats",
-        JSON.stringify(chats)
-    );
+            e.stopPropagation();
 
-    dropdown.classList.remove(
-    "show-dropdown"
-    );
+            let chats = JSON.parse(
+                localStorage.getItem("srg_chats")
+            ) || [];
 
-    loadHistory();
-};
+            chats = chats.map(c => {
 
-item.querySelector(".share-chat").onclick = async function(e){
+                if(c.title === chat.title){
+                    c.pinned = !c.pinned;
+                }
 
-    e.stopPropagation();
+                return c;
+            });
 
-    let choice = prompt(
+            chats.sort((a,b)=>
+                (b.pinned===true) -
+                (a.pinned===true)
+            );
 
-`Choose option:
+            localStorage.setItem(
+                "srg_chats",
+                JSON.stringify(chats)
+            );
 
-1 = Copy Chat
-2 = Export TXT
-3 = Share as Image
-4 = Share Link`
+            dropdown.classList.remove(
+                "show-dropdown"
+            );
 
-    );
+            loadHistory();
+        };
 
-    let text = chat.messages
-    .map(m =>
-        `${m.type.toUpperCase()}:\n${m.text}`
-    )
-    .join("\n\n");
+        item.querySelector(".rename-chat")
+        .onclick = function(e){
 
-    if(choice === "1"){
+            e.stopPropagation();
 
-        navigator.clipboard.writeText(
-            text
-        );
+            let newName = prompt(
+                "Enter new chat name:",
+                chat.title
+            );
 
-        alert("Chat copied!");
-    }
+            if(!newName || newName.trim()===""){
+                return;
+            }
 
-    else if(choice === "2"){
+            let chats = JSON.parse(
+                localStorage.getItem("srg_chats")
+            ) || [];
 
-        let blob = new Blob(
-            [text],
-            {type:"text/plain"}
-        );
+            chats = chats.map(c => {
 
-        let link =
-        document.createElement("a");
+                if(c.title === chat.title){
+                    c.title = newName;
+                }
 
-        link.href =
-        URL.createObjectURL(blob);
+                return c;
+            });
 
-        link.download =
-        `${chat.title
-        .replace(/[^a-z0-9]/gi,"_")}.txt`;
+            localStorage.setItem(
+                "srg_chats",
+                JSON.stringify(chats)
+            );
 
-        link.click();
+            currentChatTitle = newName;
 
-        alert("TXT exported!");
-    }
+            dropdown.classList.remove(
+                "show-dropdown"
+            );
 
-    else if(choice === "3"){
+            loadHistory();
+        };
 
-        alert(
-        "Screenshot feature coming soon!"
-        );
-    }
+        item.querySelector(".delete-chat")
+        .onclick = function(e){
 
-    else if(choice === "4"){
+            e.stopPropagation();
 
-        alert(
-        "Shareable links need cloud database integration."
-        );
-    }
+            let chats = JSON.parse(
+                localStorage.getItem("srg_chats")
+            ) || [];
 
-    dropdown.classList.remove(
-        "show-dropdown"
-    );
-};
+            chats = chats.filter(
+                c => c.title !== chat.title
+            );
 
+            localStorage.setItem(
+                "srg_chats",
+                JSON.stringify(chats)
+            );
 
-item.querySelector(".group-chat").onclick = function(e){
+            dropdown.classList.remove(
+                "show-dropdown"
+            );
 
-    e.stopPropagation();
+            loadHistory();
+        };
 
-    alert("Group chat feature coming soon!");
-};
+        item.querySelector(".group-chat")
+        .onclick = function(e){
 
-    historyBox.appendChild(item);
+            e.stopPropagation();
 
+            alert(
+                "Group chat feature coming soon!"
+            );
+        };
+
+        historyBox.appendChild(item);
     });
 }
+
 document.addEventListener(
 "click",
-
 function(){
 
     document
@@ -761,61 +754,59 @@ function(){
             "show-dropdown"
         );
     });
+
+    document
+    .querySelectorAll(".share-dropdown")
+    .forEach(menu => {
+
+        menu.classList.remove(
+            "show-share"
+        );
+    });
 });
 
 function newChat(){
 
     currentChat = [];
-
     currentChatTitle = null;
 
     document.getElementById(
         "chatMessages"
     ).innerHTML = "";
 
-    document.querySelector(
-        ".welcome"
-    ).style.display = "block";
+    document.querySelector(".welcome")
+    .style.display = "block";
 
-    document.querySelector(
-        ".features"
-    ).style.display = "flex";
+    document.querySelector(".features")
+    .style.display = "flex";
 
-    document.querySelector(
-        ".sidebar"
-    ).classList.remove(
-        "active"
-    );
+    document.querySelector(".sidebar")
+    .classList.remove("active");
 }
 
-const sidebar = document.querySelector(".sidebar");
+const sidebar =
+document.querySelector(".sidebar");
 
-const overlay = document.getElementById("sidebarOverlay");
+const overlay =
+document.getElementById("sidebarOverlay");
 
 function toggleSidebar(){
 
     sidebar.classList.toggle("active");
-
     overlay.classList.toggle("active");
 }
 
 overlay.onclick = ()=>{
 
     sidebar.classList.remove("active");
-
     overlay.classList.remove("active");
 };
-/* SWIPE TO CLOSE SIDEBAR */
 
 let touchStartX = 0;
-
 let touchEndX = 0;
-
-
 
 sidebar.addEventListener(
 "touchstart",
-
 function(e){
 
     touchStartX =
@@ -824,7 +815,6 @@ function(e){
 
 sidebar.addEventListener(
 "touchend",
-
 function(e){
 
     touchEndX =
@@ -832,9 +822,7 @@ function(e){
 
     if(touchEndX < touchStartX - 50){
 
-        sidebar.classList.remove(
-            "active"
-        );
+        sidebar.classList.remove("active");
     }
 });
 
@@ -844,28 +832,22 @@ document
 .getElementById("historySearch")
 .addEventListener(
 "input",
-
 function(){
-
     loadHistory();
 });
 
 document
-.getElementById(
-"userInput"
-)
+.getElementById("userInput")
 .addEventListener(
 "keypress",
-
 function(event){
 
     if(event.key === "Enter"){
-
         sendMessage();
     }
 });
 
 </script>
-</div>
+
 </body>
 </html>
