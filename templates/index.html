@@ -59,12 +59,20 @@ onclick="toggleSidebar()">
         <div class="history-title">
             🕘 Chats
         </div>
-        <input
-type="text"
-id="historySearch"
-class="history-search"
-placeholder="Search chats..."
->
+        <<div class="search-wrapper">
+
+    <span class="search-icon">
+        🔍
+    </span>
+
+    <input
+    type="text"
+    id="historySearch"
+    class="history-search"
+    placeholder="Search chats..."
+    >
+
+</div>
 
         <div id="historyList"></div>
 
@@ -472,11 +480,23 @@ document.getElementById(
 const searchText =
 searchInput.value.toLowerCase();
 
-chats = chats.filter(chat =>
+chats = chats.filter(chat => {
+
+    const titleMatch =
     chat.title
     .toLowerCase()
-    .includes(searchText)
-);
+    .includes(searchText);
+
+    const messageMatch =
+    chat.messages.some(msg =>
+
+        msg.text
+        .toLowerCase()
+        .includes(searchText)
+    );
+
+    return titleMatch || messageMatch;
+});
 
     chats.forEach(chat => {
         let item = document.createElement("div");
