@@ -530,6 +530,9 @@ item.innerHTML = `
         <button class="share-chat">
             📤 Share
         </button>
+        <button class="export-chat">
+            📄 Export
+        </button>
 
         <button class="group-chat">
             👥 Group
@@ -817,6 +820,38 @@ function(e){
 });
 
 loadHistory();
+
+item.querySelector(".export-chat").onclick = function(e){
+
+    e.stopPropagation();
+
+    let text = chat.messages
+    .map(m =>
+        `${m.type.toUpperCase()}:\n${m.text}`
+    )
+    .join("\n\n");
+
+    let blob = new Blob(
+        [text],
+        {type:"text/plain"}
+    );
+
+    let link =
+    document.createElement("a");
+
+    link.href =
+    URL.createObjectURL(blob);
+
+    link.download =
+${chat.title
+.replace(/[^a-z0-9]/gi,"_")}
+.txt
+    link.click();
+
+    dropdown.classList.remove(
+        "show-dropdown"
+    );
+};
 
 document
 .getElementById("historySearch")
