@@ -91,6 +91,7 @@ body{
     padding:20px;
 
     display:flex;
+
     flex-direction:column;
 
     transition:0.3s;
@@ -98,6 +99,8 @@ body{
     z-index:1200;
 
     flex-shrink:0;
+
+    backdrop-filter:blur(18px);
 }
 
 /* LOGO */
@@ -348,6 +351,8 @@ body{
 display:flex;
 flex-direction:column;
 justify-content:flex-start;
+box-shadow:
+0 10px 25px rgba(0,0,0,0.18);
 }
 
 .card:hover{
@@ -385,13 +390,14 @@ justify-content:flex-start;
     gap:16px;
     padding-bottom:120px;
     scroll-behavior:smooth;
+    scrollbar-gutter:stable;
 }
 
 .user-msg{
 
     align-self:flex-end;
 
-    max-width:62%;
+    max-width:55%;
 
     padding:14px 18px;
 
@@ -406,6 +412,14 @@ justify-content:flex-start;
     border:1px solid rgba(255,255,255,0.05);
 
     border-radius:18px;
+
+    transition:0.2s;
+}
+
+.user-msg:hover{
+
+    border:
+    1px solid rgba(255,255,255,0.08);
 }
 
 .ai-msg{
@@ -420,7 +434,7 @@ justify-content:flex-start;
 
     border-radius:18px;
 
-    max-width:75%;
+    max-width:68%;
 
     padding:16px 18px;
 
@@ -435,6 +449,15 @@ justify-content:flex-start;
     gap:10px;
 
     overflow:hidden;
+
+    transition:0.2s;
+    
+}
+
+.ai-msg:hover{
+
+    border:
+    1px solid rgba(255,255,255,0.08);
 }
 
 /* INPUT */
@@ -459,6 +482,8 @@ justify-content:flex-start;
     padding:12px;
     border:1px solid rgba(255,255,255,0.05);
     backdrop-filter:blur(10px);
+    box-shadow:
+0 8px 30px rgba(0,0,0,0.25);
 }
 
 .input-box input{
@@ -497,9 +522,13 @@ justify-content:flex-start;
 }
 
 .send-btn:hover{
-    transform:scale(1.05);
-}
 
+    transform:
+    scale(1.06);
+
+    box-shadow:
+    0 0 20px rgba(42,176,255,0.45);
+}
 
 /* OVERLAY */
 
@@ -606,7 +635,7 @@ justify-content:flex-start;
 
     .user-msg,
     .ai-msg{
-        max-width:75%;
+        max-width:88%;
         font-size:15px;
     }
 
@@ -685,13 +714,21 @@ justify-content:flex-start;
 @keyframes fadeIn{
 
     from{
+
         opacity:0;
-        transform:translateY(8px);
+
+        transform:
+        translateY(12px)
+        scale(0.98);
     }
 
     to{
+
         opacity:1;
-        transform:translateY(0);
+
+        transform:
+        translateY(0)
+        scale(1);
     }
 }
 .history-wrapper{
@@ -1157,6 +1194,13 @@ body.light-mode .history-dropdown button:hover{
     transition:0.2s;
 
     margin-top:4px;
+
+    opacity:0;
+
+    padding:6px 10px;
+
+    border-radius:8px;
+
 }
 
 .ai-msg:hover .copy-ai-btn{
@@ -1212,4 +1256,11 @@ body.light-mode .history-dropdown button:hover{
 .message-content p:first-child{
 
     margin-top:0;
+}
+
+.ai-msg pre code{
+
+    white-space:pre-wrap;
+
+    word-break:break-word;
 }
