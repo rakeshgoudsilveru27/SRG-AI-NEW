@@ -397,33 +397,30 @@ box-shadow:
 
     align-self:flex-end;
 
-    max-width:55%;
-
     padding:14px 18px;
 
-    line-height:1.7;
+    border-radius:18px;
+
+    max-width:70%;
+
+    width:fit-content;
+
+    background:#111827;
+
+    border:1px solid rgba(255,255,255,0.05);
+
+    line-height:1.6;
 
     white-space:pre-wrap;
 
     animation:fadeIn 0.25s ease;
 
-    background:rgba(255,255,255,0.03);
-
-    border:1px solid rgba(255,255,255,0.05);
-
-    border-radius:18px;
-
-    transition:0.2s;
-
     display:flex;
 
     flex-direction:column;
- 
-    gap:8px;
 
-    overflow:hidden;
+    gap:10px;
 }
-
 .user-msg:hover{
 
     border:
@@ -442,11 +439,11 @@ box-shadow:
 
     border-radius:18px;
 
-    min-width:320px;
+    max-width:min(75%,900px);
 
-    max-width:75%;
+    width:fit-content;
 
-    padding:16px 18px;
+    padding:14px 18px;
 
     line-height:1.7;
 
@@ -457,11 +454,6 @@ box-shadow:
     flex-direction:column;
 
     gap:10px;
-
-    overflow:hidden;
-
-    transition:0.2s;
-    
 }
 
 .ai-msg:hover{
@@ -472,15 +464,22 @@ box-shadow:
 
 /* INPUT */
 
-.chat-input-area{
-    width:100%;
-    padding:14px 20px;
-    background:transparent;
-    border-top:1px solid rgba(255,255,255,0.06);
-    position:sticky;
-    bottom:0;
-    z-index:10;
-    padding-top:10px;
+.chat-image{
+
+    width:auto;
+
+    max-width:100%;
+
+    border-radius:16px;
+
+    margin-bottom:6px;
+
+    display:block;
+
+    object-fit:contain;
+
+    border:
+    1px solid rgba(255,255,255,0.08);
 }
 
 .input-box{
@@ -1236,8 +1235,6 @@ body.light-mode .history-dropdown button:hover{
     width:220px;
 
     max-width:100%;
-
-    max-height:260px;
 
     border-radius:16px;
 
