@@ -231,6 +231,7 @@ updateClock();
 
 let currentChat = [];
 let currentChatTitle = null;
+let currentChatId = Date.now();
 
 async function sendMessage(){
 
@@ -282,8 +283,8 @@ chatBox.innerHTML += `
     }
 
     <div class="user-text">
-        ${message}
-    </div>
+    ${message}
+</div>
 
 </div>
 `;
@@ -349,9 +350,6 @@ if(currentChatTitle === null){
         "model",
         document.getElementById("modelSelect").value
     );
-
-    const imageInput =
-    document.getElementById("imageInput");
 
     if(imageInput.files[0]){
 
@@ -449,8 +447,8 @@ function saveChat(){
     ) || [];
 
     let existingChat = chats.find(
-        chat => chat.title === currentChatTitle
-    );
+    chat => chat.id === currentChatId
+);
 
     if(existingChat){
 
@@ -460,9 +458,13 @@ function saveChat(){
     else{
 
         chats.unshift({
-            title:currentChatTitle,
-            messages:[...currentChat]
-        });
+
+    id:currentChatId,
+
+    title:currentChatTitle,
+
+    messages:[...currentChat]
+});
     }
 
     localStorage.setItem(
@@ -493,7 +495,8 @@ function loadHistory(){
     chats = chats.filter(chat => {
 
         const titleMatch =
-        chat.title.toLowerCase()
+        (chat.title || "")
+        .toLowerCase()
         .includes(searchText);
 
         const messageMatch =
@@ -588,6 +591,7 @@ function loadHistory(){
 
             currentChat = [...chat.messages];
             currentChatTitle = chat.title;
+            currentChatId = chat.id;
 
             document.querySelector(".welcome")
             .style.display = "none";
@@ -605,10 +609,14 @@ function loadHistory(){
                 if(msg.type === "user"){
 
                     chatBox.innerHTML += `
-                    <div class="user-msg">
-                        ${msg.text}
-                    </div>
-                    `;
+<div class="user-msg">
+
+    <div class="user-text">
+        ${msg.text}
+    </div>
+
+</div>
+`;
                 }
 
                 else{
@@ -630,6 +638,7 @@ function loadHistory(){
 
                     </div>
                     `;
+                    
                 }
                 const historyCopyBtns =
 chatBox.querySelectorAll(
@@ -803,7 +812,7 @@ ${m.text}`
 
             chats = chats.map(c => {
 
-                if(c.title === chat.title){
+                if(c.id === chat.id){
                     c.pinned = !c.pinned;
                 }
 
@@ -847,7 +856,7 @@ ${m.text}`
 
             chats = chats.map(c => {
 
-                if(c.title === chat.title){
+                if(c.id === chat.id){
                     c.title = newName;
                 }
 
@@ -878,7 +887,8 @@ ${m.text}`
             ) || [];
 
             chats = chats.filter(
-                c => c.title !== chat.title
+                c => c.id !== chat.id
+            
             );
 
             localStorage.setItem(
@@ -971,6 +981,7 @@ function newChat(){
 
     currentChat = [];
     currentChatTitle = null;
+    currentChatId = Date.now();
 
     document.getElementById(
         "chatMessages"
