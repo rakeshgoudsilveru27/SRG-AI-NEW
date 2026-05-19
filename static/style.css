@@ -410,27 +410,31 @@ justify-content:flex-start;
 
 .ai-msg{
 
-    position:relative;
-
     align-self:flex-start;
 
-    max-width:62%;
+    background:#111827;
 
-    padding:14px 18px;
+    color:#f1f5f9;
 
-    line-height:1.7;
-
-    white-space:pre-wrap;
-
-    animation:fadeIn 0.25s ease;
-
-    background:rgba(255,255,255,0.02);
-
-    border:1px solid rgba(255,255,255,0.04);
+    border:1px solid rgba(255,255,255,0.05);
 
     border-radius:18px;
 
-    backdrop-filter:blur(6px);
+    max-width:75%;
+
+    padding:16px 18px;
+
+    line-height:1.7;
+
+    animation:fadeIn 0.25s ease;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+
+    overflow:hidden;
 }
 
 /* INPUT */
@@ -639,12 +643,20 @@ justify-content:flex-start;
 /* MARKDOWN */
 
 .ai-msg pre{
+
     background:#0b1220;
+
     padding:14px;
+
     border-radius:12px;
+
     overflow-x:auto;
+
     margin-top:10px;
+
     border:1px solid rgba(255,255,255,0.05);
+
+    width:100%;
 }
 
 .ai-msg code{
@@ -1126,13 +1138,11 @@ body.light-mode .history-dropdown button:hover{
     background:
     rgba(0,0,0,0.04);
 }
+
+
 .copy-ai-btn{
 
-    position:absolute;
-
-    top:4px;
-
-    right:-36px;
+    align-self:flex-end;
 
     background:transparent;
 
@@ -1144,19 +1154,9 @@ body.light-mode .history-dropdown button:hover{
 
     font-size:13px;
 
-    padding:6px;
-
-    border-radius:8px;
-
     transition:0.2s;
 
-    opacity:0;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
+    margin-top:4px;
 }
 
 .ai-msg:hover .copy-ai-btn{
@@ -1202,4 +1202,14 @@ body.light-mode .history-dropdown button:hover{
     background:rgba(0,0,0,0.05);
 
     color:#111827;
+}
+
+.message-content{
+
+    width:100%;
+}
+
+.message-content p:first-child{
+
+    margin-top:0;
 }
