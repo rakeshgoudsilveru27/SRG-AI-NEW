@@ -415,6 +415,8 @@ justify-content:flex-start;
 }
 .ai-msg{
 
+    position:relative;
+
     align-self:flex-start;
 
     background:transparent;
@@ -1131,7 +1133,11 @@ body.light-mode .history-dropdown button:hover{
 }
 .copy-ai-btn{
 
-    margin-top:12px;
+    position:absolute;
+
+    top:4;
+
+    right:-36px;
 
     background:transparent;
 
@@ -1143,29 +1149,31 @@ body.light-mode .history-dropdown button:hover{
 
     font-size:13px;
 
-    display:flex;
-
-    align-items:center;
-
-    gap:6px;
-
-    padding:6px 10px;
+    padding:6px;
 
     border-radius:8px;
 
     transition:0.2s;
 
-    width:fit-content;
+    opacity:0;
 
-    opacity:0.55;
+    display:flex;
 
-    backdrop-filter:blur(6px);
-    
+    align-items:center;
+
+    justify-content:center;
 }
+
+.ai-msg:hover .copy-ai-btn{
+
+    opacity:1;
+}
+
+
 
 .copy-ai-btn:hover{
 
-    background:rgba(255,255,255,0.04);
+    background:rgba(255,255,255,0.05);
 
     color:white;
 
