@@ -50,23 +50,19 @@ body{
 }
 .light-mode .ai-msg{
 
-    background:transparent;
+    background:rgba(0,0,0,0.02);
+
+    border:1px solid rgba(0,0,0,0.05);
 
     color:#111827;
-
-    border:none;
-
-    box-shadow:none;
 }
 .light-mode .user-msg{
 
-    background:transparent;
+    background:rgba(0,0,0,0.03);
+
+    border:1px solid rgba(0,0,0,0.06);
 
     color:#111827;
-
-    border:none;
-
-    box-shadow:none;
 }
 .light-mode .chat-messages{
 
@@ -395,47 +391,46 @@ justify-content:flex-start;
 
     align-self:flex-end;
 
-    max-width:68%;
+    max-width:62%;
 
-    padding:10px 0;
-
-    color:#f1f5f9;
-
-    background:transparent;
-
-    border:none;
-
-    box-shadow:none;
+    padding:14px 18px;
 
     line-height:1.7;
 
     white-space:pre-wrap;
 
     animation:fadeIn 0.25s ease;
+
+    background:rgba(255,255,255,0.03);
+
+    border:1px solid rgba(255,255,255,0.05);
+
+    border-radius:18px;
 }
+
 .ai-msg{
 
     position:relative;
 
     align-self:flex-start;
 
-    background:transparent;
+    max-width:62%;
 
-    color:#f1f5f9;
-
-    border:none;
-
-    box-shadow:none;
-
-    max-width:68%;
-
-    padding:10px 0;
+    padding:14px 18px;
 
     line-height:1.7;
 
     white-space:pre-wrap;
 
     animation:fadeIn 0.25s ease;
+
+    background:rgba(255,255,255,0.02);
+
+    border:1px solid rgba(255,255,255,0.04);
+
+    border-radius:18px;
+
+    backdrop-filter:blur(6px);
 }
 
 /* INPUT */
@@ -1135,7 +1130,7 @@ body.light-mode .history-dropdown button:hover{
 
     position:absolute;
 
-    top:4;
+    top:4px;
 
     right:-36px;
 
