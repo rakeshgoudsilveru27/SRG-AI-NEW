@@ -252,11 +252,41 @@ async function sendMessage(){
     document.querySelector(".features")
     .style.display = "none";
 
-    chatBox.innerHTML += `
-    <div class="user-msg">
+    const imageInput =
+document.getElementById("imageInput");
+
+let imageURL = "";
+
+if(imageInput.files[0]){
+
+    imageURL = URL.createObjectURL(
+        imageInput.files[0]
+    );
+}
+
+chatBox.innerHTML += `
+
+<div class="user-msg">
+
+    ${
+        imageURL
+        ?
+        `
+        <img
+        src="${imageURL}"
+        class="chat-image"
+        >
+        `
+        :
+        ""
+    }
+
+    <div class="user-text">
         ${message}
     </div>
-    `;
+
+</div>
+`;
 
     chatBox.scrollTop = chatBox.scrollHeight;
 
@@ -402,6 +432,8 @@ if(currentChatTitle === null){
         });
 
         saveChat();
+
+        imageInput.value = "";
     }
 
     catch(error){
