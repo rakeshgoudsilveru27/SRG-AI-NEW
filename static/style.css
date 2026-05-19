@@ -1131,7 +1131,7 @@ body.light-mode .history-dropdown button:hover{
 }
 .copy-ai-btn{
 
-    margin-top:10px;
+    margin-top:12px;
 
     background:transparent;
 
@@ -1143,17 +1143,33 @@ body.light-mode .history-dropdown button:hover{
 
     font-size:13px;
 
+    display:flex;
+
+    align-items:center;
+
+    gap:6px;
+
+    padding:6px 10px;
+
+    border-radius:8px;
+
     transition:0.2s;
+
+    width:fit-content;
+
+    opacity:0.55;
+
+    backdrop-filter:blur(6px);
+    
 }
 
 .copy-ai-btn:hover{
 
+    background:rgba(255,255,255,0.04);
+
     color:white;
-}
 
-.light-mode .copy-ai-btn:hover{
-
-    color:#111827;
+    opacity:1;
 }
 
 /* CHAT IMAGE */
@@ -1178,8 +1194,9 @@ body.light-mode .history-dropdown button:hover{
 
 /* LIGHT MODE */
 
-.light-mode .chat-image{
+.light-mode .copy-ai-btn:hover{
 
-    border:
-    1px solid rgba(0,0,0,0.08);
+    background:rgba(0,0,0,0.05);
+
+    color:#111827;
 }
