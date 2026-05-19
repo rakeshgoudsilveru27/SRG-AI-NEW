@@ -410,11 +410,6 @@ box-shadow:
     animation:fadeIn 0.25s ease;
 }
 
-.user-msg:hover{
-
-    border:
-    1px solid rgba(255,255,255,0.08);
-}
 
 .ai-msg{
 
@@ -433,11 +428,6 @@ box-shadow:
     animation:fadeIn 0.25s ease;
 }
 
-.ai-msg:hover{
-
-    border:
-    1px solid rgba(255,255,255,0.08);
-}
 
 /* INPUT */
 
@@ -455,9 +445,7 @@ box-shadow:
 
     object-fit:contain;
 
-    border:
-    1px solid rgba(255,255,255,0.08);
-}
+    }
 
 .input-box{
     width:100%;
@@ -480,6 +468,11 @@ box-shadow:
     color:white;
     font-size:16px;
     padding:0 12px;
+    border:none;
+
+outline:none;
+
+box-shadow:none;
 }
 
 .mic-btn,
@@ -1189,11 +1182,8 @@ body.light-mode .history-dropdown button:hover{
 
 .copy-ai-btn:hover{
 
-    background:rgba(255,255,255,0.05);
-
     color:white;
 
-    opacity:1;
 }
 
 /* CHAT IMAGE */
@@ -1245,4 +1235,31 @@ body.light-mode .history-dropdown button:hover{
 .message-content pre{
 
     margin-top:12px;
+}
+.user-msg,
+.ai-msg,
+.chat-image,
+.copy-ai-btn,
+input,
+button,
+textarea{
+
+    outline:none !important;
+
+    border:none !important;
+
+    box-shadow:none !important;
+}
+
+*{
+    -webkit-tap-highlight-color: transparent;
+}
+
+button:focus,
+input:focus,
+textarea:focus{
+
+    outline:none !important;
+
+    box-shadow:none !important;
 }
