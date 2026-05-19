@@ -387,7 +387,7 @@ box-shadow:
     padding:28px;
     display:flex;
     flex-direction:column;
-    gap:18px;
+    gap20px;
     padding-bottom:120px;
     scroll-behavior:smooth;
     scrollbar-gutter:stable;
@@ -399,7 +399,7 @@ box-shadow:
 
     max-width:70%;
 
-    padding:4px 0;
+    padding:2px 0;
 
     color:#f8fafc;
 
@@ -408,6 +408,12 @@ box-shadow:
     white-space:pre-wrap;
 
     animation:fadeIn 0.25s ease;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:6px;
 }
 
 
@@ -417,7 +423,7 @@ box-shadow:
 
     max-width:75%;
 
-    padding:4px 0;
+    padding:2px 0;
 
     color:#f8fafc;
 
@@ -426,6 +432,14 @@ box-shadow:
     white-space:pre-wrap;
 
     animation:fadeIn 0.25s ease;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:flex-start;
+
+    gap:6px;
 }
 
 
@@ -1158,11 +1172,7 @@ body.light-mode .history-dropdown button:hover{
 
 .copy-ai-btn{
 
-    margin-top:8px;
-
     background:none;
-
-    border:none;
 
     color:#7c8aa0;
 
@@ -1171,6 +1181,10 @@ body.light-mode .history-dropdown button:hover{
     font-size:13px;
 
     padding:0;
+
+    margin-top:2px;
+
+    align-self:flex-start;
 }
 
 .ai-msg:hover .copy-ai-btn{
