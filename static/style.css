@@ -397,30 +397,19 @@ box-shadow:
 
     align-self:flex-end;
 
-    padding:14px 18px;
-
-    border-radius:18px;
-
     max-width:70%;
 
-    width:fit-content;
+    padding:4px 0;
 
-    background:#111827;
+    color:#f8fafc;
 
-    border:1px solid rgba(255,255,255,0.05);
-
-    line-height:1.6;
+    line-height:1.7;
 
     white-space:pre-wrap;
 
     animation:fadeIn 0.25s ease;
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:10px;
 }
+
 .user-msg:hover{
 
     border:
@@ -431,29 +420,17 @@ box-shadow:
 
     align-self:flex-start;
 
-    background:#111827;
+    max-width:75%;
 
-    color:#f1f5f9;
+    padding:4px 0;
 
-    border:1px solid rgba(255,255,255,0.05);
+    color:#f8fafc;
 
-    border-radius:18px;
+    line-height:1.8;
 
-    max-width:min(75%,900px);
-
-    width:fit-content;
-
-    padding:14px 18px;
-
-    line-height:1.7;
+    white-space:pre-wrap;
 
     animation:fadeIn 0.25s ease;
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:10px;
 }
 
 .ai-msg:hover{
@@ -1188,28 +1165,19 @@ body.light-mode .history-dropdown button:hover{
 
 .copy-ai-btn{
 
-    align-self:flex-end;
+    margin-top:8px;
 
-    background:transparent;
+    background:none;
 
     border:none;
 
-    color:#9ca3af;
+    color:#7c8aa0;
 
     cursor:pointer;
 
     font-size:13px;
 
-    transition:0.2s;
-
-    margin-top:4px;
-
-    opacity:0;
-
-    padding:6px 10px;
-
-    border-radius:8px;
-
+    padding:0;
 }
 
 .ai-msg:hover .copy-ai-btn{
@@ -1232,20 +1200,15 @@ body.light-mode .history-dropdown button:hover{
 
 .chat-image{
 
-    width:220px;
+    max-width:260px;
 
-    max-width:100%;
+    border-radius:14px;
 
-    border-radius:16px;
-
-    margin-bottom:10px;
+    margin-bottom:8px;
 
     display:block;
 
-    object-fit:cover;
-
-    border:
-    1px solid rgba(255,255,255,0.08);
+    object-fit:contain;
 }
 
 /* LIGHT MODE */
@@ -1272,4 +1235,14 @@ body.light-mode .history-dropdown button:hover{
     white-space:pre-wrap;
 
     word-break:break-word;
+}
+
+.message-content p{
+
+    margin:10px 0;
+}
+
+.message-content pre{
+
+    margin-top:12px;
 }
