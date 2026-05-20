@@ -174,9 +174,11 @@ href="{{ url_for('static', filename='style.css') }}">
                         🎤
                     </button>
 
-                    <input type="text"
+                    <textarea
                     id="userInput"
-                    placeholder="Type your message...">
+                    placeholder="Type your message..."
+                    rows="1"></textarea>
+
 
                     <button class="send-btn" onclick="sendMessage()">
                         ➜
@@ -192,7 +194,7 @@ href="{{ url_for('static', filename='style.css') }}">
 
 </div>
 
-<script>
+<script type="module">
 
 const themeButton =
 document.getElementById("themeButton");
@@ -332,6 +334,7 @@ if(currentChatTitle === null){
 }
 
     input.value = "";
+    input.style.height = "auto";
 
     let typingDiv =
     document.createElement("div");
@@ -479,7 +482,7 @@ function saveChat(){
         JSON.stringify(chats)
     );
 
-
+    
     loadHistory();
 }
 
@@ -686,7 +689,7 @@ historyCopyBtns.forEach(btn => {
         );
 
         btn.innerText =
-        " Copied";
+        "Copied";
 
         setTimeout(()=>{
 
@@ -1062,6 +1065,20 @@ function(e){
     }
 });
 
+const userInput =
+document.getElementById("userInput");
+
+userInput.addEventListener(
+"input",
+function(){
+
+    this.style.height = "auto";
+
+    this.style.height =
+    this.scrollHeight + "px";
+});
+
+
 loadHistory();
 
 document
@@ -1075,7 +1092,7 @@ function(){
 document
 .getElementById("userInput")
 .addEventListener(
-"keypress",
+"keydown",
 function(event){
 
    if(
@@ -1089,6 +1106,39 @@ function(event){
     sendMessage();
 }
 });
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
+
+import {
+    getFirestore
+}
+from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
+
+const firebaseConfig = {
+
+    apiKey: "AIzaSyDaq94z8cbMitDD1Lx4ow2nj1XGClvcHrU",
+
+    authDomain: "srg-ai453.firebaseapp.com",
+
+    projectId: "srg-ai453",
+
+    storageBucket: "srg-ai453.firebasestorage.app",
+
+    messagingSenderId: "493951829340",
+
+    appId: "1:493951829340:web:ad9ff1872d866b622d2d99"
+};
+
+const app =
+initializeApp(firebaseConfig);
+
+const db =
+getFirestore(app);
+
+console.log(
+    "Firebase Connected"
+);
 
 </script>
 
