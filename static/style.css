@@ -50,17 +50,18 @@ body{
 }
 .light-mode .ai-msg{
 
-    background:rgba(0,0,0,0.02);
+    background:transparent;
 
-    border:1px solid rgba(0,0,0,0.05);
+    border:none;
 
     color:#111827;
 }
+
 .light-mode .user-msg{
 
-    background:rgba(0,0,0,0.03);
+    background:transparent;
 
-    border:1px solid rgba(0,0,0,0.06);
+    border:none;
 
     color:#111827;
 }
@@ -419,11 +420,13 @@ box-shadow:
 
 .ai-msg{
 
+    position:relative;
+
     align-self:flex-start;
 
     max-width:75%;
 
-    padding:2px 0;
+    padding:2px 0 22px 0;
 
     color:#f8fafc;
 
@@ -436,12 +439,7 @@ box-shadow:
     display:flex;
 
     flex-direction:column;
-
-    align-items:flex-start;
-
-    gap:6px;
 }
-
 
 /* INPUT */
 
@@ -451,9 +449,9 @@ box-shadow:
 
     max-width:100%;
 
-    border-radius:16px;
+    border-radius:10px;
 
-    margin-bottom:6px;
+    margin-bottom:3px;
 
     display:block;
 
@@ -464,7 +462,7 @@ box-shadow:
 .input-box{
     width:100%;
     background:#111827;
-    border-radius:22px;
+    border-radius:18px;
     display:flex;
     align-items:center;
     padding:12px;
@@ -660,6 +658,16 @@ box-shadow:none;
     .tagline{
         display:none;
     }
+
+
+    .copy-ai-btn{
+
+    position:static;
+
+    margin-top:6px;
+
+    align-self:flex-start;
+}
 }
 
 /* MARKDOWN */
@@ -1172,6 +1180,12 @@ body.light-mode .history-dropdown button:hover{
 
 .copy-ai-btn{
 
+    position:absolute;
+
+    top:0;
+
+    right:0;
+
     background:none;
 
     color:#7c8aa0;
@@ -1182,9 +1196,9 @@ body.light-mode .history-dropdown button:hover{
 
     padding:0;
 
-    margin-top:2px;
+    opacity:0.7;
 
-    align-self:flex-start;
+    transition:0.2s;
 }
 
 .ai-msg:hover .copy-ai-btn{
@@ -1196,8 +1210,9 @@ body.light-mode .history-dropdown button:hover{
 
 .copy-ai-btn:hover{
 
-    color:white;
+    opacity:1;
 
+    color:white;
 }
 
 /* CHAT IMAGE */
