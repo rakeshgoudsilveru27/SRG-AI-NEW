@@ -160,7 +160,8 @@ href="{{ url_for('static', filename='style.css') }}">
 
             <div class="chat-input-area">
 
-                <div class="input-box">
+                <div class="input-box"
+                onclick="focusInput(event)">
 
                     <button class="icon-btn"
                     onclick="document.getElementById('imageInput').click()">
@@ -295,6 +296,7 @@ chatBox.innerHTML += `
         type:"user",
         text:message
     });
+   
 if(currentChatTitle === null){
 
     let cleanMessage =
@@ -309,6 +311,11 @@ if(currentChatTitle === null){
     .replace(/^can you /i,"")
     .replace(/^please /i,"")
     .replace(/^tell me /i,"");
+
+    if(cleanMessage === ""){
+
+    cleanMessage = "New Chat";
+}
 
     currentChatTitle =
     cleanMessage
@@ -411,7 +418,7 @@ if(currentChatTitle === null){
                 );
 
                 btn.innerText =
-                "✅ Copied";
+                "Copied";
 
                 setTimeout(()=>{
 
@@ -472,7 +479,20 @@ function saveChat(){
         JSON.stringify(chats)
     );
 
+
     loadHistory();
+}
+
+function focusInput(e){
+
+    if(
+        e.target.tagName !== "BUTTON"
+    ){
+
+        document
+        .getElementById("userInput")
+        .focus();
+    }
 }
 
 function loadHistory(){
@@ -592,6 +612,9 @@ function loadHistory(){
             currentChat = [...chat.messages];
             currentChatTitle = chat.title;
             currentChatId = chat.id;
+            sidebar.classList.remove("active");
+
+overlay.classList.remove("active");
 
             document.querySelector(".welcome")
             .style.display = "none";
@@ -640,7 +663,9 @@ function loadHistory(){
                     `;
                     
                 }
-                const historyCopyBtns =
+              
+            });
+            const historyCopyBtns =
 chatBox.querySelectorAll(
 ".copy-ai-btn"
 );
@@ -661,7 +686,7 @@ historyCopyBtns.forEach(btn => {
         );
 
         btn.innerText =
-        "✅ Copied";
+        " Copied";
 
         setTimeout(()=>{
 
@@ -671,7 +696,6 @@ historyCopyBtns.forEach(btn => {
         },1500);
     };
 });
-            });
         };
 
         const menuBtn =
@@ -740,8 +764,7 @@ ${m.text}`
 
             navigator.clipboard.writeText(text);
 
-            alert("Chat copied!");
-
+            console.log("Chat copied");
             shareDropdown.classList.remove(
                 "show-share"
             );
@@ -1055,9 +1078,16 @@ document
 "keypress",
 function(event){
 
-    if(event.key === "Enter"){
-        sendMessage();
-    }
+   if(
+    event.key === "Enter"
+    &&
+    !event.shiftKey
+){
+
+    event.preventDefault();
+
+    sendMessage();
+}
 });
 
 </script>
