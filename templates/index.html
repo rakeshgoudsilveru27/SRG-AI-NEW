@@ -450,7 +450,7 @@ if(currentChatTitle === null){
     }
 }
 
-function saveChat(){
+async function saveChat(){
 
     let chats = JSON.parse(
         localStorage.getItem("srg_chats")
@@ -482,6 +482,36 @@ function saveChat(){
         JSON.stringify(chats)
     );
 
+    try{
+
+    await addDoc(
+
+        collection(db,"chats"),
+
+        {
+
+            chatId: currentChatId,
+
+            title: currentChatTitle,
+
+            messages: currentChat,
+
+            createdAt: Date.now()
+        }
+    );
+
+    console.log(
+        "Chat saved to Firebase"
+    );
+}
+
+catch(error){
+
+    console.error(
+        "Firebase save error:",
+        error
+    );
+}
     
     loadHistory();
 }
