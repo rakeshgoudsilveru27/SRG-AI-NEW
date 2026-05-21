@@ -215,9 +215,13 @@ from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
 import {
     getFirestore,
     collection,
-    addDoc
+    addDoc,
+    getDocs,
+    query,
+    orderBy
 }
 from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
+
 const firebaseConfig = {
 
     apiKey: "AIzaSyDaq94z8cbMitDD1Lx4ow2nj1XGClvcHrU",
@@ -247,12 +251,11 @@ new GoogleAuthProvider();
 
 onAuthStateChanged(auth,(user)=>{
 
-    const btn =
-    document.getElementById("loginBtn");
-
     if(user){
 
-        btn.innerHTML = `
+        document
+        .getElementById("loginBtn")
+        .innerHTML = `
         <img
         src="${user.photoURL}"
         style="
@@ -264,12 +267,6 @@ onAuthStateChanged(auth,(user)=>{
         ">
         ${user.displayName}
         `;
-    }
-
-    else{
-
-        btn.innerText =
-        "Sign in with Google";
     }
 });
 
@@ -295,7 +292,10 @@ async function login(){
     user.displayName
 );
 
-      
+        console.log(
+            "Logged in:",
+            user.displayName
+        );
 
     }
 
@@ -1240,6 +1240,7 @@ function(){
 document
 .getElementById("loginBtn")
 .onclick = login;
+
 
 loadHistory();
 
