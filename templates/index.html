@@ -611,24 +611,33 @@ async function saveChat(){
 
     await addDoc(
 
-        collection(
-            db,
-            "users",
-            auth.currentUser.uid,
-            "chats"
-        ),
+    collection(
+        db,
+        "users",
+        auth.currentUser.uid,
+        "chats"
+    ),
 
-        {
-            chatId: currentChatId,
-            title: currentChatTitle,
-            messages: currentChat,
-            createdAt: Date.now()
-        }
-    );
+    {
 
-    console.log(
-        "Chat saved to Firebase"
-    );
+        chatId: currentChatId,
+
+        title: currentChatTitle,
+
+        messages: currentChat,
+
+        pinned: chats.find(
+            c => c.id === currentChatId
+        )?.pinned || false,
+
+        createdAt: Date.now()
+    }
+);
+
+console.log(
+    "Chat saved to Firebase"
+);
+
 }
 
 catch(error){
@@ -998,6 +1007,7 @@ ${m.text}`
 
                 if(c.id === chat.id){
                     c.pinned = !c.pinned;
+                    saveChat();
                 }
 
                 return c;
@@ -1278,11 +1288,12 @@ async function loadChatsFromFirebase(){
 
             chats.push({
 
-                id: doc.data().chatId,
-                title: doc.data().title,
-                messages: doc.data().messages
+    id: doc.data().chatId,
+    title: doc.data().title,
+    messages: doc.data().messages,
+    pinned: doc.data().pinned || false
 
-            });
+});
 
         });
 
