@@ -748,30 +748,52 @@ margin: auto;
 
     flex:1;
 
-    min-width:0;
+    width:100%;
+
+    background:transparent;
+
+    border:none;
+
+    outline:none;
+
+    resize:none;
 
     min-height:40px;
 
-    max-height:120px;
+    max-height:220px;
 
-    height:auto;
-
-    padding:8px;
+    padding:10px 8px;
 
     font-size:15px;
 
-    line-height:20px;
+    color:white;
+
+    font-family:inherit;
 
     overflow-y:auto;
 }
 
-    #userInput::placeholder{
+.chat-input-area{
 
-        font-size:15px;
+    width:100%;
 
-        white-space:nowrap;
-    }
+    padding:16px;
 
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:#0f172a;
+
+    position:sticky;
+
+    bottom:0;
+
+    left:0;
+
+    z-index:100;
 }
 
 /* MARKDOWN */
