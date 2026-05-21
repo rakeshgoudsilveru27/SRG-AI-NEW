@@ -218,7 +218,9 @@ import {
     addDoc,
     getDocs,
     query,
-    orderBy
+    orderBy,
+    updateDoc,
+    doc
 }
 from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
 
@@ -1007,7 +1009,12 @@ ${m.text}`
 
                 if(c.id === chat.id){
                 c.pinned = !c.pinned;
-                }
+
+                 savePinnedStatus(
+                c.id,
+                c.pinned
+                );
+}
 
                 return c;
             });
@@ -1250,6 +1257,60 @@ function(){
     this.style.height =
     this.scrollHeight + "px";
 });
+
+async function savePinnedStatus(chatId,pinned){
+
+    try{
+
+        if(!auth.currentUser){
+            return;
+        }
+
+        const q = query(
+            collection(
+                db,
+                "users",
+                auth.currentUser.uid,
+                "chats"
+            )
+        );
+
+        const snapshot =
+        await getDocs(q);
+
+        snapshot.forEach(async(d)=>{
+
+            if(
+                d.data().chatId === chatId
+            ){
+
+                await updateDoc(
+
+                    doc(
+                        db,
+                        "users",
+                        auth.currentUser.uid,
+                        "chats",
+                        d.id
+                    ),
+
+                    {
+                        pinned:pinned
+                    }
+                );
+            }
+        });
+
+    }
+
+    catch(error){
+
+        console.error(
+            "Pin update error:",
+            error
+        );
+    }
+}
 
 async function loadChatsFromFirebase(){
 
