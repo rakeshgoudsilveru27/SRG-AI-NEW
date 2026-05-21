@@ -1006,8 +1006,7 @@ ${m.text}`
             chats = chats.map(c => {
 
                 if(c.id === chat.id){
-                    c.pinned = !c.pinned;
-                    saveChat();
+                c.pinned = !c.pinned;
                 }
 
                 return c;
@@ -1022,6 +1021,8 @@ ${m.text}`
                 "srg_chats",
                 JSON.stringify(chats)
             );
+
+            savePinnedChats(chats);
 
             dropdown.classList.remove(
                 "show-dropdown"
