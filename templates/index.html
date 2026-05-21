@@ -219,7 +219,7 @@ import {
     getDocs,
     query,
     orderBy,
-    updateDoc,
+    deleteDoc,
     doc
 }
 from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
@@ -1091,6 +1091,9 @@ ${m.text}`
                 c => c.id !== chat.id
             
             );
+            deleteChatFromFirebase(
+                chat.id
+            );
 
             localStorage.setItem(
                 "srg_chats",
@@ -1307,6 +1310,59 @@ async function savePinnedStatus(chatId,pinned){
 
         console.error(
             "Pin update error:",
+            error
+        );
+    }
+}
+
+async function deleteChatFromFirebase(chatId){
+
+    try{
+
+        if(!auth.currentUser){
+            return;
+        }
+
+        const q = query(
+            collection(
+                db,
+                "users",
+                auth.currentUser.uid,
+                "chats"
+            )
+        );
+
+        const snapshot =
+        await getDocs(q);
+
+        snapshot.forEach(async(d)=>{
+
+            if(
+                d.data().chatId === chatId
+            ){
+
+                await deleteDoc(
+
+                    doc(
+                        db,
+                        "users",
+                        auth.currentUser.uid,
+                        "chats",
+                        d.id
+                    )
+                );
+            }
+        });
+
+        console.log(
+            "Chat deleted from Firebase"
+        );
+
+    }
+
+    catch(error){
+
+        console.error(
             error
         );
     }
