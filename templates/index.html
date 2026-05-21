@@ -42,6 +42,10 @@ href="{{ url_for('static', filename='style.css') }}">
 
     </div>
 
+    <button id="loginBtn" class="login-btn">
+    Sign in with Google
+    </button>
+
     <button class="new-chat" onclick="newChat()">
         + New Chat
     </button>
@@ -200,6 +204,15 @@ href="{{ url_for('static', filename='style.css') }}">
 from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
 
 import {
+    getAuth,
+    GoogleAuthProvider,
+    signInWithPopup,
+    signOut,
+    onAuthStateChanged
+}
+from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
+
+import {
     getFirestore,
     collection,
     addDoc
@@ -226,9 +239,74 @@ initializeApp(firebaseConfig);
 const db =
 getFirestore(app);
 
+const auth =
+getAuth(app);
+
+const provider =
+new GoogleAuthProvider();
+
+onAuthStateChanged(auth,(user)=>{
+
+    const btn =
+    document.getElementById("loginBtn");
+
+    if(user){
+
+        btn.innerHTML = `
+        <img
+        src="${user.photoURL}"
+        style="
+        width:28px;
+        height:28px;
+        border-radius:50%;
+        vertical-align:middle;
+        margin-right:8px;
+        ">
+        ${user.displayName}
+        `;
+    }
+
+    else{
+
+        btn.innerText =
+        "Sign in with Google";
+    }
+});
+
 console.log(
     "Firebase Connected"
 );
+
+async function login(){
+
+    try{
+
+        const result =
+        await signInWithPopup(
+            auth,
+            provider
+        );
+
+        const user =
+        result.user;
+
+        console.log(
+    "Logged in:",
+    user.displayName
+);
+
+      
+
+    }
+
+    catch(error){
+
+        console.error(
+            "Login Error:",
+            error
+        );
+    }
+}
 
 const themeButton =
 document.getElementById("themeButton");
@@ -518,18 +596,28 @@ async function saveChat(){
 
     try{
 
+    if(!auth.currentUser){
+
+        console.log(
+            "User not logged in"
+        );
+
+        return;
+    }
+
     await addDoc(
 
-        collection(db,"chats"),
+        collection(
+            db,
+            "users",
+            auth.currentUser.uid,
+            "chats"
+        ),
 
         {
-
             chatId: currentChatId,
-
             title: currentChatTitle,
-
             messages: currentChat,
-
             createdAt: Date.now()
         }
     );
@@ -1149,6 +1237,9 @@ function(){
     this.scrollHeight + "px";
 });
 
+document
+.getElementById("loginBtn")
+.onclick = login;
 
 loadHistory();
 
