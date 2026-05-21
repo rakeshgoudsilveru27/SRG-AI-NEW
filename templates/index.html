@@ -1090,6 +1090,8 @@ function newChat(){
     overlay.classList.remove("active");
 }
 
+window.newChat = newChat;
+
 const sidebar =
 document.querySelector(".sidebar");
 
@@ -1101,6 +1103,8 @@ function toggleSidebar(){
     sidebar.classList.toggle("active");
     overlay.classList.toggle("active");
 }
+
+window.toggleSidebar = toggleSidebar;
 
 overlay.onclick = ()=>{
 
