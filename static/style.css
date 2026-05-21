@@ -403,11 +403,16 @@ box-shadow:
 
 .chat-area{
     flex:1;
-    width:100%;
-    max-width: 100%;
+
     display:flex;
+
     flex-direction:column;
+
+    width:100%;
+
     overflow:hidden;
+
+    min-height:0;
 }
 
 .chat-messages{
@@ -592,6 +597,31 @@ margin: auto;
     display:block;
 }
 
+.chat-input-area{
+
+    width:100%;
+
+    padding:16px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:#0f172a;
+
+    position:sticky;
+
+    bottom:0;
+
+    left:0;
+
+    z-index:100;
+
+    flex-shrink:0;
+}
+
 /* MOBILE */
 
 .mobile-menu{
@@ -748,52 +778,30 @@ margin: auto;
 
     flex:1;
 
-    width:100%;
-
-    background:transparent;
-
-    border:none;
-
-    outline:none;
-
-    resize:none;
+    min-width:0;
 
     min-height:40px;
 
-    max-height:220px;
+    max-height:120px;
 
-    padding:10px 8px;
+    height:auto;
+
+    padding:8px;
 
     font-size:15px;
 
-    color:white;
-
-    font-family:inherit;
+    line-height:20px;
 
     overflow-y:auto;
 }
 
-.chat-input-area{
+    #userInput::placeholder{
 
-    width:100%;
+        font-size:15px;
 
-    padding:16px;
+        white-space:nowrap;
+    }
 
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    background:#0f172a;
-
-    position:sticky;
-
-    bottom:0;
-
-    left:0;
-
-    z-index:100;
 }
 
 /* MARKDOWN */
@@ -1441,4 +1449,16 @@ textarea:focus{
     font-size:14px;
 
     font-weight:500;
+}
+
+.chat-input-area{
+    border:3px solid red !important;
+}
+
+.input-box{
+    border:3px solid yellow !important;
+}
+
+#userInput{
+    background:rgba(255,255,0,.2) !important;
 }
