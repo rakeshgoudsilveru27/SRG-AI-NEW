@@ -537,15 +537,7 @@ margin: auto;
 
     scroll-behavior: smooth;
 
-    white-space: nowrap;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
-
-    display:flex;
-
-    align-items:center;
+   
 }
 
 .mic-btn,
@@ -754,20 +746,24 @@ margin: auto;
 
     #userInput{
 
-        height:44px !important;
+    flex:1;
 
-        min-height:44px !important;
+    min-width:0;
 
-        max-height:44px !important;
+    min-height:40px;
 
-        padding-top:10px !important;
+    max-height:120px;
 
-        padding-bottom:10px !important;
+    height:auto;
 
-        line-height:22px !important;
+    padding:8px;
 
-        overflow:hidden !important;
-    }
+    font-size:15px;
+
+    line-height:20px;
+
+    overflow-y:auto;
+}
 
     #userInput::placeholder{
 
