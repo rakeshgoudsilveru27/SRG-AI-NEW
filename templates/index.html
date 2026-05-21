@@ -253,6 +253,8 @@ onAuthStateChanged(auth,(user)=>{
 
     if(user){
 
+        loadChatsFromFirebase();
+
         document
         .getElementById("loginBtn")
         .innerHTML = `
@@ -1236,6 +1238,75 @@ function(){
     this.style.height =
     this.scrollHeight + "px";
 });
+
+async function loadChatsFromFirebase(){
+
+    if(!auth.currentUser){
+
+        console.log(
+            "No user logged in"
+        );
+
+        return;
+    }
+
+    try{
+
+        const q = query(
+
+            collection(
+                db,
+                "users",
+                auth.currentUser.uid,
+                "chats"
+            ),
+
+            orderBy(
+                "createdAt",
+                "desc"
+            )
+        );
+
+        const snapshot =
+        await getDocs(q);
+
+        let chats = [];
+
+        snapshot.forEach(doc => {
+
+            chats.push({
+
+                id: doc.data().chatId,
+                title: doc.data().title,
+                messages: doc.data().messages
+
+            });
+
+        });
+
+        localStorage.setItem(
+
+            "srg_chats",
+
+            JSON.stringify(chats)
+        );
+
+        console.log(
+            "Firebase chats loaded"
+        );
+
+        loadHistory();
+
+    }
+
+    catch(error){
+
+        console.error(
+            "Firebase load error:",
+            error
+        );
+    }
+}
 
 document
 .getElementById("loginBtn")
