@@ -736,55 +736,57 @@ margin: auto;
 
     .input-box{
 
-    width:calc(100% - 16px);
+    width:100%;
 
-    min-height:60px;
+    max-width:100%;
 
-    padding:12px;
+    padding:8px;
 
-    gap:8px;
+    gap:6px;
 
-    border-radius:24px;
+    border-radius:20px;
+
+    display:flex;
+
+    align-items:center;
 }
 
-    .send-btn{
-    width:40px;
-    height:40px;
-    flex-shrink:0;
+.icon-btn,
+.mic-btn{
+
+    width:36px;
+
+    height:36px;
+
+    min-width:36px;
+
+    margin-right:0;
+
+    font-size:14px;
 }
 
-    .mic-btn,
-.icon-btn{
-    width:32px;
-    height:32px;
-    flex-shrink:0;
+.send-btn{
+
+    width:42px;
+
+    height:42px;
+
+    min-width:42px;
+
+    font-size:16px;
 }
 
-    .tagline{
-        display:none;
-    }
-
-
-    .copy-ai-btn{
-
-    position:static;
-
-    margin-top:6px;
-
-    align-self:flex-start;
-}
-
-    #userInput{
+#userInput{
 
     flex:1;
 
-    min-width:0;
+    width:100%;
+
+    min-width:120px;
 
     min-height:40px;
 
     max-height:120px;
-
-    height:auto;
 
     padding:8px;
 
@@ -794,14 +796,6 @@ margin: auto;
 
     overflow-y:auto;
 }
-
-    #userInput::placeholder{
-
-        font-size:15px;
-
-        white-space:nowrap;
-    }
-
 }
 
 /* MARKDOWN */
@@ -1449,16 +1443,4 @@ textarea:focus{
     font-size:14px;
 
     font-weight:500;
-}
-
-.chat-input-area{
-    border:3px solid red !important;
-}
-
-.input-box{
-    border:3px solid yellow !important;
-}
-
-#userInput{
-    background:rgba(255,255,0,.2) !important;
 }
