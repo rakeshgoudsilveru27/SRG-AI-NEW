@@ -12,6 +12,8 @@ html,body{
     min-height:100%;
 
     overflow-x:hidden;
+
+    position: fixed;
 }
 
 body{
@@ -623,14 +625,7 @@ margin: auto;
 }
 
 @media only screen and (max-width:768px){
-    .main{
-
     
-    min-height:100vh;
-
-    overflow-x:hidden;
-}
-
     .mobile-menu{
         display:flex;
         position:fixed;
@@ -785,14 +780,11 @@ margin: auto;
 
     padding:8px;
 
-    font-size:15px;
+    font-size:16px;
 
     line-height:20px;
 
     overflow-y:auto;
-}
-.main-container{
-    height:100dvh;
 }
 
 .main{
@@ -812,6 +804,39 @@ margin: auto;
 .chat-input-area{
     flex-shrink:0;
 }
+
+
+    .main-container {
+        height: 100dvh;    
+        display: flex;
+        flex-direction: column;
+        overflow: hidden; 
+    }
+
+    .main {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        min-height: 0;
+        overflow: hidden;
+    }
+
+    .features {
+        flex-direction: column;
+        align-items: center;
+        gap: 14px;
+        padding: 10px 14px 40px;
+        overflow-y: auto; 
+    }
+
+    #userInput {
+        font-size: 16px; 
+        line-height: 1.4;
+        max-height: 120px;
+        overflow-y: auto;
+    }
+
 }
 
 /* MARKDOWN */
