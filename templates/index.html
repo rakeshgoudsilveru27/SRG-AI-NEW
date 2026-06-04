@@ -498,25 +498,26 @@ if(currentChatTitle === null){
 
         document.getElementById("typing").remove();
 
-        chatBox.innerHTML += `
+        const aiMessageHtml = `
 
-        <div class="ai-msg">
+<div class="ai-msg" id="latest-ai-msg">
 
-            <div class="message-content">
+    <div class="message-content">
 
-                ${marked.parse(data.reply)}
+        ${marked.parse(data.reply)}
 
-            </div>
+    </div>
 
-            <button class="copy-ai-btn">
+    <button class="copy-ai-btn">
 
-                📋 Copy
+        📋 Copy
 
-            </button>
+    </button>
 
-        </div>
-        `;
+</div>
+`;
 
+chatBox.innerHTML += aiMessageHtml;
         const copyButtons =
         document.querySelectorAll(
         ".copy-ai-btn"
@@ -549,8 +550,12 @@ if(currentChatTitle === null){
             };
         });
 
-        chatBox.scrollTop = chatBox.scrollHeight;
-
+document
+.getElementById("latest-ai-msg")
+.scrollIntoView({
+    behavior:"smooth",
+    block:"start"
+});
         currentChat.push({
             type:"ai",
             text:data.reply
