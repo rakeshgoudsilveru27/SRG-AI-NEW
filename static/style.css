@@ -325,6 +325,9 @@ body{
 
     background:#0f172a;
 }
+.light-mode .main{
+    background:#f3f6fb;
+}
 
 /* HERO */
 
@@ -340,7 +343,15 @@ body{
 
     text-align:center;
 
-    padding:40px 20px;
+    position:absolute;
+
+    top:50%;
+
+    left:50%;
+
+    transform:translate(-50%,-50%);
+
+    width:100%;
 }
 
 .welcome h1{
@@ -379,6 +390,9 @@ body{
     min-height:0;
 
     width:100%;
+
+    position:relative;
+    
 }
 
 .chat-messages{
