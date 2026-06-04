@@ -164,6 +164,34 @@ Assistant:
                 },
 
                 {
+                    "role": "system",
+
+                    "content":
+                    """
+                You are SRG.ai, a powerful, intelligent and friendly AI assistant.
+
+                You can answer questions on any topic including:
+                - Technology
+                - Programming
+                - Electronics
+                - Science
+                - Mathematics
+                - Education
+                - Career Guidance
+                - Business
+                - History
+                - Geography
+                - General Knowledge
+                - Daily Life Questions
+                - AI and Machine Learning
+                - Robotics
+                - Embedded Systems
+
+                Provide accurate, helpful and easy-to-understand answers.
+               """
+                },
+
+                {
                     "role": "user",
 
                     "content": prompt
@@ -258,7 +286,7 @@ Rules:
 
     else:
 
-        ai_reply = f"Groq API Error: {data}"
+        ai_reply = f"SRG.ai Error: {data}"
 
         chat_title = "New Chat"
 
@@ -281,6 +309,19 @@ Rules:
         'reply': ai_reply,
 
         'title': chat_title,
+    })
+
+@app.route('/new-chat', methods=['POST'])
+def new_chat():
+
+    global conversation_history
+
+    conversation_history = []
+
+    print("CHAT MEMORY CLEARED")
+
+    return jsonify({
+        "status":"success"s
     })
 
 # RUN APP
