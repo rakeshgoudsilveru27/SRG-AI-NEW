@@ -179,9 +179,9 @@ href="{{ url_for('static', filename='style.css') }}">
                     </button>
 
                     <textarea
-                    id="userInput"
-                    placeholder="Type your message..."
-                    rows="1"></textarea>
+id="userInput"
+placeholder="Ask SRG AI..."
+rows="1"></textarea>
 
 
                     <button class="send-btn" onclick="sendMessage()">
@@ -220,6 +220,7 @@ import {
     query,
     orderBy,
     deleteDoc,
+    updateDoc,
     doc
 }
 from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";

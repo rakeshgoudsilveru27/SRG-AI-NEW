@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SRG AI Login</title>
+
+    <style>
+        body{
+            margin:0;
+            height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            background:#0f172a;
+            font-family:Arial;
+            color:white;
+        }
+
+        .login-box{
+            width:380px;
+            padding:40px;
+            background:#111827;
+            border-radius:20px;
+            text-align:center;
+        }
+
+        .logo{
+            font-size:42px;
+            font-weight:bold;
+            margin-bottom:10px;
+        }
+
+        .logo span{
+            color:#1ea0ff;
+        }
+
+        .google-btn{
+            width:100%;
+            height:50px;
+            border:none;
+            border-radius:12px;
+            cursor:pointer;
+            font-size:16px;
+            margin-top:20px;
+        }
+    </style>
+</head>
+
+<body>
+    
+
+<div class="login-box">
+
+    <div class="logo">
+        SRG<span>.ai</span>
+    </div>
+
+    <h2>Welcome Back</h2>
+
+    <p>Sign in to continue</p>
+
+    <button
+    class="google-btn"
+    onclick="login()">
+
+        Continue with Google
+
+    </button>
+
+</div>
+
+<script type="module">
+
+import {
+initializeApp
+}
+from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
+
+import {
+getAuth,
+GoogleAuthProvider,
+signInWithPopup,
+onAuthStateChanged
+}
+from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
+
+const firebaseConfig = {
+
+apiKey:"AIzaSyDaq94z8cbMitDD1Lx4ow2nj1XGClvcHrU",
+
+authDomain:"srg-ai453.firebaseapp.com",
+
+projectId:"srg-ai453",
+
+storageBucket:"srg-ai453.firebasestorage.app",
+
+messagingSenderId:"493951829340",
+
+appId:"1:493951829340:web:ad9ff1872d866b622d2d99"
+};
+
+const app =
+initializeApp(firebaseConfig);
+
+const auth =
+getAuth(app);
+
+const provider =
+new GoogleAuthProvider();
+
+async function login(){
+
+try{
+
+await signInWithPopup(
+auth,
+provider
+);
+
+}
+catch(error){
+
+console.error(error);
+
+}
+
+}
+
+window.login = login;
+
+onAuthStateChanged(
+auth,
+(user)=>{
+
+if(user){
+
+window.location.href =
+"/chat";
+
+}
+
+});
+
+</script>
+</body>
+</html>

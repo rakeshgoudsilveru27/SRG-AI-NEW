@@ -1317,6 +1317,11 @@ body.light-mode .history-dropdown button:hover{
     color:#9ca3af;
 }
 
+.light-mode .chat-input-area{
+
+    background:#eef2f7;
+}
+
 /* LIGHT MODE */
 
 .light-mode .history-category{

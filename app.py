@@ -12,10 +12,13 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 conversation_history = []
 
 # HOME PAGE
-@app.route('/')
-def home():
-    return render_template('index.html')
+@app.route("/", methods=["GET"])
+def login_page():
+    return render_template("login.html")
 
+@app.route("/chat", methods=["GET"])
+def chat_page():
+    return render_template("index.html")
 # CHAT ROUTE
 @app.route('/chat', methods=['POST'])
 def chat():
@@ -29,9 +32,34 @@ def chat():
 
     image = request.files.get('image')
 
+
     # SAVE IMAGE
 
+    prompt_image_text = ""
+
     if image:
+
+        allowed_extensions = [
+            "png",
+            "jpg",
+            "jpeg",
+            "webp"
+        ]
+
+        if "." in image.filename:
+
+            ext = image.filename.rsplit(".",1)[1].lower()
+
+            if ext not in allowed_extensions:
+
+                return jsonify({
+
+                    "reply":
+                    "Invalid image format.",
+
+                    "title":
+                    "New Chat"
+                })
 
         os.makedirs(
             UPLOAD_FOLDER,
@@ -44,6 +72,11 @@ def chat():
         )
 
         image.save(image_path)
+
+        prompt_image_text = f"""
+User uploaded image:
+{image.filename}
+"""
 
     # SAVE USER MESSAGE
 
@@ -81,6 +114,8 @@ mention that the image was received successfully.
 Conversation History:
 
 {history}
+
+{prompt_image_text if image else ""}
 
 Assistant:
 """
@@ -123,7 +158,9 @@ Assistant:
                     "content": prompt
                 }
             ]
-        }
+        },
+
+        timeout=60
     )
 
     data = response.json()
@@ -181,7 +218,9 @@ Rules:
                         "content": title_prompt
                     }
                 ]
-            }
+            },
+
+            timeout=60
         )
 
         title_data = title_response.json()
@@ -216,6 +255,12 @@ Rules:
 
     conversation_history.append(
         f"Assistant: {ai_reply}"
+    )
+
+    # LIMIT MEMORY
+
+    conversation_history[:] = (
+        conversation_history[-20:]
     )
 
     # RETURN RESPONSE
