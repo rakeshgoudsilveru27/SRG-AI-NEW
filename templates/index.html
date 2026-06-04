@@ -1198,6 +1198,10 @@ function(){
 
 function newChat(){
 
+    fetch("/new-chat",{
+        method:"POST"
+    });
+
     currentChat = [];
     currentChatTitle = null;
     currentChatId = Date.now();
@@ -1214,6 +1218,7 @@ function newChat(){
 
     document.querySelector(".sidebar")
     .classList.remove("active");
+
     overlay.classList.remove("active");
 }
 
