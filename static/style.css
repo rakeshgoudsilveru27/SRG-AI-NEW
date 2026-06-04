@@ -39,8 +39,8 @@ body{
     border-bottom:1px solid #ddd;
 }
 
-.light-mode .main{
-    background:#eef2f7;
+.welcome{
+    background:transparent;
 }
 
 .light-mode .card,
@@ -329,9 +329,18 @@ body{
 /* HERO */
 
 .welcome{
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
     text-align:center;
-    margin-top:40px;
-    padding:20px 20px 5px 20px;
+
+    padding:40px 20px;
 }
 
 .welcome h1{
@@ -344,10 +353,16 @@ body{
 }
 
 .welcome p{
-    max-width:850px;
+
+    max-width:700px;
+
+    margin:0 auto;
+
+    text-align:center;
+
     opacity:0.8;
+
     line-height:1.7;
-    margin:auto;
 }
 
 
