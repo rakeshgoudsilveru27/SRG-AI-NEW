@@ -25,11 +25,7 @@ def chat():
 
     user_message = request.form['message']
 
-    selected_model = request.form.get(
-        'model',
-        'llama-3.1-8b-instant'
-    )
-
+    
     image = request.files.get('image')
 
 
@@ -142,6 +138,36 @@ Assistant:
         "application/json"
     }
 
+    # AUTO AI MODEL SELECTION
+
+    message_lower = user_message.lower()
+
+    if len(user_message) > 200:
+
+        selected_model = "llama-3.3-70b-versatile"
+
+    elif any(word in message_lower for word in [
+
+        "project",
+        "architecture",
+        "flask",
+        "python",
+        "robot",
+        "embedded",
+        "system design",
+        "database",
+        "machine learning",
+        "dsa",
+        "algorithm"
+
+    ]):
+
+        selected_model = "llama-3.3-70b-versatile"
+
+    else:
+
+        selected_model = "llama-3.1-8b-instant"
+
     # MAIN AI RESPONSE
 
     response = requests.post(
@@ -160,35 +186,28 @@ Assistant:
                     "role": "system",
 
                     "content":
-                    "You are SRG.ai, an intelligent AI assistant for electronics, coding, Arduino, embedded systems, robotics, PCB design and engineering."
-                },
-
-                {
-                    "role": "system",
-
-                    "content":
                     """
-                You are SRG.ai, a powerful, intelligent and friendly AI assistant.
+You are SRG.ai, a powerful, intelligent and friendly AI assistant.
 
-                You can answer questions on any topic including:
-                - Technology
-                - Programming
-                - Electronics
-                - Science
-                - Mathematics
-                - Education
-                - Career Guidance
-                - Business
-                - History
-                - Geography
-                - General Knowledge
-                - Daily Life Questions
-                - AI and Machine Learning
-                - Robotics
-                - Embedded Systems
+You can answer questions on any topic including:
+- Technology
+- Programming
+- Electronics
+- Science
+- Mathematics
+- Education
+- Career Guidance
+- Business
+- History
+- Geography
+- General Knowledge
+- Daily Life Questions
+- AI and Machine Learning
+- Robotics
+- Embedded Systems
 
-                Provide accurate, helpful and easy-to-understand answers.
-               """
+Provide accurate, helpful and easy-to-understand answers.
+"""
                 },
 
                 {
