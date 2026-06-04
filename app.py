@@ -321,10 +321,12 @@ def new_chat():
     print("CHAT MEMORY CLEARED")
 
     return jsonify({
-        "status":"success"s
+        "status":"success"
     })
 
 # RUN APP
+
+
 
 if __name__ == '__main__':
 
