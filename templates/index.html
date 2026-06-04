@@ -115,36 +115,11 @@ href="{{ url_for('static', filename='style.css') }}">
 
             <p>
                 Your intelligent AI assistant
-                for electronics and coding.
             </p>
 
         </div>
 
-        <div class="features">
-
-            <div class="card">
-                <h3>⚡ Explain Circuits</h3>
-                <p>
-                    Understand electronic circuits easily.
-                </p>
-            </div>
-
-            <div class="card">
-                <h3>💻 Arduino Coding</h3>
-                <p>
-                    Generate Arduino and ESP32 code.
-                </p>
-            </div>
-
-            <div class="card">
-                <h3>🤖 Embedded Systems</h3>
-                <p>
-                    Build robotics and embedded projects.
-                </p>
-            </div>
-
-        </div>
-
+       
         <div class="chat-area">
 
             <div class="chat-messages" id="chatMessages"></div>
@@ -357,8 +332,6 @@ async function sendMessage(){
     document.querySelector(".welcome")
     .style.display = "none";
 
-    document.querySelector(".features")
-    .style.display = "none";
 
     const imageInput =
 document.getElementById("imageInput");
@@ -1196,9 +1169,6 @@ function newChat(){
 
     document.querySelector(".welcome")
     .style.display = "block";
-
-    document.querySelector(".features")
-    .style.display = "flex";
 
     document.querySelector(".sidebar")
     .classList.remove("active");

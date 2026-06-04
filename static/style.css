@@ -331,7 +331,7 @@ body{
 .welcome{
     text-align:center;
     margin-top:40px;
-    padding:20px;
+    padding:20px 20px 5px 20px;
 }
 
 .welcome h1{
@@ -350,52 +350,6 @@ body{
     margin:auto;
 }
 
-/* FEATURES */
-
-.features{
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:stretch;
-
-    gap:24px;
-
-    flex-wrap:wrap;
-
-    width:100%;
-
-    padding:30px 20px;
-}
-
-.card{
-    width:230px;
-   background:#111827;
-    padding:24px;
-    border-radius:20px;
-    transition:0.3s;
-    border:1px solid rgba(255,255,255,0.04);
-    min-height:170px;
-display:flex;
-flex-direction:column;
-justify-content:flex-start;
-box-shadow:
-0 10px 25px rgba(0,0,0,0.18);
-}
-
-.card:hover{
-    transform:translateY(-2px);
-}
-
-.card h3{
-    margin-bottom:12px;
-}
-
-.card p{
-    opacity:0.75;
-    line-height:1.5;
-}
 
 /* CHAT AREA */
 
