@@ -704,19 +704,25 @@ margin: auto;
 
     .chat-input-area{
 
+    position:fixed;
+
+    left:0;
+
+    right:0;
+
+    bottom:0;
+
     width:100%;
 
-    display:flex;
+    padding:10px;
 
-    justify-content:center;
+    z-index:9999;
 
-    align-items:center;
-
-    padding:12px 14px 18px 14px;
-
-    background:transparent;
+    background:#0f172a;
 }
-
+    .chat-messages{
+        padding-bottom:90px !important;
+    }
 
     .input-box{
 
