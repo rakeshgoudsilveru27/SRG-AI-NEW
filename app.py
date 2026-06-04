@@ -75,6 +75,39 @@ def chat():
 
         image.save(image_path)
 
+        if image:
+
+            try:
+
+                img = Image.open(image_path)
+
+                vision_model = genai.GenerativeModel(
+                    "gemini-2.5-flash"
+                )
+
+                vision_response = vision_model.generate_content([
+                    user_message,
+                    img
+                ])
+
+                ai_reply = vision_response.text
+
+                conversation_history.append(
+                    f"Assistant: {ai_reply}"
+                )
+
+                return jsonify({
+
+                    "reply": ai_reply,
+
+                    "title": "Image Analysis"
+
+                })
+
+            except Exception as e:
+
+                print("Gemini Error:", e)
+
         prompt_image_text = f"""
 User uploaded image:
 {image.filename}
