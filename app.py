@@ -34,6 +34,10 @@ def chat():
     
     image = request.files.get('image')
 
+    print("========== DEBUG ==========")
+    print("IMAGE RECEIVED =", image)
+    print("FILES =", request.files)
+    print("===========================")
 
     # SAVE IMAGE
 
