@@ -291,13 +291,6 @@ body{
     max-width:100%;
 }
 
-.topbar{
-    height:60px;
-    display:flex;
-    justify-content:flex-end;
-    align-items:center;
-    padding:10px 20px;
-    background:#0f172a;}
 
 .model-select{
     background:#10213a;
