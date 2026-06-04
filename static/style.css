@@ -13,7 +13,6 @@ html,body{
 
     overflow-x:hidden;
 
-    position: fixed;
 }
 
 body{
@@ -717,10 +716,9 @@ margin: auto;
 
     align-items:center;
 
-    padding:10px;
+    padding:12px 12px 18px 12px;
 
     background:transparent;
-
 }
 
 
@@ -730,11 +728,11 @@ margin: auto;
 
     max-width:100%;
 
-    padding:8px;
+    padding:10px;
 
-    gap:6px;
+    gap:8px;
 
-    border-radius:20px;
+    border-radius:28px;
 
     display:flex;
 
