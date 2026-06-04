@@ -18,7 +18,12 @@ href="{{ url_for('static', filename='style.css') }}">
 <body>
 
 <div class="mobile-menu" onclick="toggleSidebar()">
-☰
+
+    <img
+    src="{{ url_for('static', filename='logo.png') }}"
+    class="mobile-logo"
+    alt="SRG.ai">
+
 </div>
 
 <div class="sidebar">
