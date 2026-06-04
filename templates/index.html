@@ -500,8 +500,7 @@ if(currentChatTitle === null){
 
         const aiMessageHtml = `
 
-<div class="ai-msg" id="latest-ai-msg">
-
+<div class="ai-msg">
     <div class="message-content">
 
         ${marked.parse(data.reply)}
@@ -550,12 +549,22 @@ chatBox.innerHTML += aiMessageHtml;
             };
         });
 
-document
-.getElementById("latest-ai-msg")
-.scrollIntoView({
+const allAiMessages =
+document.querySelectorAll(".ai-msg");
+
+const latestAiMessage =
+allAiMessages[
+    allAiMessages.length - 1
+];
+
+latestAiMessage.scrollIntoView({
+
     behavior:"smooth",
+
     block:"start"
+
 });
+
         currentChat.push({
             type:"ai",
             text:data.reply
