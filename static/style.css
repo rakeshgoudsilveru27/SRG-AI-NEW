@@ -89,7 +89,7 @@ body{
 
 .sidebar{
     width:230px;
-    height:100vh;
+    height:100dvh;
     background:#111827;
 
     padding:20px;
