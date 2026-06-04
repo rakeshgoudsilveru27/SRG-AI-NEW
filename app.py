@@ -1,8 +1,14 @@
 from flask import Flask, render_template, request, jsonify
 import requests
 import os
+import google.generativeai as genai
+from PIL import Image
 
 app = Flask(__name__)
+
+genai.configure(
+    api_key=os.environ.get("GEMINI_API_KEY")
+)
 
 # UPLOAD FOLDER
 UPLOAD_FOLDER = 'uploads'
