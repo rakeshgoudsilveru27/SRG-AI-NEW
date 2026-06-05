@@ -6,12 +6,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>SRG.ai</title>
+<title>
+SRG.ai - AI Assistant for Coding,
+Robotics and Learning
+</title>
 
 <link rel="stylesheet"
 href="{{ url_for('static', filename='style.css') }}">
 
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+<meta
+name="description"
+content="
+SRG.ai is an intelligent AI assistant
+for coding, robotics, electronics,
+learning and productivity.
+">
 
 </head>
 
@@ -857,8 +868,15 @@ function loadHistory(){
         </div>
         `;
 
-        item.querySelector(".history-item")
-        .onclick = function(){
+        item.onclick = function(e){
+
+    if(
+        e.target.closest(
+            ".history-menu-container"
+        )
+    ){
+        return;
+    }
 
             currentChat = [...chat.messages];
             currentChatTitle = chat.title;
@@ -870,8 +888,15 @@ overlay.classList.remove("active");
             document.querySelector(".welcome")
             .style.display = "none";
 
-            document.querySelector(".features")
-            .style.display = "none";
+            const features =
+            document.querySelector(".features");
+
+            if(features){
+
+            features.style.display =
+            "none";
+
+        }
 
             let chatBox =
             document.getElementById("chatMessages");

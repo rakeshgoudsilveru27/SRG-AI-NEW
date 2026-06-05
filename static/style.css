@@ -954,6 +954,18 @@ body.light-mode .menu-logo{
     gap:8px;
 
     margin-bottom:8px;
+
+    padding:10px;
+
+    border-radius:12px;
+
+    cursor:pointer;
+}
+
+.history-wrapper:hover{
+
+    background:
+    rgba(255,255,255,0.05);
 }
 
 .delete-chat{
@@ -1627,4 +1639,8 @@ textarea:focus{
     flex-direction:column;
     height:100vh;
     overflow:hidden;
+}
+.history-item{
+
+    flex:1;
 }
