@@ -1676,14 +1676,14 @@ document
 
 loadHistory();
 
+loadLastOpenedChat();
+
 document
 .getElementById("historySearch")
 .addEventListener(
 "input",
 function(){
-loadHistory();
-
-loadLastOpenedChat();
+    loadHistory();
 });
 
 const textarea =
