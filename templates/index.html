@@ -420,13 +420,7 @@ chatBox.innerHTML += `
 </div>
 `;
 
-scrollToBottom();
 
-setTimeout(()=>{
-
-    scrollToBottom();
-
-},100);
     currentChat.push({
         type:"user",
         text:message
@@ -485,9 +479,6 @@ if(currentChatTitle === null){
 
     chatBox.appendChild(typingDiv);
 
-requestAnimationFrame(()=>{
-    scrollToBottom();
-});
 
     let formData = new FormData();
 
@@ -516,8 +507,6 @@ requestAnimationFrame(()=>{
     "typing"
 ).remove();
 
-scrollToBottom();
-
         const aiMessageHtml = `
 
 <div class="ai-msg">
@@ -541,26 +530,26 @@ chatBox.insertAdjacentHTML(
     aiMessageHtml
 );
 
-const userMessages =
-chatBox.querySelectorAll(
-    ".user-msg"
-);
-
 const lastUserMessage =
-userMessages[
-    userMessages.length - 1
-];
+chatBox.querySelector(
+    ".user-msg:last-of-type"
+);
 
 if(lastUserMessage){
 
-    lastUserMessage.scrollIntoView({
+    setTimeout(()=>{
 
-        behavior:"smooth",
+        lastUserMessage.scrollIntoView({
 
-        block:"start"
+            behavior:"smooth",
 
-    });
+            block:"start"
+
+        });
+
+    },50);
 }
+
 
         const copyButtons =
         document.querySelectorAll(
@@ -626,17 +615,11 @@ allAiMessages[
         typing.remove();
     }
 
-    scrollToBottom();
-
     chatBox.innerHTML += `
-
-    <div class="ai-msg">
-
-        ⚠ Unable to connect.
-
-    </div>
-
-    `;
+<div class="ai-msg">
+    ⚠ Unable to connect.
+</div>
+`;
 }
 }
 
@@ -973,6 +956,23 @@ overlay.classList.remove("active");
 
 </div>
 `;
+
+const lastUserMessage =
+chatBox.querySelector(
+    ".user-msg:last-child"
+);
+
+if(lastUserMessage){
+
+    lastUserMessage.scrollIntoView({
+
+        behavior:"smooth",
+
+        block:"start"
+
+    });
+}
+
                 }
 
                 else{
@@ -1698,7 +1698,21 @@ function loadLastOpenedChat(){
 
     });
 
-    scrollToBottom();
+const lastUserMessage =
+chatBox.querySelector(
+    ".user-msg:last-of-type"
+);
+
+if(lastUserMessage){
+
+    lastUserMessage.scrollIntoView({
+
+        behavior:"instant",
+
+        block:"start"
+
+    });
+}
 }
 
 document
