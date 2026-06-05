@@ -249,10 +249,6 @@ body{
 
     white-space:nowrap;
 }
-.history-item:hover{
-
-    background:rgba(0,0,0,0.05);
-}
 
 /* STATUS */
 
@@ -943,6 +939,7 @@ body.light-mode .menu-logo{
         scale(1);
     }
 }
+
 .history-wrapper{
 
     display:flex;
@@ -951,15 +948,17 @@ body.light-mode .menu-logo{
 
     justify-content:space-between;
 
+    width:100%;
+
     gap:8px;
 
-    margin-bottom:8px;
-
-    padding:10px;
+    padding:8px 10px;
 
     border-radius:12px;
 
     cursor:pointer;
+
+    transition:0.2s;
 }
 
 .history-wrapper:hover{
@@ -1643,4 +1642,12 @@ textarea:focus{
 .history-item{
 
     flex:1;
+
+    width:100%;
+
+    margin-bottom:0;
+
+    padding:12px;
+
+    border-radius:10px;
 }
