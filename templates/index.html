@@ -541,36 +541,26 @@ chatBox.insertAdjacentHTML(
     aiMessageHtml
 );
 
-requestAnimationFrame(()=>{
-    scrollToBottom();
-});
-setTimeout(()=>{
-    scrollToBottom();
-},100);
+const userMessages =
+chatBox.querySelectorAll(
+    ".user-msg"
+);
 
-setTimeout(()=>{
-    scrollToBottom();
-},300);
+const lastUserMessage =
+userMessages[
+    userMessages.length - 1
+];
 
-setTimeout(()=>{
-    scrollToBottom();
-},600);
+if(lastUserMessage){
 
-setTimeout(()=>{
+    lastUserMessage.scrollIntoView({
 
-    const lastMessage =
-    chatBox.lastElementChild;
+        behavior:"smooth",
 
-    if(lastMessage){
+        block:"start"
 
-        lastMessage.scrollIntoView({
-            behavior:"smooth",
-            block:"end"
-        });
-
-    }
-
-},100);
+    });
+}
 
         const copyButtons =
         document.querySelectorAll(
@@ -612,13 +602,7 @@ allAiMessages[
     allAiMessages.length - 1
 ];
 
-scrollToBottom();
 
-setTimeout(()=>{
-
-    scrollToBottom();
-
-},300);
 
         currentChat.push({
             type:"ai",
