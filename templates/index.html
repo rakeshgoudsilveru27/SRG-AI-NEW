@@ -690,6 +690,11 @@ async function saveChat(){
         JSON.stringify(chats)
     );
 
+    localStorage.setItem(
+    "active_chat_id",
+    currentChatId
+);
+
     try{
 
     if(!auth.currentUser){
@@ -881,6 +886,10 @@ function loadHistory(){
             currentChat = [...chat.messages];
             currentChatTitle = chat.title;
             currentChatId = chat.id;
+            localStorage.setItem(
+    "active_chat_id",
+    chat.id
+);
             sidebar.classList.remove("active");
 
 overlay.classList.remove("active");
@@ -1010,8 +1019,6 @@ scrollToBottom();
 
         shareBtn.onclick = function(e){
 
-            alert("Share clicked");
-            
     e.preventDefault();
 
     e.stopPropagation();
@@ -1289,6 +1296,10 @@ function(e){
 });
 
 function newChat(){
+    localStorage.removeItem(
+    "active_chat_id"
+);
+
     console.log("NEW CHAT CLICKED");
 
     fetch("/new-chat",{
@@ -1548,6 +1559,100 @@ async function loadChatsFromFirebase(){
     }
 }
 
+function loadLastOpenedChat(){
+
+    const activeChatId =
+    localStorage.getItem(
+        "active_chat_id"
+    );
+
+    if(!activeChatId){
+        return;
+    }
+
+    let chats = JSON.parse(
+        localStorage.getItem(
+            "srg_chats"
+        )
+    ) || [];
+
+    const chat = chats.find(
+        c =>
+        String(c.id) ===
+        String(activeChatId)
+    );
+
+    if(!chat){
+        return;
+    }
+
+    currentChat =
+    [...chat.messages];
+
+    currentChatTitle =
+    chat.title;
+
+    currentChatId =
+    chat.id;
+
+    document.querySelector(
+        ".welcome"
+    ).style.display =
+    "none";
+
+    let chatBox =
+    document.getElementById(
+        "chatMessages"
+    );
+
+    chatBox.innerHTML = "";
+
+    chat.messages.forEach(msg=>{
+
+        if(msg.type==="user"){
+
+            chatBox.innerHTML += `
+            <div class="user-msg">
+
+                <div class="user-text">
+
+                    ${msg.text}
+
+                </div>
+
+            </div>
+            `;
+        }
+
+        else{
+
+            chatBox.innerHTML += `
+            <div class="ai-msg">
+
+                <div class="message-content">
+
+                    ${marked.parse(
+                        msg.text
+                    )}
+
+                </div>
+
+                <button
+                class="copy-ai-btn">
+
+                    📋 Copy
+
+                </button>
+
+            </div>
+            `;
+        }
+
+    });
+
+    scrollToBottom();
+}
+
 document
 .getElementById("loginBtn")
 .onclick = async function(){
@@ -1576,7 +1681,9 @@ document
 .addEventListener(
 "input",
 function(){
-    loadHistory();
+loadHistory();
+
+loadLastOpenedChat();
 });
 
 const textarea =
