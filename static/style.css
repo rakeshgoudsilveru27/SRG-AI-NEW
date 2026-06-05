@@ -1191,9 +1191,9 @@ body.light-mode .history-dropdown button:hover{
 
     position:absolute;
 
-    left:100%;
+    left:0;
 
-    top:0;
+    top:105%;
 
     background:#111827;
 
@@ -1272,7 +1272,7 @@ body.light-mode .history-dropdown button:hover{
 
     position:absolute;
 
-    left:0%;
+    left:0;
 
     top:105%;
 

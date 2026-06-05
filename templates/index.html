@@ -1010,23 +1010,14 @@ scrollToBottom();
 
         shareBtn.onclick = function(e){
 
-            e.stopPropagation();
+    e.preventDefault();
 
-            document
-            .querySelectorAll(".share-dropdown")
-            .forEach(menu => {
+    e.stopPropagation();
 
-                if(menu !== shareDropdown){
-                    menu.classList.remove(
-                        "show-share"
-                    );
-                }
-            });
-
-            shareDropdown.classList.toggle(
-                "show-share"
-            );
-        };
+    shareDropdown.classList.toggle(
+        "show-share"
+    );
+}
 
         item.querySelector(".copy-chat")
         .onclick = function(e){
@@ -1266,7 +1257,15 @@ ${m.text}`
 
 document.addEventListener(
 "click",
-function(){
+function(e){
+
+    if(
+        e.target.closest(
+            ".history-menu-container"
+        )
+    ){
+        return;
+    }
 
     document
     .querySelectorAll(".history-dropdown")
