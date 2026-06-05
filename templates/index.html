@@ -698,45 +698,109 @@ async function saveChat(){
     try{
 
     if(!auth.currentUser){
-
-        console.log(
-            "User not logged in"
-        );
-
         return;
     }
 
-    await addDoc(
+    const q = query(
 
-    collection(
-        db,
-        "users",
-        auth.currentUser.uid,
-        "chats"
-    ),
+        collection(
+            db,
+            "users",
+            auth.currentUser.uid,
+            "chats"
+        )
 
-    {
+    );
 
-        chatId: currentChatId,
+    const snapshot =
+    await getDocs(q);
 
-        title: currentChatTitle,
+    let existingDocId =
+    null;
 
-        messages: currentChat,
+    snapshot.forEach(d => {
 
-        pinned: chats.find(
-            c => c.id === currentChatId
-        )?.pinned || false,
+        if(
+            d.data().chatId ===
+            currentChatId
+        ){
 
-        createdAt: Date.now()
+            existingDocId =
+            d.id;
+        }
+
+    });
+
+    if(existingDocId){
+
+        await updateDoc(
+
+            doc(
+                db,
+                "users",
+                auth.currentUser.uid,
+                "chats",
+                existingDocId
+            ),
+
+            {
+
+                title:
+                currentChatTitle,
+
+                messages:
+                currentChat,
+
+                pinned:
+                chats.find(
+                    c => c.id === currentChatId
+                )?.pinned || false
+
+            }
+        );
+
+        console.log(
+            "Firebase chat updated"
+        );
+
     }
-);
 
-console.log(
-    "Chat saved to Firebase"
-);
+    else{
+
+        await addDoc(
+
+            collection(
+                db,
+                "users",
+                auth.currentUser.uid,
+                "chats"
+            ),
+
+            {
+
+                chatId:
+                currentChatId,
+
+                title:
+                currentChatTitle,
+
+                messages:
+                currentChat,
+
+                pinned:
+                false,
+
+                createdAt:
+                Date.now()
+            }
+        );
+
+        console.log(
+            "Firebase chat created"
+        );
+    }
 
 }
-
 catch(error){
 
     console.error(
@@ -1688,7 +1752,7 @@ function(){
 
 const textarea =
 document.getElementById("userInput");
-
+s
 textarea.addEventListener(
 "keydown",
 function(event){
