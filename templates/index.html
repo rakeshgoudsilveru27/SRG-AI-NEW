@@ -420,6 +420,30 @@ chatBox.innerHTML += `
 </div>
 `;
 
+setTimeout(()=>{
+
+    const userMessages =
+    chatBox.querySelectorAll(
+        ".user-msg"
+    );
+
+    const lastUserMessage =
+    userMessages[
+        userMessages.length - 1
+    ];
+
+    if(lastUserMessage){
+
+       lastUserMessage.scrollIntoView({
+
+    behavior:"smooth",
+
+    block:"start"
+
+});
+    }
+
+},50);
 
     currentChat.push({
         type:"user",
@@ -530,26 +554,6 @@ chatBox.insertAdjacentHTML(
     aiMessageHtml
 );
 
-const lastUserMessage =
-chatBox.querySelector(
-    ".user-msg:last-of-type"
-);
-
-if(lastUserMessage){
-
-    setTimeout(()=>{
-
-        lastUserMessage.scrollIntoView({
-
-            behavior:"smooth",
-
-            block:"start"
-
-        });
-
-    },50);
-}
-
 
         const copyButtons =
         document.querySelectorAll(
@@ -582,15 +586,6 @@ if(lastUserMessage){
                 },1500);
             };
         });
-
-const allAiMessages =
-document.querySelectorAll(".ai-msg");
-
-const latestAiMessage =
-allAiMessages[
-    allAiMessages.length - 1
-];
-
 
 
         currentChat.push({
@@ -776,7 +771,9 @@ catch(error){
     );
 }
     
-    loadHistory();
+loadHistory();
+
+loadLastOpenedChat();
 }
 
 function focusInput(e){
@@ -957,21 +954,30 @@ overlay.classList.remove("active");
 </div>
 `;
 
-const lastUserMessage =
-chatBox.querySelector(
-    ".user-msg:last-child"
-);
+setTimeout(()=>{
 
-if(lastUserMessage){
+    const userMessages =
+    chatBox.querySelectorAll(
+        ".user-msg"
+    );
 
-    lastUserMessage.scrollIntoView({
+    const lastUserMessage =
+    userMessages[
+        userMessages.length - 1
+    ];
 
-        behavior:"smooth",
+    if(lastUserMessage){
 
-        block:"start"
+        lastUserMessage.scrollIntoView({
 
-    });
-}
+            behavior:"smooth",
+
+            block:"start"
+
+        });
+    }
+
+},50);
 
                 }
 
@@ -1029,7 +1035,6 @@ historyCopyBtns.forEach(btn => {
         },1500);
     };
 });
-scrollToBottom();
 
         };
 
@@ -1189,6 +1194,7 @@ ${m.text}`
             );
 
             loadHistory();
+            loadLastOpenedChat();            
         };
 
         item.querySelector(".rename-chat")
@@ -1596,6 +1602,8 @@ async function loadChatsFromFirebase(){
 
         loadHistory();
 
+        loadLastOpenedChat();
+
     }
 
     catch(error){
@@ -1698,10 +1706,15 @@ function loadLastOpenedChat(){
 
     });
 
-const lastUserMessage =
-chatBox.querySelector(
-    ".user-msg:last-of-type"
+const userMessages =
+chatBox.querySelectorAll(
+    ".user-msg"
 );
+
+const lastUserMessage =
+userMessages[
+    userMessages.length - 1
+];
 
 if(lastUserMessage){
 
