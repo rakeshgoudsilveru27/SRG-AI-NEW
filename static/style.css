@@ -1090,6 +1090,10 @@ body.light-mode .history-dropdown{
     cursor:pointer;
 
     transition:0.2s;
+
+    width:100%;
+
+    display:block;
 }
 
 body.light-mode .history-dropdown button{
@@ -1266,6 +1270,55 @@ body.light-mode .history-dropdown button:hover{
     position:relative;
 
     width:100%;
+}
+
+.share-chat{
+
+    width:100%;
+
+    display:flex;
+
+    align-items:center;
+
+    text-align:left;
+
+    background:transparent;
+
+    color:white;
+
+    padding:10px 12px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    transition:0.2s;
+
+    font-size:14px;
+}
+
+.share-container{
+
+    width:100%;
+
+    display:block;
+}
+
+.share-chat{
+
+    width:100% !important;
+
+    display:block !important;
+}
+
+.share-chat:hover{
+
+    background:rgba(255,255,255,0.08);
+}
+
+.light-mode .share-chat:hover{
+
+    background:rgba(0,0,0,0.05);
 }
 
 .share-dropdown{
