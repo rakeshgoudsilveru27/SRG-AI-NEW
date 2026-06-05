@@ -331,19 +331,28 @@ function scrollToBottom(){
         "chatMessages"
     );
 
-    setTimeout(()=>{
+    if(!chatBox) return;
 
-        chatBox.scrollTo({
+    requestAnimationFrame(()=>{
 
-            top:
-            chatBox.scrollHeight,
+        chatBox.scrollTop =
+        chatBox.scrollHeight;
 
-            behavior:
-            "smooth"
+        setTimeout(()=>{
 
-        });
+            chatBox.scrollTop =
+            chatBox.scrollHeight;
 
-    },100);
+        },100);
+
+        setTimeout(()=>{
+
+            chatBox.scrollTop =
+            chatBox.scrollHeight;
+
+        },300);
+
+    });
 }
 
 async function sendMessage(){
@@ -400,8 +409,13 @@ chatBox.innerHTML += `
 </div>
 `;
 
+scrollToBottom();
+
+setTimeout(()=>{
+
     scrollToBottom();
 
+},100);
     currentChat.push({
         type:"user",
         text:message
@@ -460,7 +474,9 @@ if(currentChatTitle === null){
 
     chatBox.appendChild(typingDiv);
 
+requestAnimationFrame(()=>{
     scrollToBottom();
+});
 
     let formData = new FormData();
 
@@ -509,8 +525,41 @@ scrollToBottom();
 </div>
 `;
 
-chatBox.innerHTML += aiMessageHtml;
-scrollToBottom();
+chatBox.insertAdjacentHTML(
+    "beforeend",
+    aiMessageHtml
+);
+
+requestAnimationFrame(()=>{
+    scrollToBottom();
+});
+setTimeout(()=>{
+    scrollToBottom();
+},100);
+
+setTimeout(()=>{
+    scrollToBottom();
+},300);
+
+setTimeout(()=>{
+    scrollToBottom();
+},600);
+
+setTimeout(()=>{
+
+    const lastMessage =
+    chatBox.lastElementChild;
+
+    if(lastMessage){
+
+        lastMessage.scrollIntoView({
+            behavior:"smooth",
+            block:"end"
+        });
+
+    }
+
+},100);
 
         const copyButtons =
         document.querySelectorAll(
