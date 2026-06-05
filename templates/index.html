@@ -48,7 +48,7 @@ href="{{ url_for('static', filename='style.css') }}">
     </div>
 
     <button id="loginBtn" class="login-btn">
-    Sign in with Google
+        🔑 Login
     </button>
 
     <button class="new-chat" onclick="newChat()">
@@ -216,13 +216,14 @@ new GoogleAuthProvider();
 
 onAuthStateChanged(auth,(user)=>{
 
+    const btn =
+    document.getElementById("loginBtn");
+
     if(user){
 
         loadChatsFromFirebase();
 
-        document
-        .getElementById("loginBtn")
-        .innerHTML = `
+        btn.innerHTML = `
         <img
         src="${user.photoURL}"
         style="
@@ -232,9 +233,17 @@ onAuthStateChanged(auth,(user)=>{
         vertical-align:middle;
         margin-right:8px;
         ">
-        ${user.displayName}
+        Logout
         `;
+
     }
+
+    else{
+
+        btn.innerHTML =
+        "🔑 Login";
+    }
+
 });
 
 console.log(
@@ -1414,7 +1423,23 @@ async function loadChatsFromFirebase(){
 
 document
 .getElementById("loginBtn")
-.onclick = login;
+.onclick = async function(){
+
+    if(auth.currentUser){
+
+        await signOut(auth);
+
+        location.reload();
+
+    }
+
+    else{
+
+        login();
+
+    }
+
+};
 
 
 loadHistory();

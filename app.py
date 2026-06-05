@@ -1,8 +1,40 @@
 from flask import Flask, render_template, request, jsonify
+from werkzeug.utils import secure_filename
 import requests
 import os
+GROQ_API_KEY = os.environ.get("GROQ_API_KEY")
+if not GROQ_API_KEY:
+    raise ValueError(
+        "GROQ_API_KEY not found"
+    )
+print(
+    "GROQ FOUND:",
+    bool(GROQ_API_KEY)
+)
+
+print(
+    "GEMINI FOUND:",
+    bool(os.environ.get(
+        "GEMINI_API_KEY"
+    ))
+)
+import google.generativeai as genai
+from PIL import Image
 
 app = Flask(__name__)
+
+app.config['MAX_CONTENT_LENGTH'] = 10 * 1024 * 1024
+
+GEMINI_API_KEY = os.environ.get(
+    "GEMINI_API_KEY"
+)
+
+if not GEMINI_API_KEY:
+    print("WARNING: GEMINI_API_KEY not found")
+
+genai.configure(
+    api_key=GEMINI_API_KEY
+)
 
 # UPLOAD FOLDER
 UPLOAD_FOLDER = 'uploads'
@@ -13,8 +45,8 @@ conversation_history = []
 
 # HOME PAGE
 @app.route("/", methods=["GET"])
-def login_page():
-    return render_template("login.html")
+def home():
+    return render_template("index.html")
 
 @app.route("/chat", methods=["GET"])
 def chat_page():
@@ -23,17 +55,32 @@ def chat_page():
 @app.route('/chat', methods=['POST'])
 def chat():
 
-    user_message = request.form['message']
-
+    user_message = request.form.get(
+        'message',
+        ''
+    ).strip()
     
     image = request.files.get('image')
 
+    if not user_message and not image:
+
+        return jsonify({
+
+            "reply":
+            "Please enter a message.",
+
+            "title":
+            "New Chat"
+
+        })
+
+    
 
     # SAVE IMAGE
 
     prompt_image_text = ""
 
-    if image:
+    if image and image.filename:
 
         allowed_extensions = [
             "png",
@@ -42,37 +89,93 @@ def chat():
             "webp"
         ]
 
-        if "." in image.filename:
+        if "." not in image.filename:
 
-            ext = image.filename.rsplit(".",1)[1].lower()
+            return jsonify({
 
-            if ext not in allowed_extensions:
+                "reply":"Invalid file.",
+                "title":"Image Error"
 
-                return jsonify({
+            })
 
-                    "reply":
-                    "Invalid image format.",
+        ext = image.filename.rsplit(".",1)[1].lower()
 
-                    "title":
-                    "New Chat"
-                })
+        if ext not in allowed_extensions:
+
+            return jsonify({
+
+                "reply":"Invalid image format.",
+                "title":"Image Error"
+
+            })
 
         os.makedirs(
             UPLOAD_FOLDER,
             exist_ok=True
         )
 
+        filename = secure_filename(
+            image.filename 
+        )
+
         image_path = os.path.join(
             app.config['UPLOAD_FOLDER'],
-            image.filename
+            filename
         )
 
         image.save(image_path)
 
+        print("IMAGE SAVED")
+
+        try:
+
+            img = Image.open(image_path)
+
+            vision_model = genai.GenerativeModel(
+                "gemini-2.5-flash"
+            )
+
+            vision_response = vision_model.generate_content([
+                user_message,
+                img
+            ])
+
+            print("GEMINI RESPONSE RECEIVED")
+            print(vision_response.text)
+
+            ai_reply = vision_response.text
+
+            conversation_history.append(
+                f"User: {user_message}"
+            )
+
+            conversation_history.append(
+                f"Assistant: {ai_reply}"
+            )
+
+            conversation_history[:] = conversation_history[-20:]
+
+            return jsonify({
+
+                "reply": ai_reply,
+
+                "title": "Image Analysis"
+
+            })
+
+        except Exception as e:
+
+            print("GEMINI ERROR:", str(e))
+
+            return jsonify({
+                "reply": "Image analysis failed.",
+                "title": "Image Error"
+            })
+
         prompt_image_text = f"""
-User uploaded image:
-{image.filename}
-"""
+        User uploaded image:
+        {image.filename}
+        """
 
     # SAVE USER MESSAGE
 
@@ -128,11 +231,11 @@ Assistant:
 """
 
     # GROQ API HEADERS
-
+        
     headers = {
 
         "Authorization":
-        f"Bearer {os.environ.get('GROQ_API_KEY')}",
+        f"Bearer {GROQ_API_KEY}",
 
         "Content-Type":
         "application/json"
@@ -221,6 +324,16 @@ Provide accurate, helpful and easy-to-understand answers.
         timeout=60
     )
 
+
+    if response.status_code != 200:
+
+        return jsonify({
+
+            "reply":"AI service unavailable.",
+
+            "title":"Error"
+
+        })
     data = response.json()
 
     print(data)
@@ -281,9 +394,14 @@ Rules:
             timeout=60
         )
 
-        title_data = title_response.json()
+        if title_response.status_code == 200:
 
-        print(title_data)
+            title_data = title_response.json()
+
+        else:
+            title_data = {}
+            chat_title = "New Chat"
+
 
         # TITLE SUCCESS
 
