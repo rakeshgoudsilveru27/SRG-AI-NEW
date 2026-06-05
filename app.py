@@ -20,6 +20,37 @@ print(
 )
 import google.generativeai as genai
 from PIL import Image
+def wikipedia_search(query):
+
+    try:
+
+        url = (
+            "https://en.wikipedia.org/api/rest_v1/"
+            f"page/summary/{query}"
+        )
+
+        response = requests.get(
+            url,
+            timeout=10
+        )
+
+        if response.status_code != 200:
+            return None
+
+        data = response.json()
+
+        return data.get(
+            "extract"
+        )
+
+    except Exception as e:
+
+        print(
+            "Wikipedia Error:",
+            e
+        )
+
+        return None
 
 app = Flask(__name__)
 
@@ -244,6 +275,39 @@ Assistant:
     # AUTO AI MODEL SELECTION
 
     message_lower = user_message.lower()
+
+    # WIKIPEDIA SEARCH
+
+    if (
+        user_message.lower().startswith("who is ")
+        or
+        user_message.lower().startswith("what is ")
+    ):
+
+        topic = (
+            user_message
+            .replace("Who is ","")
+            .replace("who is ","")
+            .replace("What is ","")
+            .replace("what is ","")
+            .strip()
+        )
+
+        wiki_result = wikipedia_search(
+            topic
+        )
+
+        if wiki_result:
+
+            return jsonify({
+
+                "reply":
+                wiki_result,
+
+                "title":
+                topic
+
+            })
 
     if len(user_message) > 200:
 
