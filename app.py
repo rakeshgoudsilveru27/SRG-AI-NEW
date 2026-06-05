@@ -1,14 +1,8 @@
 from flask import Flask, render_template, request, jsonify
 import requests
 import os
-import google.generativeai as genai
-from PIL import Image
 
 app = Flask(__name__)
-
-genai.configure(
-    api_key=os.environ.get("GEMINI_API_KEY")
-)
 
 # UPLOAD FOLDER
 UPLOAD_FOLDER = 'uploads'
@@ -34,10 +28,6 @@ def chat():
     
     image = request.files.get('image')
 
-    print("========== DEBUG ==========")
-    print("IMAGE RECEIVED =", image)
-    print("FILES =", request.files)
-    print("===========================")
 
     # SAVE IMAGE
 
@@ -78,39 +68,6 @@ def chat():
         )
 
         image.save(image_path)
-
-        if image:
-
-            try:
-
-                img = Image.open(image_path)
-
-                vision_model = genai.GenerativeModel(
-                    "gemini-2.5-flash"
-                )
-
-                vision_response = vision_model.generate_content([
-                    user_message,
-                    img
-                ])
-
-                ai_reply = vision_response.text
-
-                conversation_history.append(
-                    f"Assistant: {ai_reply}"
-                )
-
-                return jsonify({
-
-                    "reply": ai_reply,
-
-                    "title": "Image Analysis"
-
-                })
-
-            except Exception as e:
-
-                print("Gemini Error:", e)
 
         prompt_image_text = f"""
 User uploaded image:
