@@ -324,6 +324,28 @@ let currentChat = [];
 let currentChatTitle = null;
 let currentChatId = Date.now();
 
+function scrollToBottom(){
+
+    const chatBox =
+    document.getElementById(
+        "chatMessages"
+    );
+
+    setTimeout(()=>{
+
+        chatBox.scrollTo({
+
+            top:
+            chatBox.scrollHeight,
+
+            behavior:
+            "smooth"
+
+        });
+
+    },100);
+}
+
 async function sendMessage(){
 
     let input =
@@ -378,7 +400,7 @@ chatBox.innerHTML += `
 </div>
 `;
 
-    chatBox.scrollTop = chatBox.scrollHeight;
+    scrollToBottom();
 
     currentChat.push({
         type:"user",
@@ -438,6 +460,8 @@ if(currentChatTitle === null){
 
     chatBox.appendChild(typingDiv);
 
+    scrollToBottom();
+
     let formData = new FormData();
 
     formData.append("message",message);
@@ -461,7 +485,11 @@ if(currentChatTitle === null){
 
         const data = await response.json();
 
-        document.getElementById("typing").remove();
+        document.getElementById(
+    "typing"
+).remove();
+
+scrollToBottom();
 
         const aiMessageHtml = `
 
@@ -482,6 +510,8 @@ if(currentChatTitle === null){
 `;
 
 chatBox.innerHTML += aiMessageHtml;
+scrollToBottom();
+
         const copyButtons =
         document.querySelectorAll(
         ".copy-ai-btn"
@@ -522,13 +552,13 @@ allAiMessages[
     allAiMessages.length - 1
 ];
 
-latestAiMessage.scrollIntoView({
+scrollToBottom();
 
-    behavior:"smooth",
+setTimeout(()=>{
 
-    block:"start"
+    scrollToBottom();
 
-});
+},300);
 
         currentChat.push({
             type:"ai",
@@ -542,8 +572,28 @@ latestAiMessage.scrollIntoView({
 
     catch(error){
 
-        document.getElementById("typing").remove();
+    const typing =
+    document.getElementById(
+        "typing"
+    );
+
+    if(typing){
+
+        typing.remove();
     }
+
+    scrollToBottom();
+
+    chatBox.innerHTML += `
+
+    <div class="ai-msg">
+
+        ⚠ Unable to connect.
+
+    </div>
+
+    `;
+}
 }
 
 window.sendMessage = sendMessage;
@@ -848,6 +898,8 @@ historyCopyBtns.forEach(btn => {
         },1500);
     };
 });
+scrollToBottom();
+
         };
 
         const menuBtn =
