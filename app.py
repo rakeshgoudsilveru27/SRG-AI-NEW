@@ -75,6 +75,7 @@ def get_weather(city):
 
         print(data)
 
+
         return f"""
 🌤 Weather in {city.title()}
 
@@ -93,6 +94,57 @@ def get_weather(city):
         )
 
         return f"Weather Error: {str(e)}"
+    
+
+def get_tomorrow_weather(city):
+
+    try:
+
+        url = (
+            "https://api.openweathermap.org/data/2.5/forecast"
+        )
+
+        params = {
+
+            "q": city,
+
+            "appid":
+            OPENWEATHER_API_KEY,
+
+            "units":
+            "metric"
+
+        }
+
+        response = requests.get(
+            url,
+            params=params,
+            timeout=10
+        )
+
+        data = response.json()
+
+        print(data)
+
+        print(
+            data["list"][8]
+        )
+
+        tomorrow = data["list"][8]
+
+        return f"""
+🌤 Tomorrow Weather in {city.title()}
+
+🌡 Temperature: {tomorrow['main']['temp']}°C
+
+💧 Humidity: {tomorrow['main']['humidity']}%
+
+☁ Condition: {tomorrow['weather'][0]['description']}
+"""
+
+    except Exception as e:
+
+        return f"Forecast Error: {str(e)}"    
 
 # UPLOAD FOLDER
 UPLOAD_FOLDER = 'uploads'
@@ -303,7 +355,32 @@ Assistant:
 
     message_lower = user_message.lower()
 
-    # WEATHER ROUTER
+    # TOMORROW WEATHER
+
+    if (
+        "weather in " in message_lower
+        and
+        "tomorrow" in message_lower 
+    ):
+
+        city = (
+            message_lower
+            .replace("weather in ", "")
+            .replace("tomorrow", "")
+            .strip()
+        )
+
+        return jsonify({
+   
+            "reply":
+            get_tomorrow_weather(city),
+
+            "title":
+            f"Tomorrow Weather {city}"
+
+        })
+
+    # CURRENT WEATHER
 
     if (
         "weather in " in message_lower
@@ -320,13 +397,31 @@ Assistant:
 
         return jsonify({
 
-    "reply":
-    get_weather(city),
+            "reply":
+            get_weather(city),
 
-    "title":
-    f"Weather {city}"
+            "title":
+            f"Weather {city}"
 
-})
+        })
+
+    
+
+    # WEATHER ROUTER
+
+    if (
+        "weather in " in message_lower
+        or
+        "temperature in " in message_lower
+    ):
+
+        city = (
+            message_lower
+            .replace("weather in ", "")
+            .replace("temperature in ", "")
+            .strip()
+        )
+
 
     if len(user_message) > 200:
 
