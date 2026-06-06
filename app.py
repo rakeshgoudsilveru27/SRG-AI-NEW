@@ -76,14 +76,13 @@ def get_weather(city):
         print(data)
 
         return f"""
-🌡 Temperature:
-{data['main']['temp']}°C
+🌤 Weather in {city.title()}
 
-💧 Humidity:
-{data['main']['humidity']}%
+🌡 Temperature: {data['main']['temp']}°C
 
-☁ Condition:
-{data['weather'][0]['description']}
+💧 Humidity: {data['main']['humidity']}%
+
+☁ Condition: {data['weather'][0]['description']}
 """
 
     except Exception as e:
