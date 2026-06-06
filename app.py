@@ -305,16 +305,9 @@ Assistant:
     ):
 
         city = (
-            user_message
-            .lower()
-            .replace(
-                "weather in ",
-                ""
-            )
-            .replace(
-                "temperature in ",
-                ""
-            )
+            message_lower
+            .replace("weather in ", "")
+            .replace("temperature in ", "")
             .strip()
         )
 
