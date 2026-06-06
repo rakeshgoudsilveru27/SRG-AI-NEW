@@ -424,13 +424,56 @@ Assistant:
 
         words = message_lower.split()
 
-        if "in" in words:
+        weather_words = [
 
-            idx = words.index("in")
+            "weather",
+            "wether",
+            "waether",
 
-            if idx + 1 < len(words):
+            "temp",
+            "temperature",
 
-                city = words[idx + 1]
+            "forecast",
+
+            "humidity",
+
+            "rain",
+
+            "hot",
+
+            "cold"
+        ]
+
+        skip_words = [
+
+            "how",
+            "what",
+            "is",
+            "the",
+            "in",
+            "for",
+            "will",
+            "it",
+            "be",
+            "today",
+            "tomorrow",
+            "please",
+            "show" 
+        ]
+
+        for word in words:
+
+            if (
+                word not in weather_words
+                and
+                word not in skip_words
+                and
+                len(word) > 2
+            ):
+
+                city = word
+
+                break
 
     date_type = "today"
 
@@ -443,6 +486,10 @@ Assistant:
         date_type = "today"  
 
 
+    print("QUERY =", message_lower)
+    print("CITY =", city)
+    print("DATE =", date_type)
+    
     if is_weather_query and city:
 
         if date_type == "tomorrow":
