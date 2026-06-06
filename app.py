@@ -314,7 +314,7 @@ Assistant:
         return jsonify({
 
             "reply":
-            "🌤 WEATHER API WORKING",
+            get_weather(city),
 
             "title":
             f"Weather {city}"
