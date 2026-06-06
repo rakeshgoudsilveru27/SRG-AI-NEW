@@ -294,6 +294,10 @@ Assistant:
             .strip()
         )
 
+        print(
+            "WIKIPEDIA ROUTE ENTERED"
+        )
+
         wiki_result = wikipedia_search(
             topic
         )
@@ -303,13 +307,12 @@ Assistant:
             return jsonify({
 
                 "reply":
-                "🟢 WIKIPEDIA API WORKING\n\n"
-                + wiki_result,
+                "123456789 TEST",
 
                 "title":
                 topic
 
-            })
+          })
 
     if len(user_message) > 200:
 
