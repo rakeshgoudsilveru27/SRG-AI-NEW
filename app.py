@@ -377,13 +377,14 @@ You can answer questions on any topic including:
 - Education
 - Career Guidance
 - Business
-- History
+- History 
 - Geography
 - General Knowledge
 - Daily Life Questions
 - AI and Machine Learning
 - Robotics
 - Embedded Systems
+- Iot
 
 Provide accurate, helpful and easy-to-understand answers.
 """
