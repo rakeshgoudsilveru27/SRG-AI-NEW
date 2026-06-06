@@ -207,6 +207,12 @@ def get_currents_news(topic):
         print(data)
 
         articles = data["news"][:5]
+        if not articles:
+
+            return (
+                f"❌ No news found for: {topic}\n\n"
+                "Try different keywords."
+            )
 
         result = (
             f"📰 News Results for: {topic}\n\n"
@@ -440,15 +446,39 @@ Assistant:
     # AUTO AI MODEL SELECTION
 
     message_lower = user_message.lower()
+    message_lower = (
+        message_lower
+        .replace("sucide", "suicide")
+        .replace("waether", "weather")
+        .replace("wether", "weather")
+    )
 
     news_keywords = [
 
         "news",
         "headline",
         "headlines",
+
         "update",
         "updates",
-        "breaking"
+
+        "breaking",
+
+        "today",
+
+        "incident",
+
+        "accident",
+
+        "suicide",
+
+        "murder",
+
+        "arrest",
+
+        "happened",
+
+       "happening"
     ]
 
     is_news_query = any(
