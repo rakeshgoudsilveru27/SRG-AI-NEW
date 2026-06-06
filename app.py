@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, jsonify
 from werkzeug.utils import secure_filename
 import requests
 import os
+from urllib.parse import quote
 GROQ_API_KEY = os.environ.get("GROQ_API_KEY")
 if not GROQ_API_KEY:
     raise ValueError(
@@ -26,7 +27,7 @@ def wikipedia_search(query):
 
         url = (
             "https://en.wikipedia.org/api/rest_v1/"
-            f"page/summary/{query}"
+            f"page/summary/{quote(query)}"
         )
 
         response = requests.get(
@@ -302,7 +303,8 @@ Assistant:
             return jsonify({
 
                 "reply":
-                wiki_result,
+                "🟢 WIKIPEDIA API WORKING\n\n"
+                + wiki_result,
 
                 "title":
                 topic
