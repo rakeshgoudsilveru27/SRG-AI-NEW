@@ -73,6 +73,7 @@ def get_weather(city):
 
         data = response.json()
 
+        print(data)
 
         return f"""
 🌤 Weather in {city.title()}
@@ -84,8 +85,14 @@ def get_weather(city):
 ☁ Condition: {data['weather'][0]['description']}
 """
 
-    except Exception:
-        return "Weather service unavailable."
+    except Exception as e:
+
+        print(
+            "WEATHER ERROR:",
+            str(e)
+        )
+
+        return f"Weather Error: {str(e)}"
 
 # UPLOAD FOLDER
 UPLOAD_FOLDER = 'uploads'
@@ -313,13 +320,13 @@ Assistant:
 
         return jsonify({
 
-            "reply":
-            f"CITY DETECTED = {city}",
+    "reply":
+    get_weather(city),
 
-            "title":
-            "DEBUG"
+    "title":
+    f"Weather {city}"
 
-        })
+})
 
     if len(user_message) > 200:
 
