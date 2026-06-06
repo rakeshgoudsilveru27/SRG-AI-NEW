@@ -18,6 +18,28 @@ print(
         "GEMINI_API_KEY"
     ))
 )
+
+print(
+    "CURRENTS FOUND:",
+    bool(os.environ.get(
+        "CURRENTS_API_KEY"
+    ))
+)
+
+print(
+    "GNEWS FOUND:",
+    bool(os.environ.get(
+        "GNEWS_API_KEY"
+    ))
+)
+
+print(
+    "NEWSAPI FOUND:",
+    bool(os.environ.get(
+        "NEWS_API_KEY"
+    ))
+)
+
 import google.generativeai as genai
 from PIL import Image
 
@@ -31,6 +53,18 @@ GEMINI_API_KEY = os.environ.get(
 
 OPENWEATHER_API_KEY = os.environ.get(
     "OPENWEATHER_API_KEY"
+)
+
+CURRENTS_API_KEY = os.environ.get(
+    "CURRENTS_API_KEY"
+)
+
+GNEWS_API_KEY = os.environ.get(
+    "GNEWS_API_KEY"
+)
+
+NEWS_API_KEY = os.environ.get(
+    "NEWS_API_KEY"
 )
 
 
@@ -146,6 +180,51 @@ def get_tomorrow_weather(city):
 
         return f"Forecast Error: {str(e)}"    
 
+def get_currents_news():
+
+    try:
+
+        url = (
+            "https://api.currentsapi.services/v1/latest-news"
+        )
+
+        params = {
+
+            "apiKey":
+            CURRENTS_API_KEY
+
+        }
+
+        response = requests.get(
+            url,
+            params=params,
+            timeout=10
+        )
+
+        data = response.json()
+
+        articles = data["news"][:5]
+
+        result = "📰 Latest News\n\n"
+
+        for i, article in enumerate(
+            articles,
+            start=1
+        ):
+
+            result += (
+                f"{i}. "
+                f"{article['title']}\n\n"
+            )
+
+        return result
+
+    except Exception as e:
+
+        return (
+            f"News Error: {str(e)}"
+        )
+    
 # UPLOAD FOLDER
 UPLOAD_FOLDER = 'uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -354,6 +433,17 @@ Assistant:
     # AUTO AI MODEL SELECTION
 
     message_lower = user_message.lower()
+    if message_lower == "news":
+
+        return jsonify({
+
+            "reply":
+            get_currents_news(),
+
+            "title":
+            "Latest News"
+
+        })
 
         
     weather_keywords = [
