@@ -85,9 +85,8 @@ def get_weather(city):
 ☁ Condition: {data['weather'][0]['description']}
 """
 
-    except Exception as e:
-
-        return f"Weather Error: {str(e)}"
+    except Exception:
+        return "Weather service unavailable."
 
 # UPLOAD FOLDER
 UPLOAD_FOLDER = 'uploads'
@@ -412,8 +411,6 @@ Provide accurate, helpful and easy-to-understand answers.
 
         })
     data = response.json()
-
-    print(data)
 
     # SUCCESS RESPONSE
 
