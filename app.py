@@ -73,7 +73,6 @@ def get_weather(city):
 
         data = response.json()
 
-        print(data)
 
         return f"""
 🌤 Weather in {city.title()}
@@ -299,13 +298,21 @@ Assistant:
 
     # WEATHER ROUTER
 
-    if "weather in " in message_lower:
+    if (
+        "weather in " in message_lower
+        or
+        "temperature in " in message_lower
+    ):
 
         city = (
             user_message
             .lower()
             .replace(
                 "weather in ",
+                ""
+            )
+            .replace(
+                "temperature in ",
                 ""
             )
             .strip()
