@@ -355,45 +355,95 @@ Assistant:
 
     message_lower = user_message.lower()
 
-    # TOMORROW WEATHER
+        
+    weather_keywords = [
 
-    if (
-        "weather in " in message_lower
-        and
-        "tomorrow" in message_lower 
-    ):
+        "weather",
+        "wether",
+        "waether",
 
-        city = (
-            message_lower
-            .replace("weather in ", "")
-            .replace("tomorrow", "")
-            .strip()
-        )
+        "temperature",
+        "temp",
 
-        return jsonify({
-   
-            "reply":
-            get_tomorrow_weather(city),
+        "forecast",
 
-            "title":
-            f"Tomorrow Weather {city}"
+        "humidity",
 
-        })
+        "rain",
 
-    # CURRENT WEATHER
+        "hot",
+        "cold",
 
-    if (
-        "weather in " in message_lower
-        or
-        "temperature in " in message_lower
-    ):
+        "climate",
 
-        city = (
-            message_lower
-            .replace("weather in ", "")
-            .replace("temperature in ", "")
-            .strip()
-        )
+        "sunny",
+        "cloudy",
+        "windy"
+    ]
+
+    is_weather_query = any(
+
+        word in message_lower
+
+        for word in weather_keywords
+
+    )
+
+    city_aliases = {
+
+        "hyd": "hyderabad",
+        "hyderabad": "hyderabad",
+
+        "mum": "mumbai",
+        "mumbai": "mumbai",
+
+        "del": "delhi",
+        "delhi": "delhi",
+
+        "blr": "bangalore",
+        "bangalore": "bangalore",
+
+        "chn": "chennai",
+        "chennai": "chennai",
+
+        "kol": "kolkata", 
+        "kolkata": "kolkata"
+    }
+
+    city = None
+
+    for alias, real_city in city_aliases.items():
+ 
+        if alias in message_lower:
+
+            city = real_city
+
+            break
+
+    date_type = "today"
+
+    if "tomorrow" in message_lower:
+  
+        date_type = "tomorrow"
+
+    elif "today" in message_lower:
+
+        date_type = "today"  
+
+
+    if is_weather_query and city:
+
+        if date_type == "tomorrow":
+
+            return jsonify({
+
+                "reply":
+                 get_tomorrow_weather(city),
+
+                "title":
+                f"Tomorrow Weather {city}"
+
+            })
 
         return jsonify({
 
@@ -404,24 +454,6 @@ Assistant:
             f"Weather {city}"
 
         })
-
-    
-
-    # WEATHER ROUTER
-
-    if (
-        "weather in " in message_lower
-        or
-        "temperature in " in message_lower
-    ):
-
-        city = (
-            message_lower
-            .replace("weather in ", "")
-            .replace("temperature in ", "")
-            .strip()
-        )
-
 
     if len(user_message) > 200:
 
