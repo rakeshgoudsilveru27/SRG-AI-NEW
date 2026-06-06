@@ -208,7 +208,9 @@ def get_currents_news(topic):
 
         articles = data["news"][:5]
 
-        result = "📰 Latest News\n\n"
+        result = (
+            f"📰 News Results for: {topic}\n\n"
+        )
 
         for i, article in enumerate(
             articles,
@@ -216,8 +218,10 @@ def get_currents_news(topic):
         ):
 
             result += (
-                f"{i}. "
-                f"{article['title']}\n\n"
+                f"{i}. {article['title']}\n"
+                f"{(article.get('description', '')[:200])}\n"
+                f"Source: {article.get('author', 'Unknown')}\n"
+                f"{article.get('url', '')}\n\n"
             )
 
         return result
@@ -437,40 +441,37 @@ Assistant:
 
     message_lower = user_message.lower()
 
-    if "news" in message_lower:
+    news_keywords = [
 
-        topic = "news"
+        "news",
+        "headline",
+        "headlines",
+        "update",
+        "updates",
+        "breaking"
+    ]
 
-        if "ai" in message_lower:
+    is_news_query = any(
 
-            topic = "artificial intelligence"
+        word in message_lower
 
-        elif "technology" in message_lower:
+        for word in news_keywords
 
-            topic = "technology"
+    )
 
-        elif "india" in message_lower:
+    if is_news_query:
 
-            topic = "india"
-
-        elif "sports" in message_lower:
-
-            topic = "sports"
-
-        elif "business" in message_lower:
-
-            topic = "business"
+        topic = user_message
 
         return jsonify({
 
             "reply":
-            get_currents_news(topic),
+           get_currents_news(topic),
 
             "title":
-            f"{topic.title()} News"
+            "News"
 
         })
-
         
     weather_keywords = [
 
