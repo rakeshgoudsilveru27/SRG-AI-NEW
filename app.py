@@ -180,19 +180,19 @@ def get_tomorrow_weather(city):
 
         return f"Forecast Error: {str(e)}"    
 
-def get_currents_news():
+def get_currents_news(topic):
 
     try:
 
         url = (
-            "https://api.currentsapi.services/v1/latest-news"
+            "https://api.currentsapi.services/v1/search"
         )
 
         params = {
 
-            "apiKey":
-            CURRENTS_API_KEY
+            "keywords": topic,
 
+            "apiKey": CURRENTS_API_KEY
         }
 
         response = requests.get(
@@ -436,15 +436,38 @@ Assistant:
     # AUTO AI MODEL SELECTION
 
     message_lower = user_message.lower()
-    if message_lower == "news":
+
+    if "news" in message_lower:
+
+        topic = "news"
+
+        if "ai" in message_lower:
+
+            topic = "artificial intelligence"
+
+        elif "technology" in message_lower:
+
+            topic = "technology"
+
+        elif "india" in message_lower:
+
+            topic = "india"
+
+        elif "sports" in message_lower:
+
+            topic = "sports"
+
+        elif "business" in message_lower:
+
+            topic = "business"
 
         return jsonify({
 
             "reply":
-            get_currents_news(),
+            get_currents_news(topic),
 
             "title":
-            "Latest News"
+            f"{topic.title()} News"
 
         })
 
