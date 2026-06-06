@@ -297,6 +297,30 @@ Assistant:
 
     message_lower = user_message.lower()
 
+    # WEATHER ROUTER
+
+    if "weather in " in message_lower:
+
+        city = (
+            user_message
+            .lower()
+            .replace(
+                "weather in ",
+                ""
+            )
+            .strip()
+        )
+
+        return jsonify({
+
+            "reply":
+            "🌤 WEATHER API WORKING",
+
+            "title":
+            f"Weather {city}"
+
+        })
+
     if len(user_message) > 200:
 
         selected_model = "llama-3.3-70b-versatile"
