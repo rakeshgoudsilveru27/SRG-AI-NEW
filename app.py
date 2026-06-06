@@ -73,6 +73,8 @@ def get_weather(city):
 
         data = response.json()
 
+        print(data)
+
         return f"""
 🌡 Temperature:
 {data['main']['temp']}°C
@@ -84,9 +86,9 @@ def get_weather(city):
 {data['weather'][0]['description']}
 """
 
-    except Exception:
+    except Exception as e:
 
-        return "Weather unavailable."
+        return f"Weather Error: {str(e)}"
 
 # UPLOAD FOLDER
 UPLOAD_FOLDER = 'uploads'
