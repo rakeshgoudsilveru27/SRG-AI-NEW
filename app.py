@@ -202,6 +202,9 @@ def get_currents_news():
         )
 
         data = response.json()
+        
+        print("CURRENTS RESPONSE =")
+        print(data)
 
         articles = data["news"][:5]
 
