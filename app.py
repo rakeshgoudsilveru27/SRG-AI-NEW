@@ -314,10 +314,10 @@ Assistant:
         return jsonify({
 
             "reply":
-            get_weather(city),
+            f"CITY DETECTED = {city}",
 
             "title":
-            f"Weather {city}"
+            "DEBUG"
 
         })
 
