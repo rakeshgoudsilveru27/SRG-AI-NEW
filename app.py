@@ -2,7 +2,6 @@ from flask import Flask, render_template, request, jsonify
 from werkzeug.utils import secure_filename
 import requests
 import os
-from urllib.parse import quote
 GROQ_API_KEY = os.environ.get("GROQ_API_KEY")
 if not GROQ_API_KEY:
     raise ValueError(
@@ -21,37 +20,6 @@ print(
 )
 import google.generativeai as genai
 from PIL import Image
-def wikipedia_search(query):
-
-    try:
-
-        url = (
-            "https://en.wikipedia.org/api/rest_v1/"
-            f"page/summary/{quote(query)}"
-        )
-
-        response = requests.get(
-            url,
-            timeout=10
-        )
-
-        if response.status_code != 200:
-            return None
-
-        data = response.json()
-
-        return data.get(
-            "extract"
-        )
-
-    except Exception as e:
-
-        print(
-            "Wikipedia Error:",
-            e
-        )
-
-        return None
 
 app = Flask(__name__)
 
@@ -61,12 +29,64 @@ GEMINI_API_KEY = os.environ.get(
     "GEMINI_API_KEY"
 )
 
+OPENWEATHER_API_KEY = os.environ.get(
+    "OPENWEATHER_API_KEY"
+)
+
+
 if not GEMINI_API_KEY:
     print("WARNING: GEMINI_API_KEY not found")
 
 genai.configure(
     api_key=GEMINI_API_KEY
 )
+
+def get_weather(city):
+
+    try:
+
+        url = (
+            "https://api.openweathermap.org/data/2.5/weather"
+        )
+
+        params = {
+
+            "q": city,
+
+            "appid":
+            OPENWEATHER_API_KEY,
+
+            "units":
+            "metric"
+
+        }
+
+        response = requests.get(
+
+            url,
+
+            params=params,
+
+            timeout=10
+
+        )
+
+        data = response.json()
+
+        return f"""
+🌡 Temperature:
+{data['main']['temp']}°C
+
+💧 Humidity:
+{data['main']['humidity']}%
+
+☁ Condition:
+{data['weather'][0]['description']}
+"""
+
+    except Exception:
+
+        return "Weather unavailable."
 
 # UPLOAD FOLDER
 UPLOAD_FOLDER = 'uploads'
@@ -276,43 +296,6 @@ Assistant:
     # AUTO AI MODEL SELECTION
 
     message_lower = user_message.lower()
-
-    # WIKIPEDIA SEARCH
-
-    if (
-        user_message.lower().startswith("who is ")
-        or
-        user_message.lower().startswith("what is ")
-    ):
-
-        topic = (
-            user_message
-            .replace("Who is ","")
-            .replace("who is ","")
-            .replace("What is ","")
-            .replace("what is ","")
-            .strip()
-        )
-
-        print(
-            "WIKIPEDIA ROUTE ENTERED"
-        )
-
-        wiki_result = wikipedia_search(
-            topic
-        )
-
-        if wiki_result:
-
-            return jsonify({
-
-                "reply":
-                "123456789 TEST",
-
-                "title":
-                topic
-
-          })
 
     if len(user_message) > 200:
 
