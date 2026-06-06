@@ -413,12 +413,24 @@ Assistant:
     city = None
 
     for alias, real_city in city_aliases.items():
- 
+   
         if alias in message_lower:
 
             city = real_city
 
             break
+
+    if not city:
+
+        words = message_lower.split()
+
+        if "in" in words:
+
+            idx = words.index("in")
+
+            if idx + 1 < len(words):
+
+                city = words[idx + 1]
 
     date_type = "today"
 
