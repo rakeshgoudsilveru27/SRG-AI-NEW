@@ -18,28 +18,6 @@ print(
         "GEMINI_API_KEY"
     ))
 )
-
-print(
-    "CURRENTS FOUND:",
-    bool(os.environ.get(
-        "CURRENTS_API_KEY"
-    ))
-)
-
-print(
-    "GNEWS FOUND:",
-    bool(os.environ.get(
-        "GNEWS_API_KEY"
-    ))
-)
-
-print(
-    "NEWSAPI FOUND:",
-    bool(os.environ.get(
-        "NEWS_API_KEY"
-    ))
-)
-
 import google.generativeai as genai
 from PIL import Image
 
@@ -53,18 +31,6 @@ GEMINI_API_KEY = os.environ.get(
 
 OPENWEATHER_API_KEY = os.environ.get(
     "OPENWEATHER_API_KEY"
-)
-
-CURRENTS_API_KEY = os.environ.get(
-    "CURRENTS_API_KEY"
-)
-
-GNEWS_API_KEY = os.environ.get(
-    "GNEWS_API_KEY"
-)
-
-NEWS_API_KEY = os.environ.get(
-    "NEWS_API_KEY"
 )
 
 
@@ -180,64 +146,6 @@ def get_tomorrow_weather(city):
 
         return f"Forecast Error: {str(e)}"    
 
-def get_currents_news(topic):
-
-    try:
-
-        url = (
-            "https://api.currentsapi.services/v1/search"
-        )
-
-        params = {
-
-            "keywords": topic,
-
-            "apiKey": CURRENTS_API_KEY
-        }
-
-        response = requests.get(
-            url,
-            params=params,
-            timeout=10
-        )
-
-        data = response.json()
-        
-        print("CURRENTS RESPONSE =")
-        print(data)
-
-        articles = data["news"][:5]
-        if not articles:
-
-            return (
-                f"❌ No news found for: {topic}\n\n"
-                "Try different keywords."
-            )
-
-        result = (
-            f"📰 News Results for: {topic}\n\n"
-        )
-
-        for i, article in enumerate(
-            articles,
-            start=1
-        ):
-
-            result += (
-                f"{i}. {article['title']}\n"
-                f"{(article.get('description', '')[:200])}\n"
-                f"Source: {article.get('author', 'Unknown')}\n"
-                f"{article.get('url', '')}\n\n"
-            )
-
-        return result
-
-    except Exception as e:
-
-        return (
-            f"News Error: {str(e)}"
-        )
-    
 # UPLOAD FOLDER
 UPLOAD_FOLDER = 'uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -446,62 +354,7 @@ Assistant:
     # AUTO AI MODEL SELECTION
 
     message_lower = user_message.lower()
-    message_lower = (
-        message_lower
-        .replace("sucide", "suicide")
-        .replace("waether", "weather")
-        .replace("wether", "weather")
-    )
 
-    news_keywords = [
-
-        "news",
-        "headline",
-        "headlines",
-
-        "update",
-        "updates",
-
-        "breaking",
-
-        "today",
-
-        "incident",
-
-        "accident",
-
-        "suicide",
-
-        "murder",
-
-        "arrest",
-
-        "happened",
-
-       "happening"
-    ]
-
-    is_news_query = any(
-
-        word in message_lower
-
-        for word in news_keywords
-
-    )
-
-    if is_news_query:
-
-        topic = user_message
-
-        return jsonify({
-
-            "reply":
-           get_currents_news(topic),
-
-            "title":
-            "News"
-
-        })
         
     weather_keywords = [
 
