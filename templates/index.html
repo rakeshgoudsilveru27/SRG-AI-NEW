@@ -562,30 +562,56 @@ chatBox.insertAdjacentHTML(
 
         copyButtons.forEach(btn => {
 
-            btn.onclick = function(){
+    btn.onclick = async function(){
 
-                const text =
-                btn.parentElement
-                .querySelector(
-                    ".message-content"
-                )
-                .innerText;
+        console.log(
+            "COPY CLICKED"
+        );
 
-                navigator.clipboard.writeText(
-                    text
-                );
+        try{
+
+            const text =
+            btn.parentElement
+            .querySelector(
+                ".message-content"
+            )
+            .innerText;
+
+            await navigator.clipboard.writeText(
+                text
+            );
+
+            btn.innerText =
+            "✅ Copied";
+
+            setTimeout(()=>{
 
                 btn.innerText =
-                "Copied";
+                "📋 Copy";
 
-                setTimeout(()=>{
+            },1500);
 
-                    btn.innerText =
-                    "📋 Copy";
+        }
 
-                },1500);
-            };
-        });
+        catch(error){
+
+            console.error(
+                "COPY ERROR:",
+                error
+            );
+
+            btn.innerText =
+            "❌ Failed";
+
+            setTimeout(()=>{
+
+                btn.innerText =
+                "📋 Copy";
+
+            },1500);
+        }
+    };
+});
 
 
         currentChat.push({
@@ -1011,28 +1037,59 @@ chatBox.querySelectorAll(
 
 historyCopyBtns.forEach(btn => {
 
-    btn.onclick = function(){
+    btn.onclick = async function(){
 
-        const text =
-        btn.parentElement
-        .querySelector(
-            ".message-content"
-        )
-        .innerText;
-
-        navigator.clipboard.writeText(
-            text
+        console.log(
+            "COPY CLICKED"
         );
 
-        btn.innerText =
-        "Copied";
+        try{
 
-        setTimeout(()=>{
+            const text =
+            btn.parentElement
+            .querySelector(
+                ".message-content"
+            )
+            .innerText;
+
+            console.log(
+    "TEXT TO COPY:",
+    text
+);
+
+            await navigator.clipboard.writeText(
+                text
+            );
 
             btn.innerText =
-            "📋 Copy";
+            "✅ Copied";
 
-        },1500);
+            setTimeout(()=>{
+
+                btn.innerText =
+                "📋 Copy";
+
+            },1500);
+
+        }
+
+        catch(error){
+
+            console.error(
+                "COPY ERROR:",
+                error
+            );
+
+            btn.innerText =
+            "❌ Failed";
+
+            setTimeout(()=>{
+
+                btn.innerText =
+                "📋 Copy";
+
+            },1500);
+        }
     };
 });
 
@@ -1726,6 +1783,65 @@ if(lastUserMessage){
 
     });
 }
+const copyBtns =
+chatBox.querySelectorAll(
+    ".copy-ai-btn"
+);
+
+copyBtns.forEach(btn => {
+
+    btn.onclick = async function(){
+
+        try{
+
+            const text =
+            btn.parentElement
+            .querySelector(
+                ".message-content"
+            )
+            .innerText;
+
+            console.log(
+    "TEXT TO COPY:",
+    text
+);
+
+            await navigator.clipboard.writeText(
+                text
+            );
+
+            btn.innerText =
+            "✅ Copied";
+
+            setTimeout(()=>{
+
+                btn.innerText =
+                "📋 Copy";
+
+            },1500);
+
+        }
+
+        catch(error){
+
+            console.error(
+                "COPY ERROR:",
+                error
+            );
+
+            btn.innerText =
+            "❌ Failed";
+
+            setTimeout(()=>{
+
+                btn.innerText =
+                "📋 Copy";
+
+            },1500);
+        }
+    };
+});
+
 }
 
 document

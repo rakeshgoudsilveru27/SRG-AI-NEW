@@ -384,7 +384,6 @@ You can answer questions on any topic including:
 - AI and Machine Learning
 - Robotics
 - Embedded Systems
-- Iot
 
 Provide accurate, helpful and easy-to-understand answers.
 """
