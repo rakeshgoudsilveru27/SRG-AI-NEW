@@ -471,7 +471,9 @@ Assistant:
 
     for word in wiki_keywords
 
-)    
+)
+    print("MESSAGE =", message_lower)
+    print("IS_WIKI_QUERY =", is_wiki_query)    
 
         
     weather_keywords = [
@@ -611,10 +613,13 @@ Assistant:
     if is_wiki_query:
 
         print("WIKIPEDIA QUERY DETECTED")
+        print("ENTERED WIKIPEDIA BLOCK")
 
         wiki_result = get_wikipedia_summary(
             user_message
         )
+
+        print("WIKI RESULT =", wiki_result)
 
         if wiki_result:
 
