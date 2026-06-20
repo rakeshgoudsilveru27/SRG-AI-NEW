@@ -145,6 +145,95 @@ def get_tomorrow_weather(city):
     except Exception as e:
 
         return f"Forecast Error: {str(e)}"    
+    
+def get_wikipedia_summary(query):
+
+    try:
+
+        search_url = (
+            "https://en.wikipedia.org/w/api.php"
+        )
+
+        params = {
+
+            "action": "query",
+
+            "list": "search",
+
+            "srsearch": query,
+
+            "format": "json"
+
+        }
+
+        response = requests.get(
+
+            search_url,
+
+            params=params,
+
+            timeout=10
+
+        )
+
+        data = response.json()
+
+        print(data)
+
+        results = data.get(
+            "query",
+            {}
+        ).get(
+            "search",
+            []
+        )
+        if not results:
+
+            return None
+
+        page_title = results[0]["title"]
+
+        summary_url = (
+            "https://en.wikipedia.org/api/rest_v1/page/summary/"
+            +
+            page_title.replace(
+                " ",
+                "_"
+            )
+        )
+
+        summary_response = requests.get(
+
+            summary_url,
+
+            timeout=10
+
+        )
+
+        summary_data = summary_response.json()
+
+        if "extract" in summary_data:
+
+            return f"""
+📚 Wikipedia
+
+Title:
+{page_title}
+
+Summary:
+{summary_data['extract']}
+"""
+
+        return None
+
+    except Exception as e:
+
+        print(
+            "WIKIPEDIA ERROR:",
+            str(e)
+        )
+
+        return None    
 
 # UPLOAD FOLDER
 UPLOAD_FOLDER = 'uploads'
@@ -355,6 +444,35 @@ Assistant:
 
     message_lower = user_message.lower()
 
+    wiki_keywords = [
+
+    "who is",
+
+    "what is",
+
+    "tell me about",
+
+    "information about",
+
+    "history of",
+
+    "where is",
+
+    "when was",
+
+    "explain",
+
+    "define"
+]
+    
+    is_wiki_query = any(
+
+    word in message_lower
+
+    for word in wiki_keywords
+
+)    
+
         
     weather_keywords = [
 
@@ -489,6 +607,26 @@ Assistant:
     print("QUERY =", message_lower)
     print("CITY =", city)
     print("DATE =", date_type)
+
+    if is_wiki_query:
+
+        print("WIKIPEDIA QUERY DETECTED")
+
+        wiki_result = get_wikipedia_summary(
+            user_message
+        )
+
+        if wiki_result:
+
+            return jsonify({
+
+                "reply":
+                wiki_result,
+
+                "title":
+                "Wikipedia"
+
+            })
     
     if is_weather_query and city:
 
