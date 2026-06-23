@@ -41,6 +41,10 @@ genai.configure(
     api_key=GEMINI_API_KEY
 )
 
+gemini_model = genai.GenerativeModel(
+    "gemini-2.5-flash"
+)
+
 def get_weather(city):
 
     try:
@@ -391,34 +395,24 @@ def chat():
     # AI PROMPT
 
     prompt = f"""
-You are SRG.ai.
+You are SRG.ai, an advanced AI assistant.
 
-A smart, intelligent and helpful AI assistant.
-
-You can help with:
-- Technology
-- Programming
-- Electronics
-- Science
-- Mathematics
-- Education
-- Career Guidance
-- Business
-- History
-- Geography
-- General Knowledge
-- Daily Life Questions
-- Productivity
-- AI and Machine Learning
-- Robotics
+Specializations:
 - Embedded Systems
+- Electronics
+- IoT
+- Robotics
+- PCB Design
+- VLSI
+- Programming
+- AI & Machine Learning
 
-Continue the conversation naturally.
-
-Continue the conversation naturally.
-
-If the user uploaded an image,
-mention that the image was received successfully.
+Rules:
+- Give accurate answers.
+- Explain step by step.
+- For coding, provide complete code.
+- For electronics, explain components and wiring.
+- If unsure, say so.
 
 Conversation History:
 
@@ -443,37 +437,6 @@ Assistant:
     # AUTO AI MODEL SELECTION
 
     message_lower = user_message.lower()
-
-    wiki_keywords = [
-
-    "who is",
-
-    "what is",
-
-    "tell me about",
-
-    "information about",
-
-    "history of",
-
-    "where is",
-
-    "when was",
-
-    "explain",
-
-    "define"
-]
-    
-    is_wiki_query = any(
-
-    word in message_lower
-
-    for word in wiki_keywords
-
-)
-    print("MESSAGE =", message_lower)
-    print("IS_WIKI_QUERY =", is_wiki_query)    
 
         
     weather_keywords = [
@@ -610,28 +573,7 @@ Assistant:
     print("CITY =", city)
     print("DATE =", date_type)
 
-    if is_wiki_query:
-
-        print("WIKIPEDIA QUERY DETECTED")
-        print("ENTERED WIKIPEDIA BLOCK")
-
-        wiki_result = get_wikipedia_summary(
-            user_message
-        )
-
-        print("WIKI RESULT =", wiki_result)
-
-        if wiki_result:
-
-            return jsonify({
-
-                "reply":
-                wiki_result,
-
-                "title":
-                "Wikipedia"
-
-            })
+    
     
     if is_weather_query and city:
 
@@ -659,7 +601,7 @@ Assistant:
 
     if len(user_message) > 200:
 
-        selected_model = "llama-3.3-70b-versatile"
+        selected_model = "llama-3.1-8b-instant"
 
     elif any(word in message_lower for word in [
 
@@ -685,187 +627,54 @@ Assistant:
 
     # MAIN AI RESPONSE
 
-    response = requests.post(
-
-        "https://api.groq.com/openai/v1/chat/completions",
-
-        headers=headers,
-
-        json={
-
-            "model": selected_model,
-
-            "messages": [
-
-                {
-                    "role": "system",
-
-                    "content":
-                    """
-You are SRG.ai, a powerful, intelligent and friendly AI assistant.
-
-You can answer questions on any topic including:
-- Technology
-- Programming
-- Electronics
-- Science
-- Mathematics
-- Education
-- Career Guidance
-- Business
-- History 
-- Geography
-- General Knowledge
-- Daily Life Questions
-- AI and Machine Learning
-- Robotics
-- Embedded Systems
-
-You are SRG.ai.
-
-Always provide:
-
-- Factually accurate answers
-- Step-by-step explanations
-- Clear examples
-- Practical advice
-
-If you are unsure about a fact,
-say that you are not certain.
-
-Never invent information.
-
-For technical topics:
-- Give detailed explanations
-- Explain concepts simply
-- Include examples
-
-For coding:
-- Provide complete working code
-- Explain what changed
-- Mention possible errors
-
-For electronics:
-- Explain components
-- Explain connections
-- Explain troubleshooting
-
-For general knowledge:
-- Be factual and concise.
-"""
-                },
-
-                {
-                    "role": "user",
-
-                    "content": prompt
-                }
-            ]
-        },
-
-        timeout=60
-    )
-
-
-    if response.status_code != 200:
-
-        return jsonify({
-
-            "reply":"AI service unavailable.",
-
-            "title":"Error"
-
-        })
-    data = response.json()
-
-    # SUCCESS RESPONSE
-
-    if "choices" in data:
-
-        ai_reply = (
-            data["choices"][0]
-            ["message"]["content"]
+    try:
+        gemini_response = gemini_model.generate_content(
+            prompt
         )
 
-        # AI TITLE GENERATION
+        if hasattr(gemini_response, "text"):
+            ai_reply = gemini_response.text
+        else:
+            ai_reply = "No response generated."
 
-        title_prompt = f"""
-Generate a short professional title
-for this chat.
+        chat_title = user_message[:30]
 
-User message:
-{user_message}
+    except Exception as e:
+ 
+        print("GEMINI FAILED:", str(e))
+        print("SWITCHING TO GROQ")
 
-Rules:
-- Maximum 6 words
-- No quotes
-- No emojis
-- Professional
-- Clear and readable
-"""
-
-        title_response = requests.post(
-
+        response = requests.post(
             "https://api.groq.com/openai/v1/chat/completions",
-
             headers=headers,
-
             json={
-
                 "model": selected_model,
-
                 "messages": [
-
                     {
                         "role": "system",
-
-                        "content":
-                        "Generate short professional chat titles."
+                        "content": "You are SRG.ai."
                     },
-
                     {
                         "role": "user",
-
-                        "content": title_prompt
+                        "content": prompt
                     }
                 ]
             },
-
             timeout=60
         )
 
-        if title_response.status_code == 200:
+        if response.status_code != 200:
+            return jsonify({
+                "reply": "AI service unavailable.",
+                "title": "Error"
+            })
 
-            title_data = title_response.json()
+        data = response.json()
 
-        else:
-            title_data = {}
-            chat_title = "New Chat"
+        ai_reply = data["choices"][0]["message"]["content"]
 
+        chat_title = user_message[:30]
 
-        # TITLE SUCCESS
-
-        if "choices" in title_data:
-
-            chat_title = (
-
-                title_data["choices"][0]
-                ["message"]["content"]
-
-                .strip()
-            )
-
-        else:
-
-            chat_title = "New Chat"
-
-    # API ERROR
-
-    else:
-
-        ai_reply = f"SRG.ai Error: {data}"
-
-        chat_title = "New Chat"
 
     # SAVE AI RESPONSE
 
