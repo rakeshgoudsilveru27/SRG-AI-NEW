@@ -145,6 +145,10 @@ learning and productivity.
                         📷
                     </button>
 
+                    <button class="speaker-btn" id="voiceToggle">
+                        🔊
+                    </button>
+
                     <input type="file" id="imageInput" hidden>
                     
                     <button class="mic-btn" id="micButton">
@@ -531,20 +535,25 @@ if(currentChatTitle === null){
     "typing"
 ).remove();
 
-        const aiMessageHtml = `
+const aiMessageHtml = `
 
 <div class="ai-msg">
+
     <div class="message-content">
-
         ${marked.parse(data.reply)}
-
     </div>
 
-    <button class="copy-ai-btn">
+    <div class="ai-buttons">
 
-        📋 Copy
+        <button class="copy-ai-btn">
+            📋 Copy
+        </button>
 
-    </button>
+        <button class="speak-ai-btn">
+            🔊 Speak
+        </button>
+
+    </div>
 
 </div>
 `;
@@ -559,6 +568,25 @@ chatBox.insertAdjacentHTML(
         document.querySelectorAll(
         ".copy-ai-btn"
         );
+
+        const speakButtons =
+document.querySelectorAll(".speak-ai-btn");
+
+speakButtons.forEach(btn => {
+
+    btn.onclick = function(){
+
+        const text =
+        btn.parentElement
+        .parentElement
+        .querySelector(".message-content")
+        .innerText;
+
+        speakText(text);
+
+    };
+
+});
 
         copyButtons.forEach(btn => {
 
@@ -1030,6 +1058,10 @@ setTimeout(()=>{
 
                             📋 Copy
 
+                        </button>
+
+                        <button class="speak-ai-btn">
+                            🔊 Speak
                         </button>
 
                     </div>
@@ -1998,6 +2030,25 @@ function speakText(text){
     speechSynthesis.speak(speech);
 
 }
+
+function speakText(text){
+
+    speechSynthesis.cancel();
+
+    const speech = new SpeechSynthesisUtterance(text);
+
+    speech.lang = "en-IN";
+
+    speech.rate = 1;
+
+    speech.pitch = 1;
+
+    speech.volume = 1;
+
+    speechSynthesis.speak(speech);
+
+}
+
 
 </script>
 

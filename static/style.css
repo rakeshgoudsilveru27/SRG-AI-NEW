@@ -1704,3 +1704,36 @@ textarea:focus{
 
     border-radius:10px;
 }
+
+
+.ai-buttons{
+
+    display:flex;
+
+    gap:10px;
+
+    margin-top:10px;
+
+}
+
+.speak-ai-btn{
+
+    border:none;
+
+    padding:8px 12px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    background:#444;
+
+    color:white;
+
+}
+
+.speak-ai-btn:hover{
+
+    opacity:0.9;
+
+}
