@@ -619,6 +619,14 @@ chatBox.insertAdjacentHTML(
             text:data.reply
         });
 
+        const cleanReply =
+document.createElement("div");
+
+cleanReply.innerHTML =
+marked.parse(data.reply);
+
+speakText(cleanReply.innerText);
+
         saveChat();
 
         imageInput.value = "";
@@ -1968,6 +1976,26 @@ if (SpeechRecognition) {
 else{
 
     alert("Speech Recognition is not supported in this browser.");
+
+}
+
+function speakText(text){
+
+    if(speechSynthesis.speaking){
+        speechSynthesis.cancel();
+    }
+
+    const speech = new SpeechSynthesisUtterance(text);
+
+    speech.lang = "en-IN";
+
+    speech.rate = 1;
+
+    speech.pitch = 1;
+
+    speech.volume = 1;
+
+    speechSynthesis.speak(speech);
 
 }
 
