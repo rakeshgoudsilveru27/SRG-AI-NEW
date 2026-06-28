@@ -146,9 +146,9 @@ learning and productivity.
                     </button>
 
                     <input type="file" id="imageInput" hidden>
-
-                    <button class="mic-btn">
-                        🎤
+                    
+                    <button class="mic-btn" id="micButton">
+                     🎙   
                     </button>
 
                     <textarea
@@ -1894,6 +1894,82 @@ function(event){
         sendMessage();
     }
 });
+
+const micButton = document.getElementById("micButton");
+
+const SpeechRecognition =
+    window.SpeechRecognition ||
+    window.webkitSpeechRecognition;
+
+if (SpeechRecognition) {
+
+    const recognition = new SpeechRecognition();
+
+
+    recognition.lang = "en-IN";
+    recognition.continuous = false;
+    recognition.interimResults = false;
+
+    micButton.onclick = () => {
+
+        try{
+            recognition.start();
+        }
+        catch(e){
+        console.log("Recognition already running");
+        }
+
+        micButton.innerHTML = "🔴";
+
+        micButton.disabled = true;
+
+    };
+
+    recognition.onresult = (event) => {
+
+        const transcript =
+            event.results[0][0].transcript;
+
+        console.log("Voice:", transcript);
+
+        userInput.value = transcript;
+
+        micButton.innerHTML = "🤖";
+
+        sendMessage();
+
+    };
+
+    recognition.onend = () => {
+
+        micButton.innerHTML = "🎙";
+        micButton.disabled = false;
+
+    };
+
+    recognition.onerror = (event) => {
+
+        console.error(event.error);
+
+        if(event.error === "not-allowed"){
+            alert("Please allow microphone permission.");
+        }
+
+        if(event.error === "no-speech"){
+           alert("No speech detected.");
+        }
+
+        micButton.innerHTML = "🎙";
+        micButton.disabled = false;
+
+    };
+
+}
+else{
+
+    alert("Speech Recognition is not supported in this browser.");
+
+}
 
 </script>
 
