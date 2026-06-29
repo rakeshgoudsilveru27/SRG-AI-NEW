@@ -758,8 +758,13 @@ async function saveChat(){
 
     );
 
-    const snapshot =
-    await getDocs(q);
+    const snapshot = await getDocs(q);
+
+    console.log("Firebase documents:", snapshot.size);
+
+snapshot.forEach(doc=>{
+    console.log(doc.data());
+});
 
     let existingDocId =
     null;
@@ -1754,11 +1759,21 @@ async function loadChatsFromFirebase(){
         });
 
         localStorage.setItem(
+    "srg_chats",
+    JSON.stringify(chats)
+);
 
-            "srg_chats",
 
-            JSON.stringify(chats)
-        );
+        console.log("Chats downloaded:", chats.length);
+
+if(chats.length > 0){
+
+    localStorage.setItem(
+        "active_chat_id",
+        chats[0].id
+    );
+
+}
 
         console.log(
             "Firebase chats loaded"
@@ -1781,14 +1796,28 @@ async function loadChatsFromFirebase(){
 
 function loadLastOpenedChat(){
 
-    const activeChatId =
-    localStorage.getItem(
-        "active_chat_id"
-    );
+    let activeChatId =
+localStorage.getItem("active_chat_id");
 
     if(!activeChatId){
+
+    let chats = JSON.parse(
+        localStorage.getItem("srg_chats")
+    ) || [];
+
+    if(chats.length === 0){
         return;
     }
+
+    localStorage.setItem(
+        "active_chat_id",
+        chats[0].id
+    );
+
+    activeChatId = chats[0].id;
+    
+
+}
 
     let chats = JSON.parse(
         localStorage.getItem(
