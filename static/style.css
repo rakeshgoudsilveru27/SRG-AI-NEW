@@ -423,7 +423,7 @@ body{
 
     border-bottom-right-radius:8px;
 
-    line-height:1.8;
+    line-height:1.6;
 
     display:flex;
 
@@ -448,7 +448,7 @@ body{
 
     align-self:flex-start;
 
-    max-width:78%;
+    max-width:70%;
 
     padding:14px 18px;
 
@@ -783,7 +783,7 @@ body.light-mode .menu-logo{
 
     .user-msg,
     .ai-msg{
-        max-width:88%;
+        max-width:94%;
         font-size:15px;
     }
 
@@ -933,7 +933,7 @@ body.light-mode .menu-logo{
 
     overflow-x:auto;
 
-    margin-top:10px;
+    margin:6px 0;
 
     border:1px solid rgba(255,255,255,0.05);
 
@@ -945,10 +945,6 @@ body.light-mode .menu-logo{
     color:#7dd3fc;
 }
 
-.ai-msg p{
-    margin-top:8px;
-    line-height:1.7;
-}
 
 /* SCROLLBAR */
 
@@ -1543,7 +1539,7 @@ body.light-mode .history-dropdown button:hover{
 
     border-radius:14px;
 
-    margin-bottom:8px;
+    margin-bottom:4px;
 
     display:block;
 
@@ -1579,7 +1575,7 @@ body.light-mode .history-dropdown button:hover{
 
     margin:4px 0;
 
-    padding-left:22px;
+    padding-left:16px;
 
 }
 
@@ -1772,9 +1768,9 @@ textarea:focus{
 
     display:flex;
 
-    gap:6px;
+    gap:4px;
 
-    margin-top:4px;
+    margin-top:2px;
 
     opacity:0;
 
@@ -2011,13 +2007,7 @@ body.light-mode .welcome-tagline{
     margin-top:0;
 
 }
-.message-content ul{
 
-    margin-top:6px;
-
-    margin-bottom:6px;
-
-}
 .message-content li{
 
     margin:4px 0;
@@ -2041,12 +2031,39 @@ body.light-mode .welcome-tagline{
 }
 .message-content blockquote{
 
-    margin:8px 0;
+    margin:4px 0;
 
-    padding-left:12px;
+    padding:2px 0 2px 10px;
 
     border-left:3px solid #3B82F6;
 
     color:#cbd5e1;
+
+}
+
+.message-content h1,
+.message-content h2,
+.message-content h3,
+.message-content h4{
+
+    margin:8px 0 4px;
+
+}
+
+.message-content table{
+
+    margin:6px 0;
+
+}
+
+.message-content hr{
+
+    margin:8px 0;
+
+}
+
+.message-content img{
+
+    margin:6px 0;
 
 }
