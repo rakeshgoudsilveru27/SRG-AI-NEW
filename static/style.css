@@ -50,7 +50,7 @@ body{
 
 .light-mode .ai-msg{
 
-    background:white;
+    background:transparent;
 
     color:#111827;
 
@@ -62,7 +62,7 @@ body{
 
 .light-mode .user-msg{
 
-    background:#2563EB;
+    background:transparent;
 
     color:white;
 
@@ -415,11 +415,7 @@ body{
 
     padding:18px 22px;
 
-    background:linear-gradient(
-        135deg,
-        #2563EB,
-        #1D4ED8
-    );
+    background:transparent;
 
     color:white;
 
@@ -456,7 +452,7 @@ body{
 
     padding:18px 22px;
 
-    background:#161B22;
+    background:transparent;
 
     color:#F8FAFC;
 
@@ -470,8 +466,7 @@ body{
 
     animation:fadeIn .25s ease;
 
-    box-shadow:
-        0 10px 30px rgba(0,0,0,.18);
+    box-shadow:none;
 
     transition:.25s;
 
