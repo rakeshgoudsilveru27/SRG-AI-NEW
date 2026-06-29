@@ -432,7 +432,7 @@ body{
 
     max-width:75%;
 
-    padding:2px 0 22px 0;
+    padding:2px 0 12px 0;
 
     color:#f8fafc;
 
@@ -739,7 +739,7 @@ body.light-mode .menu-logo{
 
     .user-msg,
     .ai-msg{
-        max-width:88%;
+        max-width:75%;
         font-size:15px;
     }
 
@@ -1465,11 +1465,12 @@ body.light-mode .history-dropdown button:hover{
     align-items:center;
     justify-content:center;
 
-    width:42px;
-    height:38px;
+    width:36px;
+    height:36px;
 
-    background:#444;
-    color:white;
+    background:transparent;
+
+    color:#9CA3AF;
 
     border:none;
 
@@ -1477,11 +1478,18 @@ body.light-mode .history-dropdown button:hover{
 
     cursor:pointer;
 
-    font-size:14px;
+    font-size:18px;
 
-    transition:0.2s;
+    opacity:0.9;
+
+    transition:
+        background .2s ease,
+        color .2s ease,
+        transform .2s ease;
+
+    flex-shrink:0;
+
 }
-
 
 /* CHAT IMAGE */
 
@@ -1715,11 +1723,12 @@ textarea:focus{
 
     justify-content:flex-start;
 
-    gap:8px;
+    gap:4px;
 
-    margin-top:12px;
+    margin-top:8px;
 
     width:100%;
+
 }
 
 
@@ -1727,8 +1736,42 @@ textarea:focus{
 .copy-ai-btn:hover,
 .speak-ai-btn:hover{
 
-    background:#555;
+    background:rgba(255,255,255,.08);
 
-    transform:translateY(-1px);
+    color:#ffffff;
+
+    transform:scale(1.08);
+
+}
+
+.light-mode .copy-ai-btn,
+.light-mode .speak-ai-btn{
+
+    color:#6B7280;
+
+}
+
+.light-mode .copy-ai-btn:hover,
+.light-mode .speak-ai-btn:hover{
+
+    background:rgba(0,0,0,.05);
+
+    color:#111827;
+
+}
+
+.copy-ai-btn:active,
+.speak-ai-btn:active{
+
+    transform:scale(0.92);
+
+}
+
+.copy-ai-btn:focus-visible,
+.speak-ai-btn:focus-visible{
+
+    outline:2px solid #1ea0ff;
+
+    outline-offset:2px;
 
 }
