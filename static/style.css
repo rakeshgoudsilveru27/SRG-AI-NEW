@@ -1872,7 +1872,7 @@ textarea:focus{
 
     object-fit:contain;
 
-    margin-bottom:30px;
+    margin-bottom:10px;
 
     transition:.3s;
 
@@ -1895,9 +1895,6 @@ textarea:focus{
     line-height:1.05;
 
     margin:0;
-
-    margin-top:10px;
-
 
 }
 
