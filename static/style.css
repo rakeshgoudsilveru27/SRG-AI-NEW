@@ -1732,6 +1732,99 @@ textarea:focus{
 }
 
 
+.user-buttons{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    align-items:center;
+
+    gap:4px;
+
+    margin-top:8px;
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:0.2s;
+
+}
+
+
+.user-msg:hover .user-buttons{
+
+    opacity:1;
+
+    visibility:visible;
+
+}
+
+.copy-user-btn,
+.edit-user-btn,
+.delete-user-btn{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    width:36px;
+
+    height:36px;
+
+    background:transparent;
+
+    color:#9CA3AF;
+
+    border:none;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    font-size:18px;
+
+    opacity:.9;
+
+    transition:
+    background .2s ease,
+    color .2s ease,
+    transform .2s ease;
+
+}
+
+.copy-user-btn:hover,
+.edit-user-btn:hover,
+.delete-user-btn:hover{
+
+    background:rgba(255,255,255,.08);
+
+    color:white;
+
+    transform:scale(1.08);
+
+}
+
+.light-mode .copy-user-btn,
+.light-mode .edit-user-btn,
+.light-mode .delete-user-btn{
+
+    color:#6B7280;
+
+}
+
+.light-mode .copy-user-btn:hover,
+.light-mode .edit-user-btn:hover,
+.light-mode .delete-user-btn:hover{
+
+    background:rgba(0,0,0,.05);
+
+    color:#111827;
+
+}
 
 .copy-ai-btn:hover,
 .speak-ai-btn:hover{

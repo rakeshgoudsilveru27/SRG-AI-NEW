@@ -389,10 +389,6 @@ document.getElementById("imageInput");
 
 let imageURL = "";
 
-if(imageURL){
-    URL.revokeObjectURL(imageURL);
-}
-
 if(imageInput.files[0]){
 
     imageURL = URL.createObjectURL(
@@ -418,7 +414,32 @@ chatBox.innerHTML += `
     }
 
     <div class="user-text">
-    ${message}
+        ${message}
+    </div>
+
+    <div class="user-buttons">
+
+    <button class="copy-user-btn"
+    title="Copy">
+
+        📋
+
+    </button>
+
+    <button class="edit-user-btn"
+    title="Edit">
+
+        ✏️
+
+    </button>
+
+    <button class="delete-user-btn"
+    title="Delete">
+
+        🗑️
+
+    </button>
+
 </div>
 
 </div>
@@ -1013,6 +1034,31 @@ overlay.classList.remove("active");
     <div class="user-text">
         ${msg.text}
     </div>
+
+    <div class="user-buttons">
+
+    <button class="copy-user-btn"
+    title="Copy">
+
+        📋
+
+    </button>
+
+    <button class="edit-user-btn"
+    title="Edit">
+
+        ✏️
+
+    </button>
+
+    <button class="delete-user-btn"
+    title="Delete">
+
+        🗑️
+
+    </button>
+
+</div>
 
 </div>
 `;
@@ -1788,19 +1834,44 @@ function loadLastOpenedChat(){
             chatBox.innerHTML += `
             <div class="user-msg">
 
-                <div class="user-text">
+    <div class="user-text">
 
-                    ${msg.text}
+        ${msg.text}
 
-                </div>
+    </div>
 
-            </div>
+    <div class="user-buttons">
+
+    <button class="copy-user-btn"
+    title="Copy">
+
+        📋
+
+    </button>
+
+    <button class="edit-user-btn"
+    title="Edit">
+
+        ✏️
+
+    </button>
+
+    <button class="delete-user-btn"
+    title="Delete">
+
+        🗑️
+
+    </button>
+
+</div>
+
+</div>
             `;
         }
 
         else{
 
-            chatBox.innerHTML += `
+    chatBox.innerHTML += `
 
 <div class="ai-msg">
 
@@ -1810,19 +1881,16 @@ function loadLastOpenedChat(){
 
     <div class="ai-buttons">
 
-        <button class="copy-ai-btn">
-            📋
-        </button>
+        <button class="copy-ai-btn">📋</button>
 
-        <button class="speak-ai-btn">
-            🔊
-        </button>
+        <button class="speak-ai-btn">🔊</button>
 
     </div>
 
 </div>
+
 `;
-        }
+}
 
     });
 
@@ -2072,8 +2140,86 @@ function speakText(text){
 
 }
 
+document.addEventListener("click", async function(e){
 
+    // COPY
+    if(e.target.closest(".copy-user-btn")){
 
+        const btn = e.target.closest(".copy-user-btn");
+
+        const text = btn
+            .closest(".user-msg")
+            .querySelector(".user-text")
+            .innerText;
+
+        await navigator.clipboard.writeText(text);
+
+        btn.innerHTML = "✅";
+
+        setTimeout(()=>{
+            btn.innerHTML = "📋";
+        },1000);
+
+        return;
+    }
+
+    // EDIT
+    if(e.target.closest(".edit-user-btn")){
+
+        const btn = e.target.closest(".edit-user-btn");
+
+        const text = btn
+            .closest(".user-msg")
+            .querySelector(".user-text")
+            .innerText;
+
+        userInput.value = text;
+        userInput.focus();
+
+        userInput.style.height = "auto";
+        userInput.style.height =
+            userInput.scrollHeight + "px";
+
+        return;
+    }
+
+    // DELETE
+    if(e.target.closest(".delete-user-btn")){
+
+    const btn =
+    e.target.closest(".delete-user-btn");
+
+    const userMsg =
+    btn.closest(".user-msg");
+
+    const aiMsg =
+    userMsg.nextElementSibling;
+
+    const allMessages =
+    [...document.querySelectorAll(
+        ".user-msg,.ai-msg"
+    )];
+
+    const index =
+    allMessages.indexOf(userMsg);
+
+    if(aiMsg &&
+       aiMsg.classList.contains("ai-msg")){
+
+        aiMsg.remove();
+
+    }
+
+    userMsg.remove();
+
+    currentChat.splice(index,2);
+
+    saveChat();
+
+    return;
+}
+
+});
 
 </script>
 
