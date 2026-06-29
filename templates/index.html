@@ -119,16 +119,20 @@ learning and productivity.
 
         <div class="welcome">
 
-            <h1>
-                Welcome to
-                <span>SRG.ai</span>
-            </h1>
+    <img
+    src="{{ url_for('static', filename='logo.png') }}"
+    class="welcome-logo"
+    alt="SRG.ai">
 
-            <p>
-                Your intelligent AI assistant
-            </p>
+    <h1 class="welcome-title">
+        SRG<span>.ai</span>
+    </h1>
 
-        </div>
+    <p class="welcome-tagline">
+        Smart • Reliable • Genius
+    </p>
+
+</div>
 
        
         <div class="chat-area">
@@ -168,6 +172,8 @@ rows="1"></textarea>
         </div>
 
     </div>
+
+</div>
 
 </div>
 
@@ -701,6 +707,20 @@ imageInput.value = "";
 `;
 }
 }
+
+document.querySelectorAll(".suggestion-card")
+.forEach(card=>{
+
+    card.onclick=function(){
+
+        document.getElementById("userInput").value=
+        this.innerText;
+
+        sendMessage();
+
+    };
+
+});
 
 window.sendMessage = sendMessage;
 
