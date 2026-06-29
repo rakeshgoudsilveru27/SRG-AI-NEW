@@ -389,6 +389,10 @@ document.getElementById("imageInput");
 
 let imageURL = "";
 
+if(imageURL){
+    URL.revokeObjectURL(imageURL);
+}
+
 if(imageInput.files[0]){
 
     imageURL = URL.createObjectURL(
@@ -559,6 +563,8 @@ chatBox.insertAdjacentHTML(
     aiMessageHtml
 );
 
+scrollToBottom();
+
 
         const copyButtons =
         document.querySelectorAll(
@@ -573,8 +579,7 @@ speakButtons.forEach(btn => {
     btn.onclick = function(){
 
         const text =
-        btn.parentElement
-        .parentElement
+        btn.closest(".ai-msg")
         .querySelector(".message-content")
         .innerText;
 
@@ -595,7 +600,7 @@ speakButtons.forEach(btn => {
         try{
 
             const text =
-            btn.parentElement
+            btn.closest(".ai-msg")
             .querySelector(
                 ".message-content"
             )
@@ -649,11 +654,13 @@ document.createElement("div");
 cleanReply.innerHTML =
 marked.parse(data.reply);
 
-speakText(cleanReply.innerText);
-
         saveChat();
 
-        imageInput.value = "";
+        if(imageURL){
+    URL.revokeObjectURL(imageURL);
+}
+
+imageInput.value = "";
     }
 
     catch(error){
@@ -1050,15 +1057,17 @@ setTimeout(()=>{
 
                         </div>
 
+                        <div class="ai-buttons">
+
                         <button class="copy-ai-btn">
-
                             📋 Copy
-
                         </button>
 
                         <button class="speak-ai-btn">
                             🔊 Speak
                         </button>
+
+                    </div>
 
                     </div>
                     `;
@@ -1082,7 +1091,7 @@ historyCopyBtns.forEach(btn => {
         try{
 
             const text =
-            btn.parentElement
+            btn.closest(".ai-msg")
             .querySelector(
                 ".message-content"
             )
@@ -1127,6 +1136,24 @@ historyCopyBtns.forEach(btn => {
             },1500);
         }
     };
+});
+
+const historySpeakBtns =
+chatBox.querySelectorAll(".speak-ai-btn");
+
+historySpeakBtns.forEach(btn => {
+
+    btn.onclick = function(){
+
+        const text =
+        btn.closest(".ai-msg")
+        .querySelector(".message-content")
+        .innerText;
+
+        speakText(text);
+
+    };
+
 });
 
         };
@@ -1776,25 +1803,27 @@ function loadLastOpenedChat(){
         else{
 
             chatBox.innerHTML += `
-            <div class="ai-msg">
 
-                <div class="message-content">
+<div class="ai-msg">
 
-                    ${marked.parse(
-                        msg.text
-                    )}
+    <div class="message-content">
+        ${marked.parse(msg.text)}
+    </div>
 
-                </div>
+    <div class="ai-buttons">
 
-                <button
-                class="copy-ai-btn">
+        <button class="copy-ai-btn">
+            📋 Copy
+        </button>
 
-                    📋 Copy
+        <button class="speak-ai-btn">
+            🔊 Speak
+        </button>
 
-                </button>
+    </div>
 
-            </div>
-            `;
+</div>
+`;
         }
 
     });
@@ -1824,6 +1853,24 @@ chatBox.querySelectorAll(
     ".copy-ai-btn"
 );
 
+const speakBtns =
+chatBox.querySelectorAll(".speak-ai-btn");
+
+speakBtns.forEach(btn => {
+
+    btn.onclick = function(){
+
+        const text =
+        btn.closest(".ai-msg")
+        .querySelector(".message-content")
+        .innerText;
+
+        speakText(text);
+
+    };
+
+});
+
 copyBtns.forEach(btn => {
 
     btn.onclick = async function(){
@@ -1831,7 +1878,7 @@ copyBtns.forEach(btn => {
         try{
 
             const text =
-            btn.parentElement
+            btn.closest(".ai-msg")
             .querySelector(
                 ".message-content"
             )
@@ -2027,23 +2074,7 @@ function speakText(text){
 
 }
 
-function speakText(text){
 
-    speechSynthesis.cancel();
-
-    const speech = new SpeechSynthesisUtterance(text);
-
-    speech.lang = "en-IN";
-
-    speech.rate = 1;
-
-    speech.pitch = 1;
-
-    speech.volume = 1;
-
-    speechSynthesis.speak(speech);
-
-}
 
 
 </script>
