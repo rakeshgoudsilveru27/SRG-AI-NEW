@@ -47,23 +47,27 @@ body{
     color:#111;
     border:1px solid rgba(0,0,0,0.05);
 }
+
 .light-mode .ai-msg{
 
-    background:transparent;
-
-    border:none;
+    background:white;
 
     color:#111827;
+
+    border:1px solid rgba(0,0,0,.06);
+
+    box-shadow:0 8px 20px rgba(0,0,0,.06);
+
 }
 
 .light-mode .user-msg{
 
-    background:transparent;
+    background:#2563EB;
 
-    border:none;
+    color:white;
 
-    color:#111827;
 }
+
 .light-mode .chat-messages{
 
     background:#f3f6fb;
@@ -397,7 +401,7 @@ body{
     padding:28px;
     display:flex;
     flex-direction:column;
-    gap:20px;
+    gap:26px;
     padding-bottom:20px;
     scroll-behavior:smooth;
     scrollbar-gutter:stable;
@@ -409,45 +413,77 @@ body{
 
     max-width:70%;
 
-    padding:2px 0;
+    padding:18px 22px;
 
-    color:#f8fafc;
+    background:linear-gradient(
+        135deg,
+        #2563EB,
+        #1D4ED8
+    );
 
-    line-height:1.7;
+    color:white;
 
-    white-space:pre-wrap;
+    border-radius:24px;
 
-    animation:fadeIn 0.25s ease;
+    border-bottom-right-radius:8px;
+
+    line-height:1.8;
 
     display:flex;
 
     flex-direction:column;
 
-    gap:6px;
+    gap:12px;
+
+    animation:fadeIn .25s ease;
+
+    transition:.25s;
+
+}
+
+.user-msg:hover{
+
+    transform:translateY(-2px);
+
 }
 
 
 .ai-msg{
 
-    position:relative;
-
     align-self:flex-start;
 
-    max-width:75%;
+    max-width:78%;
 
-    padding:2px 0 12px 0;
+    padding:18px 22px;
 
-    color:#f8fafc;
+    background:#161B22;
+
+    color:#F8FAFC;
+
+    border-radius:24px;
+
+    border-bottom-left-radius:8px;
 
     line-height:1.8;
 
     white-space:pre-wrap;
 
-    animation:fadeIn 0.25s ease;
+    animation:fadeIn .25s ease;
 
-    display:flex;
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.18);
 
-    flex-direction:column;
+    transition:.25s;
+
+}
+
+.ai-msg:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.22);
+
 }
 
 /* INPUT */
@@ -752,7 +788,7 @@ body.light-mode .menu-logo{
 
     .user-msg,
     .ai-msg{
-        max-width:75%;
+        max-width:88%;
         font-size:15px;
     }
 
@@ -1714,18 +1750,21 @@ textarea:focus{
 
     display:flex;
 
-    align-items:center;
+    gap:6px;
 
-    justify-content:flex-start;
+    margin-top:12px;
 
-    gap:4px;
+    opacity:0;
 
-    margin-top:8px;
-
-    width:100%;
+    transition:.25s;
 
 }
 
+.ai-msg:hover .ai-buttons{
+
+    opacity:1;
+
+}
 
 .user-buttons{
 
@@ -1733,17 +1772,13 @@ textarea:focus{
 
     justify-content:flex-end;
 
-    align-items:center;
-
-    gap:4px;
+    gap:6px;
 
     margin-top:8px;
 
-    opacity:0;
+    opacity:0.3;
 
-    visibility:hidden;
-
-    transition:0.2s;
+    transition:.25s;
 
 }
 
@@ -1758,7 +1793,13 @@ textarea:focus{
 
 .copy-user-btn,
 .edit-user-btn,
-.delete-user-btn{
+.delete-user-btn,
+.copy-ai-btn,
+.speak-ai-btn{
+
+    width:32px;
+
+    height:32px;
 
     display:flex;
 
@@ -1766,54 +1807,37 @@ textarea:focus{
 
     justify-content:center;
 
-    width:36px;
-
-    height:36px;
+    border-radius:8px;
 
     background:transparent;
 
     color:#9CA3AF;
 
-    border:none;
-
-    border-radius:8px;
-
     cursor:pointer;
 
-    font-size:18px;
-
-    opacity:.9;
-
-    transition:
-    background .2s ease,
-    color .2s ease,
-    transform .2s ease;
+    transition:.25s;
 
 }
 
 .copy-user-btn:hover,
 .edit-user-btn:hover,
-.delete-user-btn:hover{
+.delete-user-btn:hover,
+.copy-ai-btn:hover,
+.speak-ai-btn:hover{
 
-    background:rgba(255,255,255,.08);
+    background:rgba(255,255,255,.12);
 
-    color:white;
+    color:#fff;
 
     transform:scale(1.08);
 
 }
 
-.light-mode .copy-user-btn,
-.light-mode .edit-user-btn,
-.light-mode .delete-user-btn{
-
-    color:#6B7280;
-
-}
-
 .light-mode .copy-user-btn:hover,
 .light-mode .edit-user-btn:hover,
-.light-mode .delete-user-btn:hover{
+.light-mode .delete-user-btn:hover,
+.light-mode .copy-ai-btn:hover,
+.light-mode .speak-ai-btn:hover{
 
     background:rgba(0,0,0,.05);
 
@@ -1872,7 +1896,7 @@ textarea:focus{
 
     object-fit:contain;
 
-    margin-bottom:10px;
+    margin-bottom:0px;
 
     transition:.3s;
 
