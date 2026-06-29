@@ -1458,27 +1458,28 @@ body.light-mode .history-dropdown button:hover{
 }
 
 
-.copy-ai-btn{
+.copy-ai-btn,
+.speak-ai-btn{
 
-    position:absolute;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 
-    top:0;
+    width:42px;
+    height:38px;
 
-    right:0;
+    background:#444;
+    color:white;
 
-    background:none;
+    border:none;
 
-    color:#7c8aa0;
+    border-radius:8px;
 
     cursor:pointer;
 
-    font-size:13px;
+    font-size:14px;
 
-    padding:0;
-
-    opacity:0.7;
-
-    transition:none;
+    transition:0.2s;
 }
 
 
@@ -1710,30 +1711,24 @@ textarea:focus{
 
     display:flex;
 
-    gap:10px;
+    align-items:center;
 
-    margin-top:10px;
+    justify-content:flex-start;
 
+    gap:8px;
+
+    margin-top:12px;
+
+    width:100%;
 }
 
-.speak-ai-btn{
 
-    border:none;
 
-    padding:8px 12px;
-
-    border-radius:8px;
-
-    cursor:pointer;
-
-    background:#444;
-
-    color:white;
-
-}
-
+.copy-ai-btn:hover,
 .speak-ai-btn:hover{
 
-    opacity:0.9;
+    background:#555;
+
+    transform:translateY(-1px);
 
 }
