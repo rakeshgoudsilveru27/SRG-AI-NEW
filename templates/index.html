@@ -751,8 +751,6 @@ async function saveChat(){
 
         collection(
             db,
-            "users",
-            auth.currentUser.uid,
             "chats"
         )
 
@@ -1815,7 +1813,7 @@ localStorage.getItem("active_chat_id");
     );
 
     activeChatId = chats[0].id;
-    
+
 
 }
 
