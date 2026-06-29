@@ -618,7 +618,7 @@ margin: auto;
 
 .welcome-tagline{
 
-    font-size:16px;
+    font-size:13px;
 
 }
 
@@ -1888,7 +1888,7 @@ textarea:focus{
 
 .welcome-title{
 
-    font-size:78px;
+    font-size:70px;
 
     font-weight:800;
 
@@ -1907,9 +1907,9 @@ textarea:focus{
 
 .welcome-tagline{
 
-    margin-top:15px;
+    margin-top:13px;
 
-    font-size:20px;
+    font-size:17px;
 
     color:#8b95a7;
 
