@@ -1866,9 +1866,9 @@ textarea:focus{
 
 .welcome-logo{
 
-    width:180px;
+    width:210px;
 
-    height:180px;
+    height:210px;
 
     object-fit:contain;
 
@@ -1890,7 +1890,7 @@ textarea:focus{
 
     font-size:70px;
 
-    font-weight:800;
+    font-weight:750;
 
     line-height:1.05;
 
