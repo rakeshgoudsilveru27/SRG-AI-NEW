@@ -337,6 +337,17 @@ let currentChat = [];
 let currentChatTitle = null;
 let currentChatId = Date.now();
 
+function updateViewportPadding() {
+    const viewport = window.visualViewport;
+    const safeBottom = viewport ? Math.max(0, window.innerHeight - viewport.height) : 0;
+    document.documentElement.style.setProperty("--mobile-safe-bottom", `${safeBottom}px`);
+}
+
+window.addEventListener("resize", updateViewportPadding);
+window.visualViewport?.addEventListener("resize", updateViewportPadding);
+window.visualViewport?.addEventListener("scroll", updateViewportPadding);
+updateViewportPadding();
+
 marked.setOptions({
     gfm: true,
     breaks: false,
@@ -1396,6 +1407,7 @@ function newChat(){
     .classList.remove("active");
 
     overlay.classList.remove("active");
+    document.body.classList.remove("menu-open");
 }
 
 window.newChat = newChat;
@@ -1410,6 +1422,7 @@ function toggleSidebar(){
 
     sidebar.classList.toggle("active");
     overlay.classList.toggle("active");
+    document.body.classList.toggle("menu-open", sidebar.classList.contains("active"));
 }
 
 window.toggleSidebar = toggleSidebar;
@@ -1418,6 +1431,7 @@ overlay.onclick = ()=>{
 
     sidebar.classList.remove("active");
     overlay.classList.remove("active");
+    document.body.classList.remove("menu-open");
 };
 
 let touchStartX = 0;
