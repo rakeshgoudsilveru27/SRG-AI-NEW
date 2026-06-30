@@ -390,6 +390,26 @@ function cleanMarkdownText(text = "") {
         .trim();
 }
 
+function getMessagePreview(message) {
+    if (!message || typeof message !== "object") {
+        return "";
+    }
+
+    if (typeof message.text === "string") {
+        return message.text;
+    }
+
+    if (typeof message.prompt === "string") {
+        return message.prompt;
+    }
+
+    if (typeof message.imageUrl === "string") {
+        return message.imageUrl;
+    }
+
+    return "";
+}
+
 function sanitizeRenderedHtml(html = "") {
     const temp = document.createElement("div");
     temp.innerHTML = String(html || "");
@@ -1107,6 +1127,8 @@ window.sendMessage = sendMessage;
 
 async function saveChat(){
 
+    const safeMessages = Array.isArray(currentChat) ? currentChat : [];
+
     let chats = JSON.parse(
         localStorage.getItem("srg_chats")
     ) || [];
@@ -1118,7 +1140,7 @@ async function saveChat(){
     );
 
     if(existingChat){
-        existingChat.messages = [...currentChat];
+        existingChat.messages = [...safeMessages];
         existingChat.title = normalizedTitle;
     }
 
@@ -1126,7 +1148,7 @@ async function saveChat(){
         chats.unshift({
             id: currentChatId,
             title: normalizedTitle,
-            messages: [...currentChat]
+            messages: [...safeMessages]
         });
     }
 
@@ -1159,7 +1181,7 @@ async function saveChat(){
             {
                 chatId: currentChatId,
                 title: normalizedTitle,
-                messages: currentChat,
+                messages: safeMessages,
                 pinned: chats.find(c => c.id === currentChatId)?.pinned || false,
                 createdAt: Date.now()
             }
@@ -1210,15 +1232,16 @@ function loadHistory(){
     searchInput.value.toLowerCase();
 
     chats = chats.filter(chat => {
-
         const titleMatch =
         (chat.title || "")
         .toLowerCase()
         .includes(searchText);
 
+        const messages = Array.isArray(chat.messages) ? chat.messages : [];
         const messageMatch =
-        chat.messages.some(msg =>
-            msg.text.toLowerCase()
+        messages.some(msg =>
+            getMessagePreview(msg)
+            .toLowerCase()
             .includes(searchText)
         );
 
@@ -1414,11 +1437,11 @@ function loadHistory(){
 
             e.stopPropagation();
 
-            let text = chat.messages
-            .map(m =>
-                `${m.type.toUpperCase()}:
-${m.text}`
-            )
+            let text = (Array.isArray(chat.messages) ? chat.messages : [])
+            .map(m => {
+                const preview = getMessagePreview(m);
+                return `${(m && m.type ? m.type : "message").toUpperCase()}:\n${preview}`;
+            })
             .join("");
 
             navigator.clipboard.writeText(text);
@@ -1434,11 +1457,11 @@ ${m.text}`
 
             e.stopPropagation();
 
-            let text = chat.messages
-            .map(m =>
-                `${m.type.toUpperCase()}:
-${m.text}`
-            )
+            let text = (Array.isArray(chat.messages) ? chat.messages : [])
+            .map(m => {
+                const preview = getMessagePreview(m);
+                return `${(m && m.type ? m.type : "message").toUpperCase()}:\n${preview}`;
+            })
             .join("");
 
             let blob = new Blob(
@@ -1916,16 +1939,13 @@ async function loadChatsFromFirebase(){
         let chats = [];
 
         snapshot.forEach(doc => {
-
+            const data = doc.data() || {};
             chats.push({
-
-    id: doc.data().chatId,
-    title: doc.data().title,
-    messages: doc.data().messages,
-    pinned: doc.data().pinned || false
-
-});
-
+                id: data.chatId,
+                title: data.title,
+                messages: Array.isArray(data.messages) ? data.messages : [],
+                pinned: data.pinned || false
+            });
         });
 
         localStorage.setItem(

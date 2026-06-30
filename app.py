@@ -274,12 +274,6 @@ def generate_image():
     try:
         os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
-        url = (
-            "https://generativelanguage.googleapis.com/v1beta/models/"
-            "gemini-2.0-flash-exp-image-generation:generateContent"
-            f"?key={GEMINI_API_KEY}"
-        )
-
         payload = {
             "contents": [
                 {
@@ -294,29 +288,53 @@ def generate_image():
             }
         }
 
-        response = requests.post(url, json=payload, timeout=120)
-        response.raise_for_status()
-        data = response.json()
+        models = [
+            "gemini-2.0-flash-exp-image-generation",
+            "gemini-2.0-flash-preview-image-generation"
+        ]
 
-        image_data = None
-        for part in data.get("candidates", [{}])[0].get("content", {}).get("parts", []):
-            inline_data = part.get("inlineData")
-            if inline_data and inline_data.get("data"):
-                image_data = inline_data["data"]
-                break
+        last_error = None
+        for model in models:
+            try:
+                url = (
+                    "https://generativelanguage.googleapis.com/v1beta/models/"
+                    f"{model}:generateContent?key={GEMINI_API_KEY}"
+                )
+                print(f"IMAGE GENERATION REQUEST -> model={model}")
+                response = requests.post(url, json=payload, timeout=120)
+                response.raise_for_status()
+                data = response.json()
 
-        if not image_data:
-            raise RuntimeError("No image data returned by Gemini")
+                image_data = None
+                for part in data.get("candidates", [{}])[0].get("content", {}).get("parts", []):
+                    inline_data = part.get("inlineData") or {}
+                    for key in ("data", "bytesBase64Encoded"):
+                        value = inline_data.get(key)
+                        if value:
+                            image_data = value
+                            break
+                    if image_data:
+                        break
 
-        image_bytes = base64.b64decode(image_data)
-        ext = "png"
-        filename = f"{uuid.uuid4().hex}.{ext}"
-        image_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+                if image_data:
+                    image_bytes = base64.b64decode(image_data)
+                    ext = "png"
+                    filename = f"{uuid.uuid4().hex}.{ext}"
+                    image_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
 
-        with open(image_path, "wb") as image_file:
-            image_file.write(image_bytes)
+                    with open(image_path, "wb") as image_file:
+                        image_file.write(image_bytes)
 
-        return jsonify({"image_url": f"/uploads/{filename}"})
+                    print(f"IMAGE GENERATED -> {filename}")
+                    return jsonify({"image_url": f"/uploads/{filename}"})
+
+                last_error = RuntimeError("No image data returned by Gemini")
+                print("IMAGE GENERATION ERROR -> no image returned")
+            except Exception as exc:
+                last_error = exc
+                print(f"IMAGE GENERATION ERROR -> model={model} error={exc}")
+
+        raise last_error or RuntimeError("Image generation failed")
 
     except Exception as e:
         print("IMAGE GENERATION ERROR:", str(e))
