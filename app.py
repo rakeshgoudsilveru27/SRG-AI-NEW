@@ -4,6 +4,8 @@ import requests
 import os
 import base64
 import uuid
+import json
+from urllib.parse import quote
 GROQ_API_KEY = os.environ.get("GROQ_API_KEY")
 if not GROQ_API_KEY:
     print("WARNING: GROQ_API_KEY not found")
@@ -261,6 +263,132 @@ def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
 
+def _save_generated_image(image_bytes, mime_type):
+    os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
+    if not image_bytes:
+        raise RuntimeError("Image bytes are empty")
+
+    mime_type = (mime_type or "image/png").lower()
+    if mime_type.startswith("image/png"):
+        ext = "png"
+    elif mime_type.startswith("image/jpeg") or mime_type.startswith("image/jpg"):
+        ext = "jpg"
+    elif mime_type.startswith("image/webp"):
+        ext = "webp"
+    else:
+        ext = "png"
+
+    filename = f"{uuid.uuid4().hex}.{ext}"
+    image_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+
+    with open(image_path, "wb") as image_file:
+        image_file.write(image_bytes)
+
+    try:
+        with Image.open(image_path) as img:
+            img.verify()
+    except Exception as exc:
+        os.remove(image_path)
+        raise RuntimeError(f"Saved image could not be opened: {exc}") from exc
+
+    return filename
+
+
+def _try_gemini_image_generation(prompt):
+    if not GEMINI_API_KEY:
+        raise RuntimeError("GEMINI_API_KEY is not configured")
+
+    payload = {
+        "contents": [
+            {
+                "role": "user",
+                "parts": [{"text": prompt}]
+            }
+        ],
+        "generationConfig": {
+            "responseModalities": ["TEXT", "IMAGE"]
+        }
+    }
+
+    headers = {
+        "Content-Type": "application/json",
+        "x-goog-api-key": GEMINI_API_KEY
+    }
+
+    models = [
+        "gemini-2.0-flash-exp-image-generation",
+        "gemini-2.0-flash-preview-image-generation",
+        "gemini-2.5-flash-image-preview"
+    ]
+
+    last_error = None
+    for model in models:
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
+        print(f"\n=== GEMINI IMAGE REQUEST ===")
+        print(f"model={model}")
+        print(f"url={url}")
+        print(f"payload={json.dumps(payload, indent=2)}")
+        print(f"headers={json.dumps(headers, indent=2)}")
+
+        try:
+            response = requests.post(url, headers=headers, params={"key": GEMINI_API_KEY}, json=payload, timeout=120)
+            print(f"response_status={response.status_code}")
+            print(f"response_headers={json.dumps(dict(response.headers), indent=2)}")
+            print(f"response_body={response.text}")
+
+            if response.status_code != 200:
+                last_error = RuntimeError(f"Gemini status {response.status_code}: {response.text}")
+                continue
+
+            data = response.json()
+            if "error" in data:
+                err = data["error"]
+                raise RuntimeError(f"Gemini error {err.get('status')}: {err.get('message')}")
+
+            candidates = data.get("candidates", [])
+            if not candidates:
+                raise RuntimeError("Gemini response did not contain candidates")
+
+            parts = candidates[0].get("content", {}).get("parts", [])
+            for part in parts:
+                inline_data = part.get("inlineData") or part.get("inline_data") or {}
+                b64_data = inline_data.get("data") or inline_data.get("bytesBase64Encoded")
+                mime_type = inline_data.get("mimeType") or inline_data.get("mime_type") or "image/png"
+                if b64_data:
+                    image_bytes = base64.b64decode(b64_data)
+                    filename = _save_generated_image(image_bytes, mime_type)
+                    return filename, None
+
+            raise RuntimeError("Gemini response did not contain inlineData image bytes")
+        except Exception as exc:
+            last_error = exc
+            print(f"image_generation_error model={model}: {exc}")
+
+    raise last_error or RuntimeError("Gemini image generation failed")
+
+
+def _try_pollinations_image_generation(prompt):
+    encoded_prompt = quote(prompt)
+    url = f"https://image.pollinations.ai/prompt/{encoded_prompt}?width=1024&height=1024"
+    print(f"\n=== POLLINATIONS IMAGE REQUEST ===")
+    print(f"url={url}")
+    response = requests.get(url, timeout=120)
+    print(f"response_status={response.status_code}")
+    print(f"response_headers={json.dumps(dict(response.headers), indent=2)}")
+    print(f"response_body_bytes={len(response.content)}")
+
+    if response.status_code != 200:
+        raise RuntimeError(f"Pollinations status {response.status_code}: {response.text}")
+
+    if not response.content:
+        raise RuntimeError("Pollinations returned empty image bytes")
+
+    content_type = response.headers.get("content-type", "image/png")
+    filename = _save_generated_image(response.content, content_type)
+    return filename, None
+
+
 @app.route('/generate-image', methods=['POST'])
 def generate_image():
     prompt = request.form.get('prompt', '').strip()
@@ -268,77 +396,18 @@ def generate_image():
     if not prompt:
         return jsonify({"error": "Prompt required."}), 400
 
-    if not GEMINI_API_KEY:
-        return jsonify({"error": "Gemini API key is not configured."}), 500
-
     try:
-        os.makedirs(UPLOAD_FOLDER, exist_ok=True)
-
-        payload = {
-            "contents": [
-                {
-                    "role": "user",
-                    "parts": [
-                        {"text": prompt}
-                    ]
-                }
-            ],
-            "generationConfig": {
-                "responseModalities": ["TEXT", "IMAGE"]
-            }
-        }
-
-        models = [
-            "gemini-2.0-flash-exp-image-generation",
-            "gemini-2.0-flash-preview-image-generation"
-        ]
-
-        last_error = None
-        for model in models:
-            try:
-                url = (
-                    "https://generativelanguage.googleapis.com/v1beta/models/"
-                    f"{model}:generateContent?key={GEMINI_API_KEY}"
-                )
-                print(f"IMAGE GENERATION REQUEST -> model={model}")
-                response = requests.post(url, json=payload, timeout=120)
-                response.raise_for_status()
-                data = response.json()
-
-                image_data = None
-                for part in data.get("candidates", [{}])[0].get("content", {}).get("parts", []):
-                    inline_data = part.get("inlineData") or {}
-                    for key in ("data", "bytesBase64Encoded"):
-                        value = inline_data.get(key)
-                        if value:
-                            image_data = value
-                            break
-                    if image_data:
-                        break
-
-                if image_data:
-                    image_bytes = base64.b64decode(image_data)
-                    ext = "png"
-                    filename = f"{uuid.uuid4().hex}.{ext}"
-                    image_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-
-                    with open(image_path, "wb") as image_file:
-                        image_file.write(image_bytes)
-
-                    print(f"IMAGE GENERATED -> {filename}")
-                    return jsonify({"image_url": f"/uploads/{filename}"})
-
-                last_error = RuntimeError("No image data returned by Gemini")
-                print("IMAGE GENERATION ERROR -> no image returned")
-            except Exception as exc:
-                last_error = exc
-                print(f"IMAGE GENERATION ERROR -> model={model} error={exc}")
-
-        raise last_error or RuntimeError("Image generation failed")
-
-    except Exception as e:
-        print("IMAGE GENERATION ERROR:", str(e))
-        return jsonify({"error": "Image generation failed."}), 500
+        filename, _ = _try_gemini_image_generation(prompt)
+        return jsonify({"image_url": f"/uploads/{filename}"})
+    except Exception as exc:
+        print(f"IMAGE GENERATION ERROR: {exc}")
+        try:
+            filename, _ = _try_pollinations_image_generation(prompt)
+            print(f"FALLBACK IMAGE GENERATED -> {filename}")
+            return jsonify({"image_url": f"/uploads/{filename}"})
+        except Exception as fallback_exc:
+            print(f"FALLBACK IMAGE GENERATION ERROR: {fallback_exc}")
+            return jsonify({"error": str(exc), "fallback_error": str(fallback_exc)}), 500
 
 
 @app.route('/chat', methods=['POST'])
