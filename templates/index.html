@@ -37,7 +37,7 @@ learning and productivity.
 
 </div>
 
-<div class="sidebar">
+<aside class="sidebar">
 
     <div class="logo-area">
 
@@ -107,15 +107,13 @@ learning and productivity.
 
     <div class="clock" id="clock"></div>
 
-</div>
+</aside>
 
 <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
 <div class="main-container">
 
-    
-
-    <div class="main">
+    <main class="main">
 
         <div class="welcome">
 
@@ -135,11 +133,11 @@ learning and productivity.
 </div>
 
        
-        <div class="chat-area">
+        <section class="chat-area">
 
-            <div class="chat-messages" id="chatMessages"></div>
+            <section class="chat-messages" id="chatMessages"></section>
 
-            <div class="chat-input-area">
+            <footer class="chat-input-area">
 
                 <div class="input-box"
                 onclick="focusInput(event)">
@@ -167,13 +165,11 @@ rows="1"></textarea>
 
                 </div>
 
-            </div>
+            </footer>
 
-        </div>
+        </section>
 
-    </div>
-
-</div>
+    </main>
 
 </div>
 
@@ -341,6 +337,152 @@ let currentChat = [];
 let currentChatTitle = null;
 let currentChatId = Date.now();
 
+marked.setOptions({
+    gfm: true,
+    breaks: false,
+    headerIds: false,
+    mangle: false
+});
+
+function cleanMarkdownText(text = "") {
+    return String(text || "")
+        .replace(/\r\n/g, "\n")
+        .replace(/[ \t]+\n/g, "\n")
+        .replace(/\n\s*\n\s*\n+/g,"\n\n")
+        .split("\n")
+        .map((line) => line.replace(/\s+$/g, ""))
+        .join("\n")
+        .replace(/^\s+|\s+$/g, "")
+        .trim();
+}
+
+function sanitizeRenderedHtml(html = "") {
+    const temp = document.createElement("div");
+    temp.innerHTML = String(html || "");
+
+    const emptySelectors = "p, div, blockquote, pre, ul, ol, li, table, tr, td, th, h1, h2, h3, h4, h5, h6";
+
+    temp.querySelectorAll(emptySelectors).forEach((node) => {
+        const isEmptyWrapper = node.textContent.trim() === "" && node.querySelectorAll("img, pre, table, ul, ol").length === 0;
+        const isEmptyParagraph = node.tagName === "P" && node.innerHTML.replace(/<br\s*\/?>/gi, "").trim() === "";
+
+        if (isEmptyWrapper || isEmptyParagraph) {
+            node.remove();
+        }
+    });
+
+    temp.querySelectorAll("p").forEach(p=>{
+    while(
+        p.firstChild &&
+        p.firstChild.nodeName==="BR"
+    ){
+        p.removeChild(p.firstChild);
+    }
+
+    while(
+        p.lastChild &&
+        p.lastChild.nodeName==="BR"
+    ){
+        p.removeChild(p.lastChild);
+    }
+});
+
+    return temp.innerHTML.replace(/>\s+</g, "><").trim();
+}
+
+function renderMarkdown(text = "") {
+    const cleaned = cleanMarkdownText(text);
+    const html = marked.parse(cleaned || "");
+    return sanitizeRenderedHtml(html);
+}
+
+function createUserMessageMarkup(text, imageUrl = "") {
+    const imageMarkup = imageUrl
+        ? `<img src="${imageUrl}" class="chat-image" alt="Uploaded attachment">`
+        : "";
+
+    return `
+    <article class="user-msg">
+        ${imageMarkup}
+        <div class="user-text">${text}</div>
+        <div class="user-buttons">
+            <button class="copy-user-btn" title="Copy">📋</button>
+            <button class="edit-user-btn" title="Edit">✏️</button>
+            <button class="delete-user-btn" title="Delete">🗑️</button>
+        </div>
+    </article>
+    `;
+}
+
+function createAiMessageMarkup(text) {
+    return `
+    <article class="ai-msg">
+        <div class="message-content">${renderMarkdown(text)}</div>
+        <div class="ai-buttons">
+            <button class="copy-ai-btn" title="Copy">📋</button>
+            <button class="speak-ai-btn" title="Speak">🔊</button>
+        </div>
+    </article>
+    `;
+}
+
+function attachAiMessageActions(chatBox) {
+    const copyButtons = chatBox.querySelectorAll(".copy-ai-btn");
+    const speakButtons = chatBox.querySelectorAll(".speak-ai-btn");
+
+    speakButtons.forEach((btn) => {
+        btn.onclick = function () {
+            const text = btn.closest(".ai-msg").querySelector(".message-content").innerText;
+            speakText(text);
+        };
+    });
+
+    copyButtons.forEach((btn) => {
+        btn.onclick = async function () {
+            try {
+                const text = btn.closest(".ai-msg").querySelector(".message-content").innerText;
+                await navigator.clipboard.writeText(text);
+                btn.innerText = "✅ Copied";
+                setTimeout(() => {
+                    btn.innerText = "📋";
+                }, 1500);
+            } catch (error) {
+                console.error("COPY ERROR:", error);
+                btn.innerText = "❌ Failed";
+                setTimeout(() => {
+                    btn.innerText = "📋";
+                }, 1500);
+            }
+        };
+    });
+}
+
+function appendChatMessage(chatBox, type, text, imageUrl = "") {
+    if (type === "user") {
+        chatBox.insertAdjacentHTML("beforeend", createUserMessageMarkup(text, imageUrl));
+        return;
+    }
+
+    chatBox.insertAdjacentHTML("beforeend", createAiMessageMarkup(text));
+    attachAiMessageActions(chatBox);
+}
+
+function renderMessagesIntoChat(chatBox, messages) {
+    chatBox.innerHTML = "";
+
+    messages.forEach((msg) => {
+        const markup = msg.type === "user"
+            ? createUserMessageMarkup(msg.text)
+            : createAiMessageMarkup(msg.text);
+
+        chatBox.insertAdjacentHTML("beforeend", markup);
+    });
+
+    if (chatBox.querySelector(".ai-msg")) {
+        attachAiMessageActions(chatBox);
+    }
+}
+
 function scrollToBottom(){
 
     const chatBox =
@@ -402,54 +544,7 @@ if(imageInput.files[0]){
     );
 }
 
-chatBox.innerHTML += `
-
-<div class="user-msg">
-
-    ${
-        imageURL
-        ?
-        `
-        <img
-        src="${imageURL}"
-        class="chat-image"
-        >
-        `
-        :
-        ""
-    }
-
-    <div class="user-text">
-        ${message}
-    </div>
-
-    <div class="user-buttons">
-
-    <button class="copy-user-btn"
-    title="Copy">
-
-        📋
-
-    </button>
-
-    <button class="edit-user-btn"
-    title="Edit">
-
-        ✏️
-
-    </button>
-
-    <button class="delete-user-btn"
-    title="Delete">
-
-        🗑️
-
-    </button>
-
-</div>
-
-</div>
-`;
+appendChatMessage(chatBox, "user", message, imageURL);
 
 setTimeout(()=>{
 
@@ -562,122 +657,15 @@ if(currentChatTitle === null){
     "typing"
 ).remove();
 
-const aiMessageHtml = `
-
-<div class="ai-msg">
-
-    <div class="message-content">
-        ${marked.parse(data.reply)}
-    </div>
-
-    <div class="ai-buttons">
-
-        <button class="copy-ai-btn">
-            📋
-        </button>
-
-        <button class="speak-ai-btn">
-            🔊 
-        </button>
-
-    </div>
-
-</div>
-`;
-
-chatBox.insertAdjacentHTML(
-    "beforeend",
-    aiMessageHtml
-);
-
+chatBox.insertAdjacentHTML("beforeend", createAiMessageMarkup(data.reply));
+attachAiMessageActions(chatBox);
 scrollToBottom();
-
-
-        const copyButtons =
-chatBox.querySelectorAll(".copy-ai-btn");
-
-const speakButtons =
-chatBox.querySelectorAll(".speak-ai-btn");
-
-speakButtons.forEach(btn => {
-
-    btn.onclick = function(){
-
-        const text =
-        btn.closest(".ai-msg")
-        .querySelector(".message-content")
-        .innerText;
-
-        speakText(text);
-
-    };
-
-});
-
-        copyButtons.forEach(btn => {
-
-    btn.onclick = async function(){
-
-        console.log(
-            "COPY CLICKED"
-        );
-
-        try{
-
-            const text =
-            btn.closest(".ai-msg")
-            .querySelector(
-                ".message-content"
-            )
-            .innerText;
-
-            await navigator.clipboard.writeText(
-                text
-            );
-
-            btn.innerText =
-            "✅ Copied";
-
-            setTimeout(()=>{
-
-                btn.innerText =
-                "📋 Copy";
-
-            },1500);
-
-        }
-
-        catch(error){
-
-            console.error(
-                "COPY ERROR:",
-                error
-            );
-
-            btn.innerText =
-            "❌ Failed";
-
-            setTimeout(()=>{
-
-                btn.innerText =
-                "📋 Copy";
-
-            },1500);
-        }
-    };
-});
 
 
         currentChat.push({
             type:"ai",
             text:data.reply
         });
-
-        const cleanReply =
-document.createElement("div");
-
-cleanReply.innerHTML =
-marked.parse(data.reply);
 
         saveChat();
 
@@ -1010,24 +998,24 @@ function loadHistory(){
 
         item.onclick = function(e){
 
-    if(
-        e.target.closest(
-            ".history-menu-container"
-        )
-    ){
-        return;
-    }
+            if(
+                e.target.closest(
+                    ".history-menu-container"
+                )
+            ){
+                return;
+            }
 
             currentChat = [...chat.messages];
             currentChatTitle = chat.title;
             currentChatId = chat.id;
             localStorage.setItem(
-    "active_chat_id",
-    chat.id
-);
+                "active_chat_id",
+                chat.id
+            );
             sidebar.classList.remove("active");
 
-overlay.classList.remove("active");
+            overlay.classList.remove("active");
 
             document.querySelector(".welcome")
             .style.display = "none";
@@ -1036,193 +1024,39 @@ overlay.classList.remove("active");
             document.querySelector(".features");
 
             if(features){
-
-            features.style.display =
-            "none";
-
-        }
+                features.style.display =
+                "none";
+            }
 
             let chatBox =
             document.getElementById("chatMessages");
 
-            chatBox.innerHTML = "";
-
-            chat.messages.forEach(msg => {
-
-                if(msg.type === "user"){
-
-                    chatBox.innerHTML += `
-<div class="user-msg">
-
-    <div class="user-text">
-        ${msg.text}
-    </div>
-
-    <div class="user-buttons">
-
-    <button class="copy-user-btn"
-    title="Copy">
-
-        📋
-
-    </button>
-
-    <button class="edit-user-btn"
-    title="Edit">
-
-        ✏️
-
-    </button>
-
-    <button class="delete-user-btn"
-    title="Delete">
-
-        🗑️
-
-    </button>
-
-</div>
-
-</div>
-`;
-
-setTimeout(()=>{
-
-    const userMessages =
-    chatBox.querySelectorAll(
-        ".user-msg"
-    );
-
-    const lastUserMessage =
-    userMessages[
-        userMessages.length - 1
-    ];
-
-    if(lastUserMessage){
-
-        lastUserMessage.scrollIntoView({
-
-            behavior:"smooth",
-
-            block:"start"
-
-        });
-    }
-
-},50);
-
-                }
-
-                else{
-
-                    chatBox.innerHTML += `
-                    <div class="ai-msg">
-
-                        <div class="message-content">
-
-                            ${marked.parse(msg.text)}
-
-                        </div>
-
-                        <div class="ai-buttons">
-
-                        <button class="copy-ai-btn">
-                            📋
-                        </button>
-
-                        <button class="speak-ai-btn">
-                            🔊
-                        </button>
-
-                    </div>
-
-                    </div>
-                    `;
-                    
-                }
-              
-            });
-            const historyCopyBtns =
-chatBox.querySelectorAll(
-".copy-ai-btn"
-);
-
-historyCopyBtns.forEach(btn => {
-
-    btn.onclick = async function(){
-
-        console.log(
-            "COPY CLICKED"
-        );
-
-        try{
-
-            const text =
-            btn.closest(".ai-msg")
-            .querySelector(
-                ".message-content"
-            )
-            .innerText;
-
-            console.log(
-    "TEXT TO COPY:",
-    text
-);
-
-            await navigator.clipboard.writeText(
-                text
-            );
-
-            btn.innerText =
-            "✅ Copied";
+            renderMessagesIntoChat(chatBox, chat.messages);
 
             setTimeout(()=>{
 
-                btn.innerText =
-                "📋 Copy";
+                const userMessages =
+                chatBox.querySelectorAll(
+                    ".user-msg"
+                );
 
-            },1500);
+                const lastUserMessage =
+                userMessages[
+                    userMessages.length - 1
+                ];
 
-        }
+                if(lastUserMessage){
 
-        catch(error){
+                    lastUserMessage.scrollIntoView({
 
-            console.error(
-                "COPY ERROR:",
-                error
-            );
+                        behavior:"smooth",
 
-            btn.innerText =
-            "❌ Failed";
+                        block:"start"
 
-            setTimeout(()=>{
+                    });
+                }
 
-                btn.innerText =
-                "📋 Copy";
-
-            },1500);
-        }
-    };
-});
-
-const historySpeakBtns =
-chatBox.querySelectorAll(".speak-ai-btn");
-
-historySpeakBtns.forEach(btn => {
-
-    btn.onclick = function(){
-
-        const text =
-        btn.closest(".ai-msg")
-        .querySelector(".message-content")
-        .innerText;
-
-        speakText(text);
-
-    };
-
-});
-
+            },50);
         };
 
         const menuBtn =
@@ -1872,74 +1706,7 @@ localStorage.getItem("active_chat_id");
         "chatMessages"
     );
 
-    chatBox.innerHTML = "";
-
-    chat.messages.forEach(msg=>{
-
-        if(msg.type==="user"){
-
-            chatBox.innerHTML += `
-            <div class="user-msg">
-
-    <div class="user-text">
-
-        ${msg.text}
-
-    </div>
-
-    <div class="user-buttons">
-
-    <button class="copy-user-btn"
-    title="Copy">
-
-        📋
-
-    </button>
-
-    <button class="edit-user-btn"
-    title="Edit">
-
-        ✏️
-
-    </button>
-
-    <button class="delete-user-btn"
-    title="Delete">
-
-        🗑️
-
-    </button>
-
-</div>
-
-</div>
-            `;
-        }
-
-        else{
-
-    chatBox.innerHTML += `
-
-<div class="ai-msg">
-
-    <div class="message-content">
-        ${marked.parse(msg.text)}
-    </div>
-
-    <div class="ai-buttons">
-
-        <button class="copy-ai-btn">📋</button>
-
-        <button class="speak-ai-btn">🔊</button>
-
-    </div>
-
-</div>
-
-`;
-}
-
-    });
+    renderMessagesIntoChat(chatBox, chat.messages);
 
 const userMessages =
 chatBox.querySelectorAll(
@@ -1961,82 +1728,7 @@ if(lastUserMessage){
 
     });
 }
-const copyBtns =
-chatBox.querySelectorAll(
-    ".copy-ai-btn"
-);
-
-const speakBtns =
-chatBox.querySelectorAll(".speak-ai-btn");
-
-speakBtns.forEach(btn => {
-
-    btn.onclick = function(){
-
-        const text =
-        btn.closest(".ai-msg")
-        .querySelector(".message-content")
-        .innerText;
-
-        speakText(text);
-
-    };
-
-});
-
-copyBtns.forEach(btn => {
-
-    btn.onclick = async function(){
-
-        try{
-
-            const text =
-            btn.closest(".ai-msg")
-            .querySelector(
-                ".message-content"
-            )
-            .innerText;
-
-            console.log(
-    "TEXT TO COPY:",
-    text
-);
-
-            await navigator.clipboard.writeText(
-                text
-            );
-
-            btn.innerText =
-            "✅ Copied";
-
-            setTimeout(()=>{
-
-                btn.innerText =
-                "📋 Copy";
-
-            },1500);
-
-        }
-
-        catch(error){
-
-            console.error(
-                "COPY ERROR:",
-                error
-            );
-
-            btn.innerText =
-            "❌ Failed";
-
-            setTimeout(()=>{
-
-                btn.innerText =
-                "📋 Copy";
-
-            },1500);
-        }
-    };
-});
+attachAiMessageActions(chatBox);
 
 }
 
