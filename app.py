@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, jsonify, send_from_directory
 from werkzeug.utils import secure_filename
 import requests
 import os
-import textwrap
+import base64
 import uuid
 GROQ_API_KEY = os.environ.get("GROQ_API_KEY")
 if not GROQ_API_KEY:
@@ -259,6 +259,68 @@ def chat_page():
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+
+
+@app.route('/generate-image', methods=['POST'])
+def generate_image():
+    prompt = request.form.get('prompt', '').strip()
+
+    if not prompt:
+        return jsonify({"error": "Prompt required."}), 400
+
+    if not GEMINI_API_KEY:
+        return jsonify({"error": "Gemini API key is not configured."}), 500
+
+    try:
+        os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
+        url = (
+            "https://generativelanguage.googleapis.com/v1beta/models/"
+            "gemini-2.0-flash-exp-image-generation:generateContent"
+            f"?key={GEMINI_API_KEY}"
+        )
+
+        payload = {
+            "contents": [
+                {
+                    "role": "user",
+                    "parts": [
+                        {"text": prompt}
+                    ]
+                }
+            ],
+            "generationConfig": {
+                "responseModalities": ["TEXT", "IMAGE"]
+            }
+        }
+
+        response = requests.post(url, json=payload, timeout=120)
+        response.raise_for_status()
+        data = response.json()
+
+        image_data = None
+        for part in data.get("candidates", [{}])[0].get("content", {}).get("parts", []):
+            inline_data = part.get("inlineData")
+            if inline_data and inline_data.get("data"):
+                image_data = inline_data["data"]
+                break
+
+        if not image_data:
+            raise RuntimeError("No image data returned by Gemini")
+
+        image_bytes = base64.b64decode(image_data)
+        ext = "png"
+        filename = f"{uuid.uuid4().hex}.{ext}"
+        image_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+
+        with open(image_path, "wb") as image_file:
+            image_file.write(image_bytes)
+
+        return jsonify({"image_url": f"/uploads/{filename}"})
+
+    except Exception as e:
+        print("IMAGE GENERATION ERROR:", str(e))
+        return jsonify({"error": "Image generation failed."}), 500
 
 
 @app.route('/chat', methods=['POST'])
