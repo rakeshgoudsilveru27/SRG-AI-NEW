@@ -1,7 +1,9 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, send_from_directory
 from werkzeug.utils import secure_filename
 import requests
 import os
+import textwrap
+import uuid
 GROQ_API_KEY = os.environ.get("GROQ_API_KEY")
 if not GROQ_API_KEY:
     print("WARNING: GROQ_API_KEY not found")
@@ -244,6 +246,56 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 # CHAT MEMORY
 conversation_history = []
 
+
+def create_placeholder_image(prompt):
+    from PIL import Image, ImageDraw
+
+    width, height = 1024, 1024
+    image = Image.new("RGB", (width, height), "#07162b")
+    draw = ImageDraw.Draw(image)
+
+    for y in range(height):
+        color = (7 + y // 20, 18 + y // 15, 43 + y // 10)
+        draw.line([(0, y), (width, y)], fill=color)
+
+    margin = 80
+    draw.rounded_rectangle(
+        [margin, margin, width - margin, height - margin],
+        radius=42,
+        outline="#1ea0ff",
+        width=8
+    )
+    draw.rounded_rectangle(
+        [margin + 28, margin + 28, width - margin - 28, height - margin - 28],
+        radius=32,
+        outline="#2ab0ff",
+        width=3
+    )
+
+    title = "SRG.ai Generated Image"
+    body = (prompt[:120] if prompt else "Your creative prompt")
+    wrapped = textwrap.wrap(body, width=32)
+    lines = [title] + wrapped
+
+    try:
+        from PIL import ImageFont
+        font = ImageFont.load_default()
+    except Exception:
+        font = None
+
+    y_text = 220
+    for line in lines:
+        text_width = draw.textlength(line) if hasattr(draw, "textlength") else 280
+        x_text = (width - text_width) / 2
+        draw.text((x_text, y_text), line, fill="white", font=font)
+        y_text += 42
+
+    filename = f"generated_{uuid.uuid4().hex}.png"
+    image_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+    image.save(image_path)
+    return filename
+
+
 # HOME PAGE
 @app.route("/", methods=["GET"])
 def home():
@@ -253,6 +305,24 @@ def home():
 def chat_page():
     return render_template("index.html")
 # CHAT ROUTE
+@app.route('/uploads/<filename>')
+def uploaded_file(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+
+
+@app.route('/generate-image', methods=['POST'])
+def generate_image():
+    prompt = request.form.get('prompt', '').strip()
+
+    if not prompt:
+        return jsonify({"error": "Prompt required."}), 400
+
+    filename = create_placeholder_image(prompt)
+    return jsonify({
+        "image_url": f"/uploads/{filename}"
+    })
+
+
 @app.route('/chat', methods=['POST'])
 def chat():
 
@@ -360,7 +430,8 @@ def chat():
 
                 "reply": ai_reply,
 
-                "title": "Image Analysis"
+                "title": "Image Analysis",
+                "image_url": f"/uploads/{os.path.basename(image_path)}"
 
             })
 

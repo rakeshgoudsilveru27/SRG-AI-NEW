@@ -139,6 +139,8 @@ learning and productivity.
 
             <footer class="chat-input-area">
 
+                <div class="image-preview-area" id="imagePreviewArea"></div>
+
                 <div class="input-box"
                 onclick="focusInput(event)">
 
@@ -147,7 +149,7 @@ learning and productivity.
                         📷
                     </button>
 
-                    <input type="file" id="imageInput" hidden>
+                    <input type="file" id="imageInput" accept=".png,.jpg,.jpeg,.webp,image/png,image/jpeg,image/webp" hidden>
                     
                     <button class="mic-btn" id="micButton">
                      🎙   
@@ -171,6 +173,24 @@ rows="1"></textarea>
 
     </main>
 
+</div>
+
+<div class="image-viewer-overlay" id="imageViewerOverlay" hidden>
+    <div class="image-viewer-backdrop" id="imageViewerBackdrop"></div>
+    <div class="image-viewer-panel">
+        <div class="image-viewer-toolbar">
+            <button class="viewer-btn" id="closeViewerBtn" title="Close">✕</button>
+            <div class="viewer-actions">
+                <button class="viewer-btn" id="downloadViewerBtn" title="Download">⬇</button>
+                <button class="viewer-btn" id="zoomInViewerBtn" title="Zoom In">＋</button>
+                <button class="viewer-btn" id="zoomOutViewerBtn" title="Zoom Out">−</button>
+                <button class="viewer-btn" id="shareViewerBtn" title="Share">🔗</button>
+            </div>
+        </div>
+        <div class="image-viewer-stage">
+            <img id="imageViewerImage" alt="Full screen image">
+        </div>
+    </div>
 </div>
 
 <script type="module">
@@ -482,15 +502,301 @@ function renderMessagesIntoChat(chatBox, messages) {
     chatBox.innerHTML = "";
 
     messages.forEach((msg) => {
-        const markup = msg.type === "user"
-            ? createUserMessageMarkup(msg.text)
-            : createAiMessageMarkup(msg.text);
-
+        const markup = renderImageMessage(msg);
         chatBox.insertAdjacentHTML("beforeend", markup);
     });
 
     if (chatBox.querySelector(".ai-msg")) {
         attachAiMessageActions(chatBox);
+    }
+
+    if (chatBox.querySelector(".generated-image-card")) {
+        attachGeneratedImageActions(chatBox);
+    }
+
+    chatBox.querySelectorAll(".chat-image").forEach((img) => {
+        img.onclick = () => openImageViewer(img.src, img.alt || "Uploaded image");
+    });
+}
+
+function escapeHtml(value = "") {
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/\"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+}
+
+let pendingImageFile = null;
+let pendingImagePreviewUrl = "";
+let currentImageViewer = { url: "", scale: 1 };
+
+function createImagePreview(file) {
+    if (!file) return;
+
+    const allowedTypes = ["image/png", "image/jpeg", "image/jpg", "image/webp"];
+    const fileName = (file.name || "").toLowerCase();
+    const isAllowed = allowedTypes.includes(file.type) || /\.(png|jpe?g|webp)$/i.test(fileName);
+
+    if (!isAllowed) {
+        alert("Please choose a PNG, JPG, JPEG, or WEBP image.");
+        return;
+    }
+
+    if (pendingImagePreviewUrl) {
+        URL.revokeObjectURL(pendingImagePreviewUrl);
+    }
+
+    pendingImageFile = file;
+    pendingImagePreviewUrl = URL.createObjectURL(file);
+
+    const previewArea = document.getElementById("imagePreviewArea");
+    previewArea.innerHTML = "";
+
+    const card = document.createElement("div");
+    card.className = "image-preview-card";
+
+    const img = document.createElement("img");
+    img.src = pendingImagePreviewUrl;
+    img.alt = "Selected image preview";
+    img.onclick = () => openImageViewer(pendingImagePreviewUrl, file.name);
+
+    const removeBtn = document.createElement("button");
+    removeBtn.className = "image-preview-remove";
+    removeBtn.innerHTML = "×";
+    removeBtn.onclick = (event) => {
+        event.stopPropagation();
+        removeImagePreview();
+    };
+
+    card.appendChild(img);
+    card.appendChild(removeBtn);
+    previewArea.appendChild(card);
+}
+
+function removeImagePreview() {
+    if (pendingImagePreviewUrl) {
+        URL.revokeObjectURL(pendingImagePreviewUrl);
+    }
+
+    pendingImageFile = null;
+    pendingImagePreviewUrl = "";
+
+    const previewArea = document.getElementById("imagePreviewArea");
+    if (previewArea) {
+        previewArea.innerHTML = "";
+    }
+
+    const imageInput = document.getElementById("imageInput");
+    if (imageInput) {
+        imageInput.value = "";
+    }
+}
+
+function openImageViewer(imageUrl, title = "") {
+    const overlay = document.getElementById("imageViewerOverlay");
+    const viewerImage = document.getElementById("imageViewerImage");
+
+    if (!overlay || !viewerImage) return;
+
+    currentImageViewer.url = imageUrl;
+    currentImageViewer.scale = 1;
+    viewerImage.src = imageUrl;
+    viewerImage.alt = title || "Image viewer";
+    viewerImage.style.setProperty("--viewer-scale", "1");
+    overlay.hidden = false;
+    document.body.style.overflow = "hidden";
+}
+
+function closeImageViewer() {
+    const overlay = document.getElementById("imageViewerOverlay");
+    if (overlay) {
+        overlay.hidden = true;
+    }
+    document.body.style.overflow = "";
+    currentImageViewer.scale = 1;
+}
+
+function renderGeneratedImage(prompt, imageUrl) {
+    return `
+    <article class="ai-msg">
+        <div class="generated-image-card">
+            <img src="${imageUrl}" class="generated-image" alt="Generated image">
+            <div class="generated-image-meta">
+                <div class="prompt-text">${escapeHtml(prompt || "")}</div>
+                <div class="generated-image-actions">
+                    <button class="download-image-btn">⬇ Download</button>
+                    <button class="copy-prompt-btn">📋 Copy</button>
+                    <button class="regenerate-image-btn">🔁 Regenerate</button>
+                    <button class="view-image-btn">🖼 View</button>
+                    <button class="share-image-btn">🔗 Share</button>
+                </div>
+            </div>
+        </div>
+    </article>
+    `;
+}
+
+function saveGeneratedImage(prompt, imageUrl) {
+    currentChat.push({
+        type: "generated-image",
+        prompt,
+        imageUrl,
+        createdAt: Date.now()
+    });
+
+    saveChat();
+}
+
+function renderImageMessage(message) {
+    if (message.type === "generated-image") {
+        return renderGeneratedImage(message.prompt || "", message.imageUrl || "");
+    }
+
+    if (message.type === "user" && message.imageUrl) {
+        return createUserMessageMarkup(message.text || "", message.imageUrl);
+    }
+
+    if (message.type === "user") {
+        return createUserMessageMarkup(message.text || "");
+    }
+
+    return createAiMessageMarkup(message.text || "");
+}
+
+function attachGeneratedImageActions(chatBox) {
+    chatBox.querySelectorAll(".view-image-btn").forEach((btn) => {
+        btn.onclick = () => {
+            const article = btn.closest(".ai-msg");
+            const image = article?.querySelector(".generated-image");
+            const promptText = article?.querySelector(".prompt-text")?.innerText || "Generated image";
+            if (image) {
+                openImageViewer(image.src, promptText);
+            }
+        };
+    });
+
+    chatBox.querySelectorAll(".download-image-btn").forEach((btn) => {
+        btn.onclick = () => {
+            const article = btn.closest(".ai-msg");
+            const image = article?.querySelector(".generated-image");
+            if (!image?.src) return;
+
+            const link = document.createElement("a");
+            link.href = image.src;
+            link.download = "generated-image.png";
+            link.click();
+        };
+    });
+
+    chatBox.querySelectorAll(".copy-prompt-btn").forEach((btn) => {
+        btn.onclick = async () => {
+            const article = btn.closest(".ai-msg");
+            const promptText = article?.querySelector(".prompt-text")?.innerText || "";
+            if (!promptText) return;
+
+            try {
+                await navigator.clipboard.writeText(promptText);
+                btn.innerText = "✅ Copied";
+                setTimeout(() => {
+                    btn.innerText = "📋 Copy";
+                }, 1400);
+            } catch (error) {
+                console.error("PROMPT COPY ERROR:", error);
+            }
+        };
+    });
+
+    chatBox.querySelectorAll(".share-image-btn").forEach((btn) => {
+        btn.onclick = async () => {
+            const article = btn.closest(".ai-msg");
+            const image = article?.querySelector(".generated-image");
+            const promptText = article?.querySelector(".prompt-text")?.innerText || "";
+            const imageUrl = image?.src || "";
+
+            if (navigator.share && imageUrl) {
+                try {
+                    await navigator.share({
+                        title: "SRG.ai image",
+                        text: promptText,
+                        url: imageUrl
+                    });
+                } catch (error) {
+                    console.error("SHARE ERROR:", error);
+                }
+                return;
+            }
+
+            if (imageUrl) {
+                await navigator.clipboard.writeText(imageUrl);
+                btn.innerText = "✅ Shared";
+                setTimeout(() => {
+                    btn.innerText = "🔗 Share";
+                }, 1400);
+            }
+        };
+    });
+
+    chatBox.querySelectorAll(".regenerate-image-btn").forEach((btn) => {
+        btn.onclick = () => {
+            const article = btn.closest(".ai-msg");
+            const promptText = article?.querySelector(".prompt-text")?.innerText || "";
+            if (promptText) {
+                generateImage(promptText);
+            }
+        };
+    });
+}
+
+async function generateImage(prompt) {
+    if (!prompt) return;
+
+    const chatBox = document.getElementById("chatMessages");
+
+    let typingDiv = document.createElement("div");
+    typingDiv.className = "ai-msg";
+    typingDiv.id = "typing";
+    typingDiv.innerHTML = `
+    <div class="dot-loader">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    `;
+    chatBox.appendChild(typingDiv);
+
+    try {
+        const formData = new FormData();
+        formData.append("prompt", prompt);
+
+        const response = await fetch("/generate-image", {
+            method: "POST",
+            body: formData
+        });
+
+        const data = await response.json();
+
+        if (typingDiv) {
+            typingDiv.remove();
+        }
+
+        if (!response.ok || !data.image_url) {
+            throw new Error(data.error || "Image generation failed.");
+        }
+
+        chatBox.insertAdjacentHTML("beforeend", renderGeneratedImage(prompt, data.image_url));
+        attachGeneratedImageActions(chatBox);
+        saveGeneratedImage(prompt, data.image_url);
+        scrollToBottom();
+    }
+    catch (error) {
+        if (typingDiv) {
+            typingDiv.remove();
+        }
+
+        chatBox.insertAdjacentHTML("beforeend", `<div class="ai-msg">⚠ Unable to generate image.</div>`);
+        console.error("IMAGE GENERATION ERROR:", error);
     }
 }
 
@@ -532,7 +838,12 @@ async function sendMessage(){
 
     let message = input.value.trim();
 
-    if(message === ""){
+    const imageInput =
+    document.getElementById("imageInput");
+
+    const hasAttachment = !!pendingImageFile || !!imageInput.files[0];
+
+    if(message === "" && !hasAttachment){
         return;
     }
 
@@ -542,49 +853,95 @@ async function sendMessage(){
     document.querySelector(".welcome")
     .style.display = "none";
 
+    const isImageGenerationPrompt = /\b(generate|create|draw|design|render|make|craft|illustrate|paint)\b/i.test(message) && /\b(image|photo|picture|logo|wallpaper|poster|banner|robot|cyberpunk|pcb|city|lab|scene|illustration|portrait|icon)\b/i.test(message);
 
-    const imageInput =
-document.getElementById("imageInput");
+    if (message && isImageGenerationPrompt && !hasAttachment) {
+        currentChat.push({
+            type: "user",
+            text: message
+        });
 
-let imageURL = "";
+        appendChatMessage(chatBox, "user", message);
 
-if(imageInput.files[0]){
+        input.value = "";
+        input.style.height = "auto";
 
-    imageURL = URL.createObjectURL(
-        imageInput.files[0]
-    );
-}
+        if (currentChatTitle === null) {
+            let cleanMessage =
+            message
+            .replace(/[^\w\s]/gi,"")
+            .trim();
 
-appendChatMessage(chatBox, "user", message, imageURL);
+            cleanMessage =
+            cleanMessage
+            .replace(/^how to /i,"")
+            .replace(/^what is /i,"")
+            .replace(/^can you /i,"")
+            .replace(/^please /i,"")
+            .replace(/^tell me /i,"");
 
-setTimeout(()=>{
+            if(cleanMessage === ""){
+                cleanMessage = "New Chat";
+            }
 
-    const userMessages =
-    chatBox.querySelectorAll(
-        ".user-msg"
-    );
+            currentChatTitle =
+            cleanMessage
+            .split(" ")
+            .slice(0,6)
+            .join(" ");
 
-    const lastUserMessage =
-    userMessages[
-        userMessages.length - 1
-    ];
+            currentChatTitle =
+            currentChatTitle
+            .charAt(0)
+            .toUpperCase()
+            +
+            currentChatTitle.slice(1);
+        }
 
-    if(lastUserMessage){
+        await generateImage(message);
+        removeImagePreview();
+        saveChat();
+        return;
+    }
 
-       lastUserMessage.scrollIntoView({
+    let imageURL = "";
+
+    if(hasAttachment){
+        appendChatMessage(chatBox, "user", message, pendingImagePreviewUrl || "");
+    }
+    else{
+        appendChatMessage(chatBox, "user", message, "");
+    }
+
+    setTimeout(()=>{
+
+        const userMessages =
+        chatBox.querySelectorAll(
+            ".user-msg"
+        );
+
+        const lastUserMessage =
+        userMessages[
+            userMessages.length - 1
+        ];
+
+        if(lastUserMessage){
+
+           lastUserMessage.scrollIntoView({
 
     behavior:"smooth",
 
     block:"start"
 
 });
-    }
+        }
 
-},50);
+    },50);
 
     currentChat.push({
         type:"user",
-        text:message
+        text:message,
+        imageUrl: hasAttachment ? pendingImagePreviewUrl || "" : ""
     });
    
 if(currentChatTitle === null){
@@ -646,11 +1003,11 @@ if(currentChatTitle === null){
     formData.append("message",message);
 
 
-    if(imageInput.files[0]){
+    if(hasAttachment && pendingImageFile){
 
         formData.append(
             "image",
-            imageInput.files[0]
+            pendingImageFile
         );
     }
 
@@ -672,7 +1029,6 @@ chatBox.insertAdjacentHTML("beforeend", createAiMessageMarkup(data.reply));
 attachAiMessageActions(chatBox);
 scrollToBottom();
 
-
         currentChat.push({
             type:"ai",
             text:data.reply
@@ -680,11 +1036,19 @@ scrollToBottom();
 
         saveChat();
 
-        if(imageURL){
-    URL.revokeObjectURL(imageURL);
-}
+        if (data.image_url) {
+            const uploadedMessage = currentChat[currentChat.length - 2];
+            if (uploadedMessage && uploadedMessage.type === "user") {
+                uploadedMessage.imageUrl = data.image_url;
+            }
+        }
 
-imageInput.value = "";
+        if (pendingImagePreviewUrl) {
+            URL.revokeObjectURL(pendingImagePreviewUrl);
+        }
+
+        removeImagePreview();
+        imageInput.value = "";
     }
 
     catch(error){
@@ -1460,6 +1824,14 @@ function(e){
 
 const userInput =
 document.getElementById("userInput");
+const imageInput = document.getElementById("imageInput");
+
+imageInput.addEventListener("change", function(event) {
+    const file = event.target.files && event.target.files[0];
+    if (file) {
+        createImagePreview(file);
+    }
+});
 
 userInput.addEventListener(
 "input",
@@ -1892,6 +2264,65 @@ function speakText(text){
     speechSynthesis.speak(speech);
 
 }
+
+const viewerOverlay = document.getElementById("imageViewerOverlay");
+const viewerBackdrop = document.getElementById("imageViewerBackdrop");
+const closeViewerBtn = document.getElementById("closeViewerBtn");
+const downloadViewerBtn = document.getElementById("downloadViewerBtn");
+const zoomInViewerBtn = document.getElementById("zoomInViewerBtn");
+const zoomOutViewerBtn = document.getElementById("zoomOutViewerBtn");
+const shareViewerBtn = document.getElementById("shareViewerBtn");
+const viewerImage = document.getElementById("imageViewerImage");
+
+closeViewerBtn.onclick = closeImageViewer;
+viewerBackdrop.onclick = closeImageViewer;
+viewerOverlay.onclick = (event) => {
+    if (event.target === viewerOverlay) {
+        closeImageViewer();
+    }
+};
+
+downloadViewerBtn.onclick = () => {
+    if (!currentImageViewer.url) return;
+    const link = document.createElement("a");
+    link.href = currentImageViewer.url;
+    link.download = "srg-image.png";
+    link.click();
+};
+
+zoomInViewerBtn.onclick = () => {
+    currentImageViewer.scale = Math.min(2, currentImageViewer.scale + 0.25);
+    viewerImage.style.setProperty("--viewer-scale", currentImageViewer.scale.toFixed(2));
+};
+
+zoomOutViewerBtn.onclick = () => {
+    currentImageViewer.scale = Math.max(0.75, currentImageViewer.scale - 0.25);
+    viewerImage.style.setProperty("--viewer-scale", currentImageViewer.scale.toFixed(2));
+};
+
+shareViewerBtn.onclick = async () => {
+    if (!currentImageViewer.url) return;
+
+    if (navigator.share) {
+        try {
+            await navigator.share({
+                title: "SRG.ai image",
+                url: currentImageViewer.url
+            });
+        } catch (error) {
+            console.error("VIEWER SHARE ERROR:", error);
+        }
+        return;
+    }
+
+    await navigator.clipboard.writeText(currentImageViewer.url);
+};
+
+document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+        closeImageViewer();
+    }
+});
 
 document.addEventListener("click", async function(e){
 
