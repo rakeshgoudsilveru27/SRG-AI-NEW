@@ -253,6 +253,7 @@ def home():
 def chat_page():
     return render_template("index.html")
 # CHAT ROUTE
+
 @app.route('/chat', methods=['POST'])
 def chat():
 
@@ -274,8 +275,6 @@ def chat():
             "New Chat"
 
         })
-
-    
 
     # SAVE IMAGE
 
@@ -360,9 +359,10 @@ def chat():
 
                 "reply": ai_reply,
 
-                "title": "Image Analysis"
+                "title": user_message[:30]
 
-            })
+            })          
+
 
         except Exception as e:
 
@@ -725,10 +725,28 @@ def glasses():
         return jsonify({
             "reply": "Please enter a message."
         })
+    
+    try:
+        prompt = f"""
+    You are SRG.ai.
+
+    Reply briefly because the answer will be spoken by AI glasses.
+
+    User:
+    {user_message}
+    """
+
+        response = gemini_model.generate_content(prompt)
+
+        ai_reply = response.text
+
+    except Exception as e:
+
+        ai_reply = "AI Error: " + str(e)
 
     return jsonify({
-        "reply": "Received: " + user_message
-    })
+        "reply": ai_reply
+   })
 
 @app.route('/new-chat', methods=['POST'])
 def new_chat():
