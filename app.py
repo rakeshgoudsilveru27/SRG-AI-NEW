@@ -714,6 +714,22 @@ Assistant:
         'title': chat_title,
     })
 
+@app.route("/glasses", methods=["POST"])
+def glasses():
+
+    data = request.get_json(silent=True) or {}
+
+    user_message = data.get("message", "").strip()
+
+    if not user_message:
+        return jsonify({
+            "reply": "Please enter a message."
+        })
+
+    return jsonify({
+        "reply": "Received: " + user_message
+    })
+
 @app.route('/new-chat', methods=['POST'])
 def new_chat():
 
