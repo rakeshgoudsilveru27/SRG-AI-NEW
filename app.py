@@ -773,44 +773,74 @@ User:
             "status": "error",
             "reply": f"AI Error: {str(e)}"
         }), 500
-@app.route("/glasses_voice", methods=["POST"])
+
+@app.route("/glasses_voice", methods=["GET", "POST"])
 def glasses_voice():
 
+    # Browser test
+    if request.method == "GET":
+        return jsonify({
+            "status": "working",
+            "message": "SRG Voice API is running."
+        })
+
+    # Check audio file
     if "audio" not in request.files:
         return jsonify({
-            "status":"error",
-            "reply":"No audio file received."
-        }),400
+            "status": "error",
+            "reply": "No audio file received."
+        }), 400
 
-    audio=request.files["audio"]
-    audio_data=audio.read()
+    audio = request.files["audio"]
 
-    headers={
-        "Authorization":f"Token {DEEPGRAM_API_KEY}",
-        "Content-Type":"audio/wav"
-    }
-
-    response=requests.post(
-        "https://api.deepgram.com/v1/listen?model=nova-3",
-        headers=headers,
-        data=audio_data
-    )
-
-    if response.status_code!=200:
-
+    if audio.filename == "":
         return jsonify({
-            "status":"error",
-            "reply":"Deepgram failed.",
-            "details":response.text
-        }),500
+            "status": "error",
+            "reply": "No audio file selected."
+        }), 400
 
-    dg=response.json()
+    audio_data = audio.read()
 
-    transcript=dg["results"]["channels"][0]["alternatives"][0]["transcript"]
+    try:
+        # Send audio to Deepgram
+        headers = {
+            "Authorization": f"Token {DEEPGRAM_API_KEY}",
+            "Content-Type": "audio/wav"
+        }
 
-    print("USER SAID:",transcript)
+        response = requests.post(
+            "https://api.deepgram.com/v1/listen?model=nova-3&smart_format=true",
+            headers=headers,
+            data=audio_data,
+            timeout=60
+        )
 
-    prompt=f"""
+        if response.status_code != 200:
+            return jsonify({
+                "status": "error",
+                "reply": "Deepgram transcription failed.",
+                "details": response.text
+            }), 500
+
+        dg = response.json()
+
+        transcript = (
+            dg.get("results", {})
+              .get("channels", [{}])[0]
+              .get("alternatives", [{}])[0]
+              .get("transcript", "")
+        )
+
+        if not transcript:
+            return jsonify({
+                "status": "error",
+                "reply": "No speech detected."
+            }), 400
+
+        print("USER SAID:", transcript)
+
+        # Ask Gemini
+        prompt = f"""
 You are SRG.ai.
 
 Reply briefly because the answer will be spoken by AI glasses.
@@ -819,19 +849,23 @@ User:
 {transcript}
 """
 
-    ai=gemini_model.generate_content(prompt)
+        ai = gemini_model.generate_content(prompt)
 
-    if hasattr(ai,"text"):
-        reply=ai.text
-    else:
-        reply="No response generated."
+        if hasattr(ai, "text"):
+            reply = ai.text
+        else:
+            reply = "No response generated."
 
-    return jsonify({
+        return jsonify({
+            "status": "success",
+            "heard": transcript,
+            "reply": reply
+        })
 
-        "status":"success",
+    except Exception as e:
+        print("VOICE ERROR:", str(e))
 
-        "heard":transcript,
-
-        "reply":reply
-
-    })
+        return jsonify({
+            "status": "error",
+            "reply": str(e)
+        }), 500
