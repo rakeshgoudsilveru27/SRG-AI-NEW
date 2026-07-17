@@ -714,27 +714,37 @@ Assistant:
         'title': chat_title,
     })
 
-@app.route("/glasses", methods=["POST"])
+@app.route("/glasses", methods=["GET", "POST"])
 def glasses():
 
+    # Browser test
+    if request.method == "GET":
+        return jsonify({
+            "status": "working",
+            "message": "SRG Glasses API is running."
+        })
+
+    # POST request from ESP32
     data = request.get_json(silent=True) or {}
 
     user_message = data.get("message", "").strip()
 
     if not user_message:
         return jsonify({
+            "status": "error",
             "reply": "Please enter a message."
-        })
-    
+        }), 400
+
     try:
+
         prompt = f"""
-    You are SRG.ai.
+You are SRG.ai.
 
-    Reply briefly because the answer will be spoken by AI glasses.
+Reply briefly because the answer will be spoken by AI glasses.
 
-    User:
-    {user_message}
-    """
+User:
+{user_message}
+"""
 
         response = gemini_model.generate_content(prompt)
 
@@ -743,17 +753,29 @@ def glasses():
         else:
             ai_reply = "No response generated."
 
+        return jsonify({
+            "status": "success",
+            "reply": ai_reply
+        })
+
     except Exception as e:
 
-        ai_reply = "AI Error: " + str(e)
-
-    return jsonify({
-        "reply": ai_reply
-   })
-
-@app.route("/glasses_voice", methods=["POST"])
+        return jsonify({
+            "status": "error",
+            "reply": f"AI Error: {str(e)}"
+        }), 500
+    
+@app.route("/glasses_voice", methods=["GET", "POST"])
 def glasses_voice():
 
+    # Browser test
+    if request.method == "GET":
+        return jsonify({
+            "status": "working",
+            "message": "SRG Voice API is running."
+        })
+
+    # POST request from ESP32
     data = request.get_json(silent=True) or {}
 
     user_message = data.get("message", "").strip()
@@ -764,8 +786,7 @@ def glasses_voice():
             "reply": "No speech text received."
         }), 400
 
-    print()
-    print("========== SPEECH ==========")
+    print("\n========== SPEECH ==========")
     print(user_message)
     print("============================")
 
@@ -779,6 +800,7 @@ User:
 """
 
     try:
+
         response = gemini_model.generate_content(prompt)
 
         if hasattr(response, "text"):
@@ -787,13 +809,13 @@ User:
             ai_reply = "No response generated."
 
     except Exception as e:
+
         return jsonify({
             "status": "error",
             "reply": f"AI Error: {str(e)}"
         }), 500
 
-    print()
-    print("========== GEMINI ==========")
+    print("\n========== GEMINI ==========")
     print(ai_reply)
     print("============================")
 
@@ -801,7 +823,4 @@ User:
         "status": "success",
         "heard": user_message,
         "reply": ai_reply
-    })
-if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
+    })    
