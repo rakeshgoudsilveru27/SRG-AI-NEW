@@ -10,6 +10,15 @@ print(
     bool(GROQ_API_KEY)
 )
 
+
+DEEPGRAM_API_KEY = os.environ.get("DEEPGRAM_API_KEY")
+
+if not DEEPGRAM_API_KEY:
+    print("WARNING: DEEPGRAM_API_KEY not found")
+else:
+    print("DEEPGRAM FOUND")
+
+
 print(
     "GEMINI FOUND:",
     bool(os.environ.get(
@@ -764,67 +773,65 @@ User:
             "status": "error",
             "reply": f"AI Error: {str(e)}"
         }), 500
-    
-@app.route("/glasses_voice", methods=["GET", "POST"])
+@app.route("/glasses_voice", methods=["POST"])
 def glasses_voice():
 
-    # Browser test
-    if request.method == "GET":
+    if "audio" not in request.files:
         return jsonify({
-            "status": "working",
-            "message": "SRG Voice API is running."
-        })
+            "status":"error",
+            "reply":"No audio file received."
+        }),400
 
-    # POST request from ESP32
-    data = request.get_json(silent=True) or {}
+    audio=request.files["audio"]
+    audio_data=audio.read()
 
-    user_message = data.get("message", "").strip()
+    headers={
+        "Authorization":f"Token {DEEPGRAM_API_KEY}",
+        "Content-Type":"audio/wav"
+    }
 
-    if not user_message:
+    response=requests.post(
+        "https://api.deepgram.com/v1/listen?model=nova-3",
+        headers=headers,
+        data=audio_data
+    )
+
+    if response.status_code!=200:
+
         return jsonify({
-            "status": "error",
-            "reply": "No speech text received."
-        }), 400
+            "status":"error",
+            "reply":"Deepgram failed.",
+            "details":response.text
+        }),500
 
-    print("\n========== SPEECH ==========")
-    print(user_message)
-    print("============================")
+    dg=response.json()
 
-    prompt = f"""
+    transcript=dg["results"]["channels"][0]["alternatives"][0]["transcript"]
+
+    print("USER SAID:",transcript)
+
+    prompt=f"""
 You are SRG.ai.
 
 Reply briefly because the answer will be spoken by AI glasses.
 
 User:
-{user_message}
+{transcript}
 """
 
-    try:
+    ai=gemini_model.generate_content(prompt)
 
-        response = gemini_model.generate_content(prompt)
-
-        if hasattr(response, "text"):
-            ai_reply = response.text
-        else:
-            ai_reply = "No response generated."
-
-    except Exception as e:
-
-        return jsonify({
-            "status": "error",
-            "reply": f"AI Error: {str(e)}"
-        }), 500
-
-    print("\n========== GEMINI ==========")
-    print(ai_reply)
-    print("============================")
+    if hasattr(ai,"text"):
+        reply=ai.text
+    else:
+        reply="No response generated."
 
     return jsonify({
-        "status": "success",
-        "heard": user_message,
-        "reply": ai_reply
-    })    
 
-if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
+        "status":"success",
+
+        "heard":transcript,
+
+        "reply":reply
+
+    })
