@@ -2,6 +2,8 @@ from flask import Flask, render_template, request, jsonify
 from werkzeug.utils import secure_filename
 import requests
 import os
+import whisper
+import tempfile
 GROQ_API_KEY = os.environ.get("GROQ_API_KEY")
 if not GROQ_API_KEY:
     print("WARNING: GROQ_API_KEY not found")
@@ -42,6 +44,8 @@ genai.configure(
 gemini_model = genai.GenerativeModel(
     "gemini-2.5-flash"
 )
+
+whisper_model = whisper.load_model("tiny")
 
 def get_weather(city):
 
@@ -738,7 +742,10 @@ def glasses():
 
         response = gemini_model.generate_content(prompt)
 
-        ai_reply = response.text
+        if hasattr(response, "text"):
+            ai_reply = response.text
+        else:
+            ai_reply = "No response generated."
 
     except Exception as e:
 
@@ -748,35 +755,80 @@ def glasses():
         "reply": ai_reply
    })
 
-@app.route('/new-chat', methods=['POST'])
-def new_chat():
+@app.route("/glasses_voice", methods=["POST"])
+def glasses_voice():
 
-    global conversation_history
+    if "audio" not in request.files:
+        return jsonify({
+            "reply": "No audio received."
+        })
 
-    conversation_history = []
+    audio = request.files["audio"]
 
-    print("CHAT MEMORY CLEARED")
+    if audio.filename == "":
+        return jsonify({
+            "reply": "Empty audio file."
+        })
+
+    with tempfile.NamedTemporaryFile(
+        suffix=".wav",
+        delete=False
+    ) as temp_audio:
+
+        audio.save(temp_audio.name)
+
+    try:
+        result = whisper_model.transcribe(temp_audio.name)
+        user_message = result["text"].strip()
+
+    except Exception as e:
+        return jsonify({
+            "reply": "Speech recognition failed.",
+            "error": str(e)
+        })
+
+    finally:
+        os.remove(temp_audio.name)
+
+    if not user_message:
+        return jsonify({
+            "reply": "I couldn't understand your speech."
+        })
+
+    print()
+    print("========== SPEECH ==========")
+    print(user_message)
+    print("============================")
+
+    prompt = f"""
+You are SRG.ai.
+
+Reply briefly because the answer will be spoken by AI glasses.
+
+User:
+{user_message}
+"""
+
+    try:
+
+        response = gemini_model.generate_content(prompt)
+
+        if hasattr(response, "text"):
+            ai_reply = response.text
+        else:
+            ai_reply = "No response generated."
+
+    except Exception as e:
+
+        ai_reply = "AI Error: " + str(e)
+
+    print()
+    print("========== GEMINI ==========")
+    print(ai_reply)
+    print("============================")
 
     return jsonify({
-        "status":"success"
+        "status": "success",
+        "heard": user_message,
+        "reply": ai_reply
     })
-
-# RUN APP
-
-
-
-if __name__ == '__main__':
-
-    os.makedirs(
-        UPLOAD_FOLDER,
-        exist_ok=True
-    )
-
-    port = int(
-        os.environ.get("PORT", 5000)
-    )
-
-    app.run(
-        host="0.0.0.0",
-        port=port
-    )
