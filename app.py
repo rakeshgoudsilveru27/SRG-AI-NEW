@@ -2,8 +2,6 @@ from flask import Flask, render_template, request, jsonify
 from werkzeug.utils import secure_filename
 import requests
 import os
-import whisper
-import tempfile
 GROQ_API_KEY = os.environ.get("GROQ_API_KEY")
 if not GROQ_API_KEY:
     print("WARNING: GROQ_API_KEY not found")
@@ -44,8 +42,6 @@ genai.configure(
 gemini_model = genai.GenerativeModel(
     "gemini-2.5-flash"
 )
-
-whisper_model = whisper.load_model("tiny")
 
 def get_weather(city):
 
@@ -758,42 +754,15 @@ def glasses():
 @app.route("/glasses_voice", methods=["POST"])
 def glasses_voice():
 
-    if "audio" not in request.files:
-        return jsonify({
-            "reply": "No audio received."
-        })
+    data = request.get_json(silent=True) or {}
 
-    audio = request.files["audio"]
-
-    if audio.filename == "":
-        return jsonify({
-            "reply": "Empty audio file."
-        })
-
-    with tempfile.NamedTemporaryFile(
-        suffix=".wav",
-        delete=False
-    ) as temp_audio:
-
-        audio.save(temp_audio.name)
-
-    try:
-        result = whisper_model.transcribe(temp_audio.name)
-        user_message = result["text"].strip()
-
-    except Exception as e:
-        return jsonify({
-            "reply": "Speech recognition failed.",
-            "error": str(e)
-        })
-
-    finally:
-        os.remove(temp_audio.name)
+    user_message = data.get("message", "").strip()
 
     if not user_message:
         return jsonify({
-            "reply": "I couldn't understand your speech."
-        })
+            "status": "error",
+            "reply": "No speech text received."
+        }), 400
 
     print()
     print("========== SPEECH ==========")
@@ -810,7 +779,6 @@ User:
 """
 
     try:
-
         response = gemini_model.generate_content(prompt)
 
         if hasattr(response, "text"):
@@ -819,8 +787,10 @@ User:
             ai_reply = "No response generated."
 
     except Exception as e:
-
-        ai_reply = "AI Error: " + str(e)
+        return jsonify({
+            "status": "error",
+            "reply": f"AI Error: {str(e)}"
+        }), 500
 
     print()
     print("========== GEMINI ==========")
