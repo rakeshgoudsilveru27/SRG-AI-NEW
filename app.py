@@ -32,25 +32,62 @@ app = Flask(__name__)
 
 app.config['MAX_CONTENT_LENGTH'] = 10 * 1024 * 1024
 
-GEMINI_API_KEY = os.environ.get(
-    "GEMINI_API_KEY"
-)
-
 OPENWEATHER_API_KEY = os.environ.get(
     "OPENWEATHER_API_KEY"
 )
 
+GEMINI_KEYS = [
+    os.getenv("GEMINI_API_KEY"),
+    os.getenv("GEMINI_API_KEY1"),
+    os.getenv("GEMINI_API_KEY2"),
+    os.getenv("GEMINI_API_KEY3"),
+]
 
-if not GEMINI_API_KEY:
-    print("WARNING: GEMINI_API_KEY not found")
+GEMINI_KEYS = [k for k in GEMINI_KEYS if k]
 
-genai.configure(
-    api_key=GEMINI_API_KEY
-)
+print("Gemini Keys Loaded:", len(GEMINI_KEYS))
 
-gemini_model = genai.GenerativeModel(
-    "gemini-2.5-flash"
-)
+def ask_gemini(prompt):
+
+    last_error = None
+
+    for index, api_key in enumerate(GEMINI_KEYS):
+
+        try:
+
+            print(f"Using Gemini Key {index+1}")
+
+            genai.configure(api_key=api_key)
+
+            model = genai.GenerativeModel(
+                "gemini-2.5-flash"
+            )
+
+            response = model.generate_content(prompt)
+
+            if hasattr(response, "text"):
+                return response.text
+
+            return "No response."
+
+        except Exception as e:
+
+            print(f"Gemini Key {index+1} Failed")
+
+            print(e)
+
+            last_error = e
+
+            # Only continue for quota/rate limit errors.
+            error_text = str(e).lower()
+            if "429" in error_text or "quota" in error_text or "rate limit" in error_text:
+                continue
+
+            # For other errors, stop immediately.
+            raise
+
+    raise last_error
+
 
 def get_weather(city):
 
@@ -340,19 +377,53 @@ def chat():
 
             img = Image.open(image_path)
 
-            vision_model = genai.GenerativeModel(
-                "gemini-2.5-flash"
-            )
+            def ask_gemini_vision(prompt, img):
 
-            vision_response = vision_model.generate_content([
-                user_message,
-                img
-            ])
+                last_error = None
+
+                for index, api_key in enumerate(GEMINI_KEYS):
+
+                    try:
+
+                        print(f"Vision using Key {index+1}")
+
+                        genai.configure(api_key=api_key)
+
+                        model = genai.GenerativeModel(
+                            "gemini-2.5-flash"
+                        )
+
+                        response = model.generate_content(
+                           [prompt, img]
+                        )
+
+                        return response.text
+
+                    except Exception as e:
+
+                        print(e)
+
+                        last_error = e
+
+                        error_text = str(e).lower()
+                        if "429" in error_text or "quota" in error_text or "rate limit" in error_text:
+                            continue
+
+                        raise
+
+                raise last_error
+
+            ai_reply = ask_gemini_vision(user_message, img)
 
             print("GEMINI RESPONSE RECEIVED")
-            print(vision_response.text)
+            print(ai_reply)
 
-            ai_reply = vision_response.text
+            ai_reply = ask_gemini_vision(
+                user_message,
+                img
+            )
+
+            print(ai_reply)
 
             conversation_history.append(
                 f"User: {user_message}"
@@ -654,16 +725,11 @@ Assistant:
     # MAIN AI RESPONSE
 
     try:
-        gemini_response = gemini_model.generate_content(
-            prompt
-        )
-
-        if hasattr(gemini_response, "text"):
-            ai_reply = gemini_response.text
-        else:
-            ai_reply = "No response generated."
+        ai_reply = ask_gemini(prompt)
 
         chat_title = user_message[:30]
+
+        
 
     except Exception as e:
  
@@ -755,12 +821,7 @@ User:
 {user_message}
 """
 
-        response = gemini_model.generate_content(prompt)
-
-        if hasattr(response, "text"):
-            ai_reply = response.text
-        else:
-            ai_reply = "No response generated."
+        ai_reply = ask_gemini(prompt)
 
         return jsonify({
             "status": "success",
@@ -841,7 +902,7 @@ def glasses_voice():
 
         # Ask Gemini
         prompt = f"""
-You are SRG.ai.
+You are SRG glasses with SRG.ai integrated 
 
 Reply briefly because the answer will be spoken by AI glasses.
 
@@ -849,12 +910,7 @@ User:
 {transcript}
 """
 
-        ai = gemini_model.generate_content(prompt)
-
-        if hasattr(ai, "text"):
-            reply = ai.text
-        else:
-            reply = "No response generated."
+        reply = ask_gemini(prompt)
 
         return jsonify({
             "status": "success",
