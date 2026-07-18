@@ -59,9 +59,8 @@ def ask_gemini(prompt):
 
             genai.configure(api_key=api_key)
 
-            model = genai.GenerativeModel(
-                "gemini-2.5-flash"
-            )
+            model = genai.GenerativeModel("gemini-2.5-flash-lite")
+            
 
             response = model.generate_content(prompt)
 
@@ -389,10 +388,8 @@ def chat():
 
                         genai.configure(api_key=api_key)
 
-                        model = genai.GenerativeModel(
-                            "gemini-2.5-flash"
-                        )
-
+                        model = genai.GenerativeModel("gemini-2.5-flash-lite")
+                        
                         response = model.generate_content(
                            [prompt, img]
                         )
