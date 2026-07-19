@@ -59,6 +59,11 @@ def ask_gemini(prompt):
 
             genai.configure(api_key=api_key)
 
+            print("Available Models:")
+
+            for m in genai.list_models():
+                print(m.name)
+
             model = genai.GenerativeModel("gemini-2.5-flash-lite")
             
 
@@ -387,6 +392,11 @@ def chat():
                         print(f"Vision using Key {index+1}")
 
                         genai.configure(api_key=api_key)
+
+                        print("Available Models:")
+                        
+                        for m in genai.list_models():
+                            print(m.name)
 
                         model = genai.GenerativeModel("gemini-2.5-flash-lite")
                         
