@@ -415,10 +415,6 @@ def chat():
             print("GEMINI RESPONSE RECEIVED")
             print(ai_reply)
 
-            ai_reply = ask_gemini_vision(
-                user_message,
-                img
-            )
 
             print(ai_reply)
 
@@ -881,6 +877,8 @@ def glasses_voice():
             }), 500
 
         dg = response.json()
+        print("Deepgram Status:", response.status_code)
+        print("Deepgram Response:", dg)
 
         transcript = (
             dg.get("results", {})
