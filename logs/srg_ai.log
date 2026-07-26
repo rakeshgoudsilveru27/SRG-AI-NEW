@@ -1,0 +1,1275 @@
+2026-07-23 17:24:16,376 | INFO | ============================================================
+2026-07-23 17:24:16,376 | INFO | SRG AI Backend Started
+2026-07-23 17:24:16,376 | INFO | Version : 2.0
+2026-07-23 17:24:16,376 | INFO | Host    : 0.0.0.0
+2026-07-23 17:24:16,376 | INFO | Port    : 5000
+2026-07-23 17:24:16,376 | INFO | ============================================================
+2026-07-23 17:24:17,509 | INFO | ============================================================
+2026-07-23 17:24:17,509 | INFO | SRG AI Backend Started
+2026-07-23 17:24:17,509 | INFO | Version : 2.0
+2026-07-23 17:24:17,509 | INFO | Host    : 0.0.0.0
+2026-07-23 17:24:17,510 | INFO | Port    : 5000
+2026-07-23 17:24:17,510 | INFO | ============================================================
+2026-07-23 17:26:01,579 | INFO | Current weather request: Hyderabad
+2026-07-23 17:26:01,580 | ERROR | Current Weather Route Error
+Traceback (most recent call last):
+  File "C:\Users\S.RAKESH GOUD\Desktop\SRG\SRG_AI\backend\routes\weather.py", line 50, in current_weather
+    reply = WeatherService.get_weather(city)
+  File "C:\Users\S.RAKESH GOUD\Desktop\SRG\SRG_AI\backend\services\weather_service.py", line 25, in get_weather
+    raise RuntimeError("OpenWeather API key is not configured.")
+RuntimeError: OpenWeather API key is not configured.
+2026-07-23 17:31:03,220 | INFO | ============================================================
+2026-07-23 17:31:03,220 | INFO | SRG AI Backend Started
+2026-07-23 17:31:03,220 | INFO | Version : 2.0
+2026-07-23 17:31:03,220 | INFO | Host    : 0.0.0.0
+2026-07-23 17:31:03,220 | INFO | Port    : 5000
+2026-07-23 17:31:03,220 | INFO | ============================================================
+2026-07-23 17:31:04,174 | INFO | ============================================================
+2026-07-23 17:31:04,174 | INFO | SRG AI Backend Started
+2026-07-23 17:31:04,174 | INFO | Version : 2.0
+2026-07-23 17:31:04,175 | INFO | Host    : 0.0.0.0
+2026-07-23 17:31:04,175 | INFO | Port    : 5000
+2026-07-23 17:31:04,175 | INFO | ============================================================
+2026-07-23 17:35:19,545 | INFO | ============================================================
+2026-07-23 17:35:19,545 | INFO | SRG AI Backend Started
+2026-07-23 17:35:19,546 | INFO | Version : 2.0
+2026-07-23 17:35:19,546 | INFO | Host    : 0.0.0.0
+2026-07-23 17:35:19,546 | INFO | Port    : 5000
+2026-07-23 17:35:19,546 | INFO | ============================================================
+2026-07-23 17:38:00,548 | INFO | ============================================================
+2026-07-23 17:38:00,549 | INFO | SRG AI Backend Started
+2026-07-23 17:38:00,549 | INFO | Version : 2.0
+2026-07-23 17:38:00,549 | INFO | Host    : 0.0.0.0
+2026-07-23 17:38:00,549 | INFO | Port    : 5000
+2026-07-23 17:38:00,549 | INFO | ============================================================
+2026-07-23 17:38:13,754 | INFO | ============================================================
+2026-07-23 17:38:13,754 | INFO | SRG AI Backend Started
+2026-07-23 17:38:13,755 | INFO | Version : 2.0
+2026-07-23 17:38:13,755 | INFO | Host    : 0.0.0.0
+2026-07-23 17:38:13,755 | INFO | Port    : 5000
+2026-07-23 17:38:13,755 | INFO | ============================================================
+2026-07-23 17:42:57,612 | INFO | Current weather request: Hyderabad
+2026-07-23 17:42:57,612 | INFO | Getting current weather for Hyderabad
+2026-07-23 22:48:51,624 | INFO | ============================================================
+2026-07-23 22:48:51,625 | INFO | SRG AI Backend Started
+2026-07-23 22:48:51,625 | INFO | Version : 2.0
+2026-07-23 22:48:51,626 | INFO | Host    : 0.0.0.0
+2026-07-23 22:48:51,626 | INFO | Port    : 5000
+2026-07-23 22:48:51,626 | INFO | ============================================================
+2026-07-23 22:48:53,602 | INFO | ============================================================
+2026-07-23 22:48:53,603 | INFO | SRG AI Backend Started
+2026-07-23 22:48:53,603 | INFO | Version : 2.0
+2026-07-23 22:48:53,603 | INFO | Host    : 0.0.0.0
+2026-07-23 22:48:53,603 | INFO | Port    : 5000
+2026-07-23 22:48:53,604 | INFO | ============================================================
+2026-07-24 00:21:59,208 | INFO | ============================================================
+2026-07-24 00:21:59,209 | INFO | SRG AI Backend Started
+2026-07-24 00:21:59,209 | INFO | Version : 2.0
+2026-07-24 00:21:59,209 | INFO | Host    : 0.0.0.0
+2026-07-24 00:21:59,209 | INFO | Port    : 5000
+2026-07-24 00:21:59,209 | INFO | ============================================================
+2026-07-24 00:22:00,221 | INFO | ============================================================
+2026-07-24 00:22:00,221 | INFO | SRG AI Backend Started
+2026-07-24 00:22:00,221 | INFO | Version : 2.0
+2026-07-24 00:22:00,222 | INFO | Host    : 0.0.0.0
+2026-07-24 00:22:00,222 | INFO | Port    : 5000
+2026-07-24 00:22:00,222 | INFO | ============================================================
+2026-07-24 22:04:47,412 | INFO | ============================================================
+2026-07-24 22:04:47,413 | INFO | SRG AI Backend Started
+2026-07-24 22:04:47,413 | INFO | Version : 2.0
+2026-07-24 22:04:47,414 | INFO | Host    : 0.0.0.0
+2026-07-24 22:04:47,414 | INFO | Port    : 5000
+2026-07-24 22:04:47,415 | INFO | ============================================================
+2026-07-24 22:05:13,423 | INFO | ============================================================
+2026-07-24 22:05:13,423 | INFO | SRG AI Backend Started
+2026-07-24 22:05:13,424 | INFO | Version : 2.0
+2026-07-24 22:05:13,424 | INFO | Host    : 0.0.0.0
+2026-07-24 22:05:13,425 | INFO | Port    : 5000
+2026-07-24 22:05:13,425 | INFO | ============================================================
+2026-07-24 22:24:52,371 | INFO | User: hello
+2026-07-24 22:24:52,371 | INFO | User Message: hello
+2026-07-24 22:24:55,588 | ERROR | Gemini Text Generation Failed
+Traceback (most recent call last):
+  File "C:\Users\S.RAKESH GOUD\Desktop\SRG\SRG_AI\backend\services\gemini_service.py", line 26, in generate_text
+    response = client.models.generate_content(
+        model=Config.GEMINI_MODEL,
+        contents=prompt
+    )
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\models.py", line 6558, in generate_content
+    response = self._generate_content(
+        model=model, contents=contents, config=parsed_config_to_call
+    )
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\models.py", line 4986, in _generate_content
+    response = self._api_client.request(
+        'post', path, request_dict, http_options
+    )
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\_api_client.py", line 1700, in request
+    response = self._request(http_request, http_options, stream=False)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\_api_client.py", line 1487, in _request
+    return self._retry(self._request_once, http_request, stream)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 470, in __call__
+    do = self.iter(retry_state=retry_state)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 371, in iter
+    result = action(retry_state)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 413, in exc_check
+    raise retry_exc.reraise()
+          ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 184, in reraise
+    raise self.last_attempt.result()
+          ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py", line 443, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py", line 395, in __get_result
+    raise self._exception
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 473, in __call__
+    result = fn(*args, **kwargs)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\_api_client.py", line 1464, in _request_once
+    errors.APIError.raise_for_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\errors.py", line 155, in raise_for_response
+    cls.raise_error(response.status_code, response_json, response)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\errors.py", line 184, in raise_error
+    raise ClientError(status_code, response_json, response)
+google.genai.errors.ClientError: 404 NOT_FOUND. {'error': {'code': 404, 'message': 'This model models/gemini-2.5-flash-lite is no longer available to new users. Please update your code to use a newer model for the latest features and improvements.', 'status': 'NOT_FOUND'}}
+2026-07-24 22:24:55,608 | INFO | Gemini response generated successfully.
+2026-07-24 22:24:55,609 | INFO | Chat response generated successfully.
+2026-07-24 22:25:19,265 | INFO | User: i
+2026-07-24 22:25:19,265 | INFO | User Message: i
+2026-07-24 22:25:19,879 | ERROR | Gemini Text Generation Failed
+Traceback (most recent call last):
+  File "C:\Users\S.RAKESH GOUD\Desktop\SRG\SRG_AI\backend\services\gemini_service.py", line 26, in generate_text
+    response = client.models.generate_content(
+        model=Config.GEMINI_MODEL,
+        contents=prompt
+    )
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\models.py", line 6558, in generate_content
+    response = self._generate_content(
+        model=model, contents=contents, config=parsed_config_to_call
+    )
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\models.py", line 4986, in _generate_content
+    response = self._api_client.request(
+        'post', path, request_dict, http_options
+    )
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\_api_client.py", line 1700, in request
+    response = self._request(http_request, http_options, stream=False)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\_api_client.py", line 1487, in _request
+    return self._retry(self._request_once, http_request, stream)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 470, in __call__
+    do = self.iter(retry_state=retry_state)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 371, in iter
+    result = action(retry_state)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 413, in exc_check
+    raise retry_exc.reraise()
+          ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 184, in reraise
+    raise self.last_attempt.result()
+          ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py", line 443, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py", line 395, in __get_result
+    raise self._exception
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 473, in __call__
+    result = fn(*args, **kwargs)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\_api_client.py", line 1464, in _request_once
+    errors.APIError.raise_for_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\errors.py", line 155, in raise_for_response
+    cls.raise_error(response.status_code, response_json, response)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\errors.py", line 184, in raise_error
+    raise ClientError(status_code, response_json, response)
+google.genai.errors.ClientError: 404 NOT_FOUND. {'error': {'code': 404, 'message': 'This model models/gemini-2.5-flash-lite is no longer available to new users. Please update your code to use a newer model for the latest features and improvements.', 'status': 'NOT_FOUND'}}
+2026-07-24 22:25:19,884 | INFO | Gemini response generated successfully.
+2026-07-24 22:25:19,885 | INFO | Chat response generated successfully.
+2026-07-24 22:27:36,976 | INFO | User: weather in hyderabad
+2026-07-24 22:27:36,977 | INFO | User Message: weather in hyderabad
+2026-07-24 22:27:36,977 | INFO | Getting current weather for hyderabad
+2026-07-24 22:27:38,146 | INFO | Chat response generated successfully.
+2026-07-24 22:49:56,002 | INFO | ============================================================
+2026-07-24 22:49:56,003 | INFO | SRG AI Backend Started
+2026-07-24 22:49:56,003 | INFO | Version : 2.0
+2026-07-24 22:49:56,003 | INFO | Host    : 0.0.0.0
+2026-07-24 22:49:56,004 | INFO | Port    : 5000
+2026-07-24 22:49:56,004 | INFO | ============================================================
+2026-07-24 22:49:58,278 | INFO | ============================================================
+2026-07-24 22:49:58,278 | INFO | SRG AI Backend Started
+2026-07-24 22:49:58,279 | INFO | Version : 2.0
+2026-07-24 22:49:58,279 | INFO | Host    : 0.0.0.0
+2026-07-24 22:49:58,279 | INFO | Port    : 5000
+2026-07-24 22:49:58,279 | INFO | ============================================================
+2026-07-24 22:50:10,136 | INFO | User: hi
+2026-07-24 22:50:10,136 | INFO | User Message: hi
+2026-07-24 22:50:12,570 | ERROR | Gemini Text Generation Failed
+Traceback (most recent call last):
+  File "C:\Users\S.RAKESH GOUD\Desktop\SRG\SRG_AI\backend\services\gemini_service.py", line 26, in generate_text
+    response = client.models.generate_content(
+        model=Config.GEMINI_MODEL,
+        contents=prompt
+    )
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\models.py", line 6558, in generate_content
+    response = self._generate_content(
+        model=model, contents=contents, config=parsed_config_to_call
+    )
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\models.py", line 4986, in _generate_content
+    response = self._api_client.request(
+        'post', path, request_dict, http_options
+    )
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\_api_client.py", line 1700, in request
+    response = self._request(http_request, http_options, stream=False)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\_api_client.py", line 1487, in _request
+    return self._retry(self._request_once, http_request, stream)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 470, in __call__
+    do = self.iter(retry_state=retry_state)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 371, in iter
+    result = action(retry_state)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 413, in exc_check
+    raise retry_exc.reraise()
+          ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 184, in reraise
+    raise self.last_attempt.result()
+          ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py", line 443, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py", line 395, in __get_result
+    raise self._exception
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 473, in __call__
+    result = fn(*args, **kwargs)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\_api_client.py", line 1464, in _request_once
+    errors.APIError.raise_for_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\errors.py", line 155, in raise_for_response
+    cls.raise_error(response.status_code, response_json, response)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\errors.py", line 184, in raise_error
+    raise ClientError(status_code, response_json, response)
+google.genai.errors.ClientError: 404 NOT_FOUND. {'error': {'code': 404, 'message': 'This model models/gemini-2.5-flash-lite is no longer available to new users. Please update your code to use a newer model for the latest features and improvements.', 'status': 'NOT_FOUND'}}
+2026-07-24 22:50:12,591 | INFO | Gemini response generated successfully.
+2026-07-24 22:50:12,596 | INFO | Chat response generated successfully.
+2026-07-24 22:53:24,591 | INFO | ============================================================
+2026-07-24 22:53:24,592 | INFO | SRG AI Backend Started
+2026-07-24 22:53:24,593 | INFO | Version : 2.0
+2026-07-24 22:53:24,593 | INFO | Host    : 0.0.0.0
+2026-07-24 22:53:24,593 | INFO | Port    : 5000
+2026-07-24 22:53:24,594 | INFO | ============================================================
+2026-07-24 22:53:28,505 | INFO | ============================================================
+2026-07-24 22:53:28,506 | INFO | SRG AI Backend Started
+2026-07-24 22:53:28,506 | INFO | Version : 2.0
+2026-07-24 22:53:28,507 | INFO | Host    : 0.0.0.0
+2026-07-24 22:53:28,507 | INFO | Port    : 5000
+2026-07-24 22:53:28,507 | INFO | ============================================================
+2026-07-24 22:56:33,666 | INFO | ============================================================
+2026-07-24 22:56:33,666 | INFO | SRG AI Backend Started
+2026-07-24 22:56:33,667 | INFO | Version : 2.0
+2026-07-24 22:56:33,668 | INFO | Host    : 0.0.0.0
+2026-07-24 22:56:33,668 | INFO | Port    : 5000
+2026-07-24 22:56:33,668 | INFO | ============================================================
+2026-07-24 22:58:14,072 | INFO | ============================================================
+2026-07-24 22:58:14,072 | INFO | SRG AI Backend Started
+2026-07-24 22:58:14,072 | INFO | Version : 2.0
+2026-07-24 22:58:14,073 | INFO | Host    : 0.0.0.0
+2026-07-24 22:58:14,073 | INFO | Port    : 5000
+2026-07-24 22:58:14,073 | INFO | ============================================================
+2026-07-24 22:58:21,745 | INFO | ============================================================
+2026-07-24 22:58:21,745 | INFO | SRG AI Backend Started
+2026-07-24 22:58:21,746 | INFO | Version : 2.0
+2026-07-24 22:58:21,746 | INFO | Host    : 0.0.0.0
+2026-07-24 22:58:21,746 | INFO | Port    : 5000
+2026-07-24 22:58:21,746 | INFO | ============================================================
+2026-07-24 22:59:11,663 | INFO | User: hi
+2026-07-24 22:59:11,663 | INFO | User Message: hi
+2026-07-24 22:59:14,995 | INFO | Gemini response generated successfully.
+2026-07-24 22:59:14,996 | INFO | Chat response generated successfully.
+2026-07-24 22:59:20,175 | INFO | User: hlo
+2026-07-24 22:59:20,177 | INFO | User Message: hlo
+2026-07-24 22:59:22,430 | INFO | Gemini response generated successfully.
+2026-07-24 22:59:22,431 | INFO | Chat response generated successfully.
+2026-07-24 22:59:38,352 | INFO | User: hh
+2026-07-24 22:59:38,353 | INFO | User Message: hh
+2026-07-24 22:59:40,856 | INFO | Gemini response generated successfully.
+2026-07-24 22:59:40,856 | INFO | Chat response generated successfully.
+2026-07-24 22:59:43,824 | INFO | User: wjfiuv\
+2026-07-24 22:59:43,824 | INFO | User Message: wjfiuv\
+2026-07-24 22:59:45,164 | INFO | User: khgsbv
+2026-07-24 22:59:45,164 | INFO | User Message: khgsbv
+2026-07-24 22:59:45,564 | INFO | Gemini response generated successfully.
+2026-07-24 22:59:45,565 | INFO | Chat response generated successfully.
+2026-07-24 22:59:46,045 | INFO | User: kjb
+2026-07-24 22:59:46,045 | INFO | User Message: kjb
+2026-07-24 22:59:47,130 | INFO | Gemini response generated successfully.
+2026-07-24 22:59:47,130 | INFO | Chat response generated successfully.
+2026-07-24 22:59:47,364 | INFO | User: hv,
+2026-07-24 22:59:47,365 | INFO | User Message: hv,
+2026-07-24 22:59:47,944 | INFO | User: v
+2026-07-24 22:59:47,944 | INFO | User Message: v
+2026-07-24 22:59:48,191 | INFO | Gemini response generated successfully.
+2026-07-24 22:59:48,191 | INFO | Chat response generated successfully.
+2026-07-24 22:59:48,493 | INFO | User: vjbccvc
+2026-07-24 22:59:48,494 | INFO | User Message: vjbccvc
+2026-07-24 22:59:49,014 | INFO | User: '';vsksjkv
+2026-07-24 22:59:49,015 | INFO | User Message: '';vsksjkv
+2026-07-24 22:59:49,554 | INFO | User: vklljv
+2026-07-24 22:59:49,555 | INFO | User Message: vklljv
+2026-07-24 22:59:49,617 | INFO | Gemini response generated successfully.
+2026-07-24 22:59:49,617 | INFO | Chat response generated successfully.
+2026-07-24 22:59:50,075 | INFO | User: ;svjbvs
+2026-07-24 22:59:50,076 | INFO | User Message: ;svjbvs
+2026-07-24 22:59:50,180 | INFO | Gemini response generated successfully.
+2026-07-24 22:59:50,181 | INFO | Chat response generated successfully.
+2026-07-24 22:59:50,314 | ERROR | Gemini Text Generation Failed
+Traceback (most recent call last):
+  File "C:\Users\S.RAKESH GOUD\Desktop\SRG\SRG_AI\backend\services\gemini_service.py", line 26, in generate_text
+    response = client.models.generate_content(
+        model=Config.GEMINI_MODEL,
+        contents=prompt
+    )
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\models.py", line 6558, in generate_content
+    response = self._generate_content(
+        model=model, contents=contents, config=parsed_config_to_call
+    )
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\models.py", line 4986, in _generate_content
+    response = self._api_client.request(
+        'post', path, request_dict, http_options
+    )
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\_api_client.py", line 1700, in request
+    response = self._request(http_request, http_options, stream=False)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\_api_client.py", line 1487, in _request
+    return self._retry(self._request_once, http_request, stream)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 470, in __call__
+    do = self.iter(retry_state=retry_state)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 371, in iter
+    result = action(retry_state)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 413, in exc_check
+    raise retry_exc.reraise()
+          ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 184, in reraise
+    raise self.last_attempt.result()
+          ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py", line 443, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py", line 395, in __get_result
+    raise self._exception
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 473, in __call__
+    result = fn(*args, **kwargs)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\_api_client.py", line 1464, in _request_once
+    errors.APIError.raise_for_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\errors.py", line 155, in raise_for_response
+    cls.raise_error(response.status_code, response_json, response)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\errors.py", line 184, in raise_error
+    raise ClientError(status_code, response_json, response)
+google.genai.errors.ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-2.5-flash\nPlease retry in 8.396740191s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-2.5-flash', 'location': 'global'}, 'quotaValue': '5'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '8s'}]}}
+2026-07-24 22:59:50,329 | INFO | Gemini response generated successfully.
+2026-07-24 22:59:50,329 | INFO | Chat response generated successfully.
+2026-07-24 22:59:50,371 | INFO | Gemini response generated successfully.
+2026-07-24 22:59:50,372 | INFO | Chat response generated successfully.
+2026-07-24 22:59:50,563 | INFO | User: vlbsv
+2026-07-24 22:59:50,564 | INFO | User Message: vlbsv
+2026-07-24 22:59:50,788 | ERROR | Gemini Text Generation Failed
+Traceback (most recent call last):
+  File "C:\Users\S.RAKESH GOUD\Desktop\SRG\SRG_AI\backend\services\gemini_service.py", line 26, in generate_text
+    response = client.models.generate_content(
+        model=Config.GEMINI_MODEL,
+        contents=prompt
+    )
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\models.py", line 6558, in generate_content
+    response = self._generate_content(
+        model=model, contents=contents, config=parsed_config_to_call
+    )
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\models.py", line 4986, in _generate_content
+    response = self._api_client.request(
+        'post', path, request_dict, http_options
+    )
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\_api_client.py", line 1700, in request
+    response = self._request(http_request, http_options, stream=False)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\_api_client.py", line 1487, in _request
+    return self._retry(self._request_once, http_request, stream)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 470, in __call__
+    do = self.iter(retry_state=retry_state)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 371, in iter
+    result = action(retry_state)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 413, in exc_check
+    raise retry_exc.reraise()
+          ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 184, in reraise
+    raise self.last_attempt.result()
+          ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py", line 443, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py", line 395, in __get_result
+    raise self._exception
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 473, in __call__
+    result = fn(*args, **kwargs)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\_api_client.py", line 1464, in _request_once
+    errors.APIError.raise_for_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\errors.py", line 155, in raise_for_response
+    cls.raise_error(response.status_code, response_json, response)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\errors.py", line 184, in raise_error
+    raise ClientError(status_code, response_json, response)
+google.genai.errors.ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-2.5-flash\nPlease retry in 7.956947099s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-2.5-flash', 'location': 'global'}, 'quotaValue': '5'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '7s'}]}}
+2026-07-24 22:59:50,796 | INFO | Gemini response generated successfully.
+2026-07-24 22:59:50,796 | INFO | Chat response generated successfully.
+2026-07-24 22:59:50,939 | INFO | Gemini response generated successfully.
+2026-07-24 22:59:50,939 | INFO | Chat response generated successfully.
+2026-07-24 22:59:51,054 | INFO | User: ljvb
+2026-07-24 22:59:51,054 | INFO | User Message: ljvb
+2026-07-24 22:59:51,545 | INFO | User: vkvj
+2026-07-24 22:59:51,545 | INFO | User Message: vkvj
+2026-07-24 22:59:51,703 | INFO | Gemini response generated successfully.
+2026-07-24 22:59:51,704 | INFO | Chat response generated successfully.
+2026-07-24 22:59:51,751 | ERROR | Gemini Text Generation Failed
+Traceback (most recent call last):
+  File "C:\Users\S.RAKESH GOUD\Desktop\SRG\SRG_AI\backend\services\gemini_service.py", line 26, in generate_text
+    response = client.models.generate_content(
+        model=Config.GEMINI_MODEL,
+        contents=prompt
+    )
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\models.py", line 6558, in generate_content
+    response = self._generate_content(
+        model=model, contents=contents, config=parsed_config_to_call
+    )
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\models.py", line 4986, in _generate_content
+    response = self._api_client.request(
+        'post', path, request_dict, http_options
+    )
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\_api_client.py", line 1700, in request
+    response = self._request(http_request, http_options, stream=False)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\_api_client.py", line 1487, in _request
+    return self._retry(self._request_once, http_request, stream)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 470, in __call__
+    do = self.iter(retry_state=retry_state)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 371, in iter
+    result = action(retry_state)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 413, in exc_check
+    raise retry_exc.reraise()
+          ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 184, in reraise
+    raise self.last_attempt.result()
+          ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py", line 443, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py", line 395, in __get_result
+    raise self._exception
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 473, in __call__
+    result = fn(*args, **kwargs)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\_api_client.py", line 1464, in _request_once
+    errors.APIError.raise_for_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\errors.py", line 155, in raise_for_response
+    cls.raise_error(response.status_code, response_json, response)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\errors.py", line 184, in raise_error
+    raise ClientError(status_code, response_json, response)
+google.genai.errors.ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-2.5-flash\nPlease retry in 6.951575327s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash'}, 'quotaValue': '5'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '6s'}]}}
+2026-07-24 22:59:51,758 | INFO | Gemini response generated successfully.
+2026-07-24 22:59:51,759 | INFO | Chat response generated successfully.
+2026-07-24 22:59:52,535 | INFO | User: llljsblb
+2026-07-24 22:59:52,536 | INFO | User Message: llljsblb
+2026-07-24 22:59:52,741 | ERROR | Gemini Text Generation Failed
+Traceback (most recent call last):
+  File "C:\Users\S.RAKESH GOUD\Desktop\SRG\SRG_AI\backend\services\gemini_service.py", line 26, in generate_text
+    response = client.models.generate_content(
+        model=Config.GEMINI_MODEL,
+        contents=prompt
+    )
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\models.py", line 6558, in generate_content
+    response = self._generate_content(
+        model=model, contents=contents, config=parsed_config_to_call
+    )
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\models.py", line 4986, in _generate_content
+    response = self._api_client.request(
+        'post', path, request_dict, http_options
+    )
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\_api_client.py", line 1700, in request
+    response = self._request(http_request, http_options, stream=False)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\_api_client.py", line 1487, in _request
+    return self._retry(self._request_once, http_request, stream)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 470, in __call__
+    do = self.iter(retry_state=retry_state)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 371, in iter
+    result = action(retry_state)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 413, in exc_check
+    raise retry_exc.reraise()
+          ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 184, in reraise
+    raise self.last_attempt.result()
+          ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py", line 443, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py", line 395, in __get_result
+    raise self._exception
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 473, in __call__
+    result = fn(*args, **kwargs)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\_api_client.py", line 1464, in _request_once
+    errors.APIError.raise_for_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\errors.py", line 155, in raise_for_response
+    cls.raise_error(response.status_code, response_json, response)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\errors.py", line 184, in raise_error
+    raise ClientError(status_code, response_json, response)
+google.genai.errors.ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-2.5-flash\nPlease retry in 5.985670057s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash'}, 'quotaValue': '5'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '5s'}]}}
+2026-07-24 22:59:52,745 | INFO | Gemini response generated successfully.
+2026-07-24 22:59:52,746 | INFO | Chat response generated successfully.
+2026-07-24 22:59:53,024 | INFO | User: lssk
+2026-07-24 22:59:53,024 | INFO | User Message: lssk
+2026-07-24 22:59:53,350 | ERROR | Gemini Text Generation Failed
+Traceback (most recent call last):
+  File "C:\Users\S.RAKESH GOUD\Desktop\SRG\SRG_AI\backend\services\gemini_service.py", line 26, in generate_text
+    response = client.models.generate_content(
+        model=Config.GEMINI_MODEL,
+        contents=prompt
+    )
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\models.py", line 6558, in generate_content
+    response = self._generate_content(
+        model=model, contents=contents, config=parsed_config_to_call
+    )
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\models.py", line 4986, in _generate_content
+    response = self._api_client.request(
+        'post', path, request_dict, http_options
+    )
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\_api_client.py", line 1700, in request
+    response = self._request(http_request, http_options, stream=False)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\_api_client.py", line 1487, in _request
+    return self._retry(self._request_once, http_request, stream)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 470, in __call__
+    do = self.iter(retry_state=retry_state)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 371, in iter
+    result = action(retry_state)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 413, in exc_check
+    raise retry_exc.reraise()
+          ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 184, in reraise
+    raise self.last_attempt.result()
+          ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py", line 443, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py", line 395, in __get_result
+    raise self._exception
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 473, in __call__
+    result = fn(*args, **kwargs)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\_api_client.py", line 1464, in _request_once
+    errors.APIError.raise_for_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\errors.py", line 155, in raise_for_response
+    cls.raise_error(response.status_code, response_json, response)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\errors.py", line 184, in raise_error
+    raise ClientError(status_code, response_json, response)
+google.genai.errors.ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-2.5-flash\nPlease retry in 5.443911638s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash'}, 'quotaValue': '5'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '5s'}]}}
+2026-07-24 22:59:53,354 | INFO | Gemini response generated successfully.
+2026-07-24 22:59:53,354 | INFO | Chat response generated successfully.
+2026-07-24 22:59:53,438 | INFO | Gemini response generated successfully.
+2026-07-24 22:59:53,438 | INFO | Chat response generated successfully.
+2026-07-24 22:59:53,513 | INFO | User: llj
+2026-07-24 22:59:53,514 | INFO | User Message: llj
+2026-07-24 22:59:53,686 | ERROR | Gemini Text Generation Failed
+Traceback (most recent call last):
+  File "C:\Users\S.RAKESH GOUD\Desktop\SRG\SRG_AI\backend\services\gemini_service.py", line 26, in generate_text
+    response = client.models.generate_content(
+        model=Config.GEMINI_MODEL,
+        contents=prompt
+    )
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\models.py", line 6558, in generate_content
+    response = self._generate_content(
+        model=model, contents=contents, config=parsed_config_to_call
+    )
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\models.py", line 4986, in _generate_content
+    response = self._api_client.request(
+        'post', path, request_dict, http_options
+    )
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\_api_client.py", line 1700, in request
+    response = self._request(http_request, http_options, stream=False)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\_api_client.py", line 1487, in _request
+    return self._retry(self._request_once, http_request, stream)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 470, in __call__
+    do = self.iter(retry_state=retry_state)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 371, in iter
+    result = action(retry_state)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 413, in exc_check
+    raise retry_exc.reraise()
+          ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 184, in reraise
+    raise self.last_attempt.result()
+          ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py", line 443, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py", line 395, in __get_result
+    raise self._exception
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 473, in __call__
+    result = fn(*args, **kwargs)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\_api_client.py", line 1464, in _request_once
+    errors.APIError.raise_for_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\errors.py", line 155, in raise_for_response
+    cls.raise_error(response.status_code, response_json, response)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\errors.py", line 184, in raise_error
+    raise ClientError(status_code, response_json, response)
+google.genai.errors.ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-2.5-flash\nPlease retry in 5.021741386s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash'}, 'quotaValue': '5'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '5s'}]}}
+2026-07-24 22:59:53,691 | INFO | Gemini response generated successfully.
+2026-07-24 22:59:53,692 | INFO | Chat response generated successfully.
+2026-07-24 22:59:54,024 | INFO | User: llbvv
+2026-07-24 22:59:54,025 | INFO | User Message: llbvv
+2026-07-24 22:59:54,372 | ERROR | Gemini Text Generation Failed
+Traceback (most recent call last):
+  File "C:\Users\S.RAKESH GOUD\Desktop\SRG\SRG_AI\backend\services\gemini_service.py", line 26, in generate_text
+    response = client.models.generate_content(
+        model=Config.GEMINI_MODEL,
+        contents=prompt
+    )
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\models.py", line 6558, in generate_content
+    response = self._generate_content(
+        model=model, contents=contents, config=parsed_config_to_call
+    )
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\models.py", line 4986, in _generate_content
+    response = self._api_client.request(
+        'post', path, request_dict, http_options
+    )
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\_api_client.py", line 1700, in request
+    response = self._request(http_request, http_options, stream=False)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\_api_client.py", line 1487, in _request
+    return self._retry(self._request_once, http_request, stream)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 470, in __call__
+    do = self.iter(retry_state=retry_state)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 371, in iter
+    result = action(retry_state)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 413, in exc_check
+    raise retry_exc.reraise()
+          ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 184, in reraise
+    raise self.last_attempt.result()
+          ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py", line 443, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py", line 395, in __get_result
+    raise self._exception
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 473, in __call__
+    result = fn(*args, **kwargs)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\_api_client.py", line 1464, in _request_once
+    errors.APIError.raise_for_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\errors.py", line 155, in raise_for_response
+    cls.raise_error(response.status_code, response_json, response)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\errors.py", line 184, in raise_error
+    raise ClientError(status_code, response_json, response)
+google.genai.errors.ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-2.5-flash\nPlease retry in 4.494162721s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash'}, 'quotaValue': '5'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '4s'}]}}
+2026-07-24 22:59:54,377 | INFO | Gemini response generated successfully.
+2026-07-24 22:59:54,377 | INFO | Chat response generated successfully.
+2026-07-24 22:59:54,524 | INFO | User: slsvlvvb
+2026-07-24 22:59:54,524 | INFO | User Message: slsvlvvb
+2026-07-24 22:59:54,744 | ERROR | Gemini Text Generation Failed
+Traceback (most recent call last):
+  File "C:\Users\S.RAKESH GOUD\Desktop\SRG\SRG_AI\backend\services\gemini_service.py", line 26, in generate_text
+    response = client.models.generate_content(
+        model=Config.GEMINI_MODEL,
+        contents=prompt
+    )
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\models.py", line 6558, in generate_content
+    response = self._generate_content(
+        model=model, contents=contents, config=parsed_config_to_call
+    )
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\models.py", line 4986, in _generate_content
+    response = self._api_client.request(
+        'post', path, request_dict, http_options
+    )
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\_api_client.py", line 1700, in request
+    response = self._request(http_request, http_options, stream=False)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\_api_client.py", line 1487, in _request
+    return self._retry(self._request_once, http_request, stream)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 470, in __call__
+    do = self.iter(retry_state=retry_state)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 371, in iter
+    result = action(retry_state)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 413, in exc_check
+    raise retry_exc.reraise()
+          ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 184, in reraise
+    raise self.last_attempt.result()
+          ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py", line 443, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py", line 395, in __get_result
+    raise self._exception
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 473, in __call__
+    result = fn(*args, **kwargs)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\_api_client.py", line 1464, in _request_once
+    errors.APIError.raise_for_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\errors.py", line 155, in raise_for_response
+    cls.raise_error(response.status_code, response_json, response)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\errors.py", line 184, in raise_error
+    raise ClientError(status_code, response_json, response)
+google.genai.errors.ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-2.5-flash\nPlease retry in 3.961257263s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash'}, 'quotaValue': '5'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '3s'}]}}
+2026-07-24 22:59:54,749 | INFO | Gemini response generated successfully.
+2026-07-24 22:59:54,750 | INFO | Chat response generated successfully.
+2026-07-24 22:59:55,004 | INFO | User: ;v.,mbss
+2026-07-24 22:59:55,004 | INFO | User Message: ;v.,mbss
+2026-07-24 22:59:55,290 | ERROR | Gemini Text Generation Failed
+Traceback (most recent call last):
+  File "C:\Users\S.RAKESH GOUD\Desktop\SRG\SRG_AI\backend\services\gemini_service.py", line 26, in generate_text
+    response = client.models.generate_content(
+        model=Config.GEMINI_MODEL,
+        contents=prompt
+    )
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\models.py", line 6558, in generate_content
+    response = self._generate_content(
+        model=model, contents=contents, config=parsed_config_to_call
+    )
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\models.py", line 4986, in _generate_content
+    response = self._api_client.request(
+        'post', path, request_dict, http_options
+    )
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\_api_client.py", line 1700, in request
+    response = self._request(http_request, http_options, stream=False)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\_api_client.py", line 1487, in _request
+    return self._retry(self._request_once, http_request, stream)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 470, in __call__
+    do = self.iter(retry_state=retry_state)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 371, in iter
+    result = action(retry_state)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 413, in exc_check
+    raise retry_exc.reraise()
+          ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 184, in reraise
+    raise self.last_attempt.result()
+          ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py", line 443, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py", line 395, in __get_result
+    raise self._exception
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 473, in __call__
+    result = fn(*args, **kwargs)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\_api_client.py", line 1464, in _request_once
+    errors.APIError.raise_for_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\errors.py", line 155, in raise_for_response
+    cls.raise_error(response.status_code, response_json, response)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\errors.py", line 184, in raise_error
+    raise ClientError(status_code, response_json, response)
+google.genai.errors.ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-2.5-flash\nPlease retry in 3.512080693s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash'}, 'quotaValue': '5'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '3s'}]}}
+2026-07-24 22:59:55,296 | INFO | Gemini response generated successfully.
+2026-07-24 22:59:55,298 | INFO | Chat response generated successfully.
+2026-07-24 22:59:55,546 | INFO | User: v;v.svv
+2026-07-24 22:59:55,546 | INFO | User Message: v;v.svv
+2026-07-24 22:59:55,909 | ERROR | Gemini Text Generation Failed
+Traceback (most recent call last):
+  File "C:\Users\S.RAKESH GOUD\Desktop\SRG\SRG_AI\backend\services\gemini_service.py", line 26, in generate_text
+    response = client.models.generate_content(
+        model=Config.GEMINI_MODEL,
+        contents=prompt
+    )
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\models.py", line 6558, in generate_content
+    response = self._generate_content(
+        model=model, contents=contents, config=parsed_config_to_call
+    )
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\models.py", line 4986, in _generate_content
+    response = self._api_client.request(
+        'post', path, request_dict, http_options
+    )
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\_api_client.py", line 1700, in request
+    response = self._request(http_request, http_options, stream=False)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\_api_client.py", line 1487, in _request
+    return self._retry(self._request_once, http_request, stream)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 470, in __call__
+    do = self.iter(retry_state=retry_state)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 371, in iter
+    result = action(retry_state)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 413, in exc_check
+    raise retry_exc.reraise()
+          ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 184, in reraise
+    raise self.last_attempt.result()
+          ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py", line 443, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py", line 395, in __get_result
+    raise self._exception
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 473, in __call__
+    result = fn(*args, **kwargs)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\_api_client.py", line 1464, in _request_once
+    errors.APIError.raise_for_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\errors.py", line 155, in raise_for_response
+    cls.raise_error(response.status_code, response_json, response)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\errors.py", line 184, in raise_error
+    raise ClientError(status_code, response_json, response)
+google.genai.errors.ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-2.5-flash\nPlease retry in 2.965444482s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash'}, 'quotaValue': '5'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '2s'}]}}
+2026-07-24 22:59:55,914 | INFO | Gemini response generated successfully.
+2026-07-24 22:59:55,915 | INFO | Chat response generated successfully.
+2026-07-24 22:59:55,974 | INFO | User: ;;vknbv
+2026-07-24 22:59:55,974 | INFO | User Message: ;;vknbv
+2026-07-24 22:59:56,151 | ERROR | Gemini Text Generation Failed
+Traceback (most recent call last):
+  File "C:\Users\S.RAKESH GOUD\Desktop\SRG\SRG_AI\backend\services\gemini_service.py", line 26, in generate_text
+    response = client.models.generate_content(
+        model=Config.GEMINI_MODEL,
+        contents=prompt
+    )
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\models.py", line 6558, in generate_content
+    response = self._generate_content(
+        model=model, contents=contents, config=parsed_config_to_call
+    )
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\models.py", line 4986, in _generate_content
+    response = self._api_client.request(
+        'post', path, request_dict, http_options
+    )
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\_api_client.py", line 1700, in request
+    response = self._request(http_request, http_options, stream=False)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\_api_client.py", line 1487, in _request
+    return self._retry(self._request_once, http_request, stream)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 470, in __call__
+    do = self.iter(retry_state=retry_state)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 371, in iter
+    result = action(retry_state)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 413, in exc_check
+    raise retry_exc.reraise()
+          ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 184, in reraise
+    raise self.last_attempt.result()
+          ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py", line 443, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py", line 395, in __get_result
+    raise self._exception
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 473, in __call__
+    result = fn(*args, **kwargs)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\_api_client.py", line 1464, in _request_once
+    errors.APIError.raise_for_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\errors.py", line 155, in raise_for_response
+    cls.raise_error(response.status_code, response_json, response)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\errors.py", line 184, in raise_error
+    raise ClientError(status_code, response_json, response)
+google.genai.errors.ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-2.5-flash\nPlease retry in 2.561075093s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-2.5-flash', 'location': 'global'}, 'quotaValue': '5'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '2s'}]}}
+2026-07-24 22:59:56,156 | INFO | Gemini response generated successfully.
+2026-07-24 22:59:56,156 | INFO | Chat response generated successfully.
+2026-07-24 22:59:56,454 | INFO | User: slv;vkbs
+2026-07-24 22:59:56,454 | INFO | User Message: slv;vkbs
+2026-07-24 22:59:56,645 | ERROR | Gemini Text Generation Failed
+Traceback (most recent call last):
+  File "C:\Users\S.RAKESH GOUD\Desktop\SRG\SRG_AI\backend\services\gemini_service.py", line 26, in generate_text
+    response = client.models.generate_content(
+        model=Config.GEMINI_MODEL,
+        contents=prompt
+    )
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\models.py", line 6558, in generate_content
+    response = self._generate_content(
+        model=model, contents=contents, config=parsed_config_to_call
+    )
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\models.py", line 4986, in _generate_content
+    response = self._api_client.request(
+        'post', path, request_dict, http_options
+    )
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\_api_client.py", line 1700, in request
+    response = self._request(http_request, http_options, stream=False)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\_api_client.py", line 1487, in _request
+    return self._retry(self._request_once, http_request, stream)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 470, in __call__
+    do = self.iter(retry_state=retry_state)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 371, in iter
+    result = action(retry_state)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 413, in exc_check
+    raise retry_exc.reraise()
+          ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 184, in reraise
+    raise self.last_attempt.result()
+          ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py", line 443, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py", line 395, in __get_result
+    raise self._exception
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 473, in __call__
+    result = fn(*args, **kwargs)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\_api_client.py", line 1464, in _request_once
+    errors.APIError.raise_for_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\errors.py", line 155, in raise_for_response
+    cls.raise_error(response.status_code, response_json, response)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\errors.py", line 184, in raise_error
+    raise ClientError(status_code, response_json, response)
+google.genai.errors.ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-2.5-flash\nPlease retry in 2.06151052s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash'}, 'quotaValue': '5'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '2s'}]}}
+2026-07-24 22:59:56,651 | INFO | Gemini response generated successfully.
+2026-07-24 22:59:56,651 | INFO | Chat response generated successfully.
+2026-07-24 22:59:56,995 | INFO | User: vls;sknvn
+2026-07-24 22:59:56,995 | INFO | User Message: vls;sknvn
+2026-07-24 22:59:57,173 | ERROR | Gemini Text Generation Failed
+Traceback (most recent call last):
+  File "C:\Users\S.RAKESH GOUD\Desktop\SRG\SRG_AI\backend\services\gemini_service.py", line 26, in generate_text
+    response = client.models.generate_content(
+        model=Config.GEMINI_MODEL,
+        contents=prompt
+    )
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\models.py", line 6558, in generate_content
+    response = self._generate_content(
+        model=model, contents=contents, config=parsed_config_to_call
+    )
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\models.py", line 4986, in _generate_content
+    response = self._api_client.request(
+        'post', path, request_dict, http_options
+    )
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\_api_client.py", line 1700, in request
+    response = self._request(http_request, http_options, stream=False)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\_api_client.py", line 1487, in _request
+    return self._retry(self._request_once, http_request, stream)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 470, in __call__
+    do = self.iter(retry_state=retry_state)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 371, in iter
+    result = action(retry_state)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 413, in exc_check
+    raise retry_exc.reraise()
+          ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 184, in reraise
+    raise self.last_attempt.result()
+          ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py", line 443, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py", line 395, in __get_result
+    raise self._exception
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 473, in __call__
+    result = fn(*args, **kwargs)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\_api_client.py", line 1464, in _request_once
+    errors.APIError.raise_for_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\errors.py", line 155, in raise_for_response
+    cls.raise_error(response.status_code, response_json, response)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\errors.py", line 184, in raise_error
+    raise ClientError(status_code, response_json, response)
+google.genai.errors.ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-2.5-flash\nPlease retry in 1.537668537s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash'}, 'quotaValue': '5'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '1s'}]}}
+2026-07-24 22:59:57,182 | INFO | Gemini response generated successfully.
+2026-07-24 22:59:57,182 | INFO | Chat response generated successfully.
+2026-07-24 22:59:59,263 | INFO | User: lvvb
+2026-07-24 22:59:59,264 | INFO | User Message: lvvb
+2026-07-24 22:59:59,475 | ERROR | Gemini Text Generation Failed
+Traceback (most recent call last):
+  File "C:\Users\S.RAKESH GOUD\Desktop\SRG\SRG_AI\backend\services\gemini_service.py", line 26, in generate_text
+    response = client.models.generate_content(
+        model=Config.GEMINI_MODEL,
+        contents=prompt
+    )
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\models.py", line 6558, in generate_content
+    response = self._generate_content(
+        model=model, contents=contents, config=parsed_config_to_call
+    )
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\models.py", line 4986, in _generate_content
+    response = self._api_client.request(
+        'post', path, request_dict, http_options
+    )
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\_api_client.py", line 1700, in request
+    response = self._request(http_request, http_options, stream=False)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\_api_client.py", line 1487, in _request
+    return self._retry(self._request_once, http_request, stream)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 470, in __call__
+    do = self.iter(retry_state=retry_state)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 371, in iter
+    result = action(retry_state)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 413, in exc_check
+    raise retry_exc.reraise()
+          ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 184, in reraise
+    raise self.last_attempt.result()
+          ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py", line 443, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py", line 395, in __get_result
+    raise self._exception
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 473, in __call__
+    result = fn(*args, **kwargs)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\_api_client.py", line 1464, in _request_once
+    errors.APIError.raise_for_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\errors.py", line 155, in raise_for_response
+    cls.raise_error(response.status_code, response_json, response)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\errors.py", line 184, in raise_error
+    raise ClientError(status_code, response_json, response)
+google.genai.errors.ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-2.5-flash\nPlease retry in 59.232471875s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-2.5-flash', 'location': 'global'}, 'quotaValue': '5'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '59s'}]}}
+2026-07-24 22:59:59,480 | INFO | Gemini response generated successfully.
+2026-07-24 22:59:59,481 | INFO | Chat response generated successfully.
+2026-07-24 23:00:02,746 | INFO | User: hi
+2026-07-24 23:00:02,746 | INFO | User Message: hi
+2026-07-24 23:00:02,952 | ERROR | Gemini Text Generation Failed
+Traceback (most recent call last):
+  File "C:\Users\S.RAKESH GOUD\Desktop\SRG\SRG_AI\backend\services\gemini_service.py", line 26, in generate_text
+    response = client.models.generate_content(
+        model=Config.GEMINI_MODEL,
+        contents=prompt
+    )
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\models.py", line 6558, in generate_content
+    response = self._generate_content(
+        model=model, contents=contents, config=parsed_config_to_call
+    )
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\models.py", line 4986, in _generate_content
+    response = self._api_client.request(
+        'post', path, request_dict, http_options
+    )
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\_api_client.py", line 1700, in request
+    response = self._request(http_request, http_options, stream=False)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\_api_client.py", line 1487, in _request
+    return self._retry(self._request_once, http_request, stream)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 470, in __call__
+    do = self.iter(retry_state=retry_state)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 371, in iter
+    result = action(retry_state)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 413, in exc_check
+    raise retry_exc.reraise()
+          ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 184, in reraise
+    raise self.last_attempt.result()
+          ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py", line 443, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py", line 395, in __get_result
+    raise self._exception
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 473, in __call__
+    result = fn(*args, **kwargs)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\_api_client.py", line 1464, in _request_once
+    errors.APIError.raise_for_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\errors.py", line 155, in raise_for_response
+    cls.raise_error(response.status_code, response_json, response)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\errors.py", line 184, in raise_error
+    raise ClientError(status_code, response_json, response)
+google.genai.errors.ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-2.5-flash\nPlease retry in 55.748969201s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash'}, 'quotaValue': '5'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '55s'}]}}
+2026-07-24 23:00:02,957 | INFO | Gemini response generated successfully.
+2026-07-24 23:00:02,957 | INFO | Chat response generated successfully.
+2026-07-24 23:00:16,604 | INFO | User: hi
+2026-07-24 23:00:16,604 | INFO | User Message: hi
+2026-07-24 23:00:17,001 | ERROR | Gemini Text Generation Failed
+Traceback (most recent call last):
+  File "C:\Users\S.RAKESH GOUD\Desktop\SRG\SRG_AI\backend\services\gemini_service.py", line 26, in generate_text
+    response = client.models.generate_content(
+        model=Config.GEMINI_MODEL,
+        contents=prompt
+    )
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\models.py", line 6558, in generate_content
+    response = self._generate_content(
+        model=model, contents=contents, config=parsed_config_to_call
+    )
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\models.py", line 4986, in _generate_content
+    response = self._api_client.request(
+        'post', path, request_dict, http_options
+    )
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\_api_client.py", line 1700, in request
+    response = self._request(http_request, http_options, stream=False)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\_api_client.py", line 1487, in _request
+    return self._retry(self._request_once, http_request, stream)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 470, in __call__
+    do = self.iter(retry_state=retry_state)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 371, in iter
+    result = action(retry_state)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 413, in exc_check
+    raise retry_exc.reraise()
+          ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 184, in reraise
+    raise self.last_attempt.result()
+          ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py", line 443, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py", line 395, in __get_result
+    raise self._exception
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 473, in __call__
+    result = fn(*args, **kwargs)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\_api_client.py", line 1464, in _request_once
+    errors.APIError.raise_for_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\errors.py", line 155, in raise_for_response
+    cls.raise_error(response.status_code, response_json, response)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\errors.py", line 184, in raise_error
+    raise ClientError(status_code, response_json, response)
+google.genai.errors.ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-2.5-flash\nPlease retry in 41.722823097s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash'}, 'quotaValue': '5'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '41s'}]}}
+2026-07-24 23:00:17,006 | INFO | Gemini response generated successfully.
+2026-07-24 23:00:17,007 | INFO | Chat response generated successfully.
+2026-07-24 23:00:28,275 | INFO | User: hlo
+2026-07-24 23:00:28,275 | INFO | User Message: hlo
+2026-07-24 23:00:28,659 | ERROR | Gemini Text Generation Failed
+Traceback (most recent call last):
+  File "C:\Users\S.RAKESH GOUD\Desktop\SRG\SRG_AI\backend\services\gemini_service.py", line 26, in generate_text
+    response = client.models.generate_content(
+        model=Config.GEMINI_MODEL,
+        contents=prompt
+    )
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\models.py", line 6558, in generate_content
+    response = self._generate_content(
+        model=model, contents=contents, config=parsed_config_to_call
+    )
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\models.py", line 4986, in _generate_content
+    response = self._api_client.request(
+        'post', path, request_dict, http_options
+    )
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\_api_client.py", line 1700, in request
+    response = self._request(http_request, http_options, stream=False)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\_api_client.py", line 1487, in _request
+    return self._retry(self._request_once, http_request, stream)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 470, in __call__
+    do = self.iter(retry_state=retry_state)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 371, in iter
+    result = action(retry_state)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 413, in exc_check
+    raise retry_exc.reraise()
+          ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 184, in reraise
+    raise self.last_attempt.result()
+          ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py", line 443, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py", line 395, in __get_result
+    raise self._exception
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\tenacity\__init__.py", line 473, in __call__
+    result = fn(*args, **kwargs)
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\_api_client.py", line 1464, in _request_once
+    errors.APIError.raise_for_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\errors.py", line 155, in raise_for_response
+    cls.raise_error(response.status_code, response_json, response)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\S.RAKESH GOUD\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\google\genai\errors.py", line 184, in raise_error
+    raise ClientError(status_code, response_json, response)
+google.genai.errors.ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-2.5-flash\nPlease retry in 30.087637704s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.5-flash'}, 'quotaValue': '5'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '30s'}]}}
+2026-07-24 23:00:28,664 | INFO | Gemini response generated successfully.
+2026-07-24 23:00:28,664 | INFO | Chat response generated successfully.
+2026-07-25 00:34:49,167 | INFO | ============================================================
+2026-07-25 00:34:49,168 | INFO | SRG.ai Backend Started
+2026-07-25 00:34:49,168 | INFO | ============================================================
+2026-07-25 00:34:49,168 | INFO | Version   : 2.0
+2026-07-25 00:34:49,168 | INFO | Host      : 0.0.0.0
+2026-07-25 00:34:49,168 | INFO | Port      : 5000
+2026-07-25 00:34:49,168 | INFO | Debug     : True
+2026-07-25 00:34:49,168 | INFO | Templates : C:\Users\S.RAKESH GOUD\Desktop\SRG\SRG_AI\frontend\templates
+2026-07-25 00:34:49,168 | INFO | Static    : C:\Users\S.RAKESH GOUD\Desktop\SRG\SRG_AI\frontend\static
+2026-07-25 00:34:49,169 | INFO | ============================================================
+2026-07-25 00:34:49,169 | INFO | Starting SRG.ai Server...
+2026-07-25 00:43:48,328 | INFO | ============================================================
+2026-07-25 00:43:48,329 | INFO | SRG.ai Backend Started
+2026-07-25 00:43:48,329 | INFO | ============================================================
+2026-07-25 00:43:48,329 | INFO | Version   : 2.0
+2026-07-25 00:43:48,329 | INFO | Host      : 0.0.0.0
+2026-07-25 00:43:48,329 | INFO | Port      : 5000
+2026-07-25 00:43:48,329 | INFO | Debug     : True
+2026-07-25 00:43:48,329 | INFO | Templates : C:\Users\S.RAKESH GOUD\Desktop\SRG\SRG_AI\frontend\templates
+2026-07-25 00:43:48,329 | INFO | Static    : C:\Users\S.RAKESH GOUD\Desktop\SRG\SRG_AI\frontend\static
+2026-07-25 00:43:48,330 | INFO | ============================================================
+2026-07-25 00:43:48,330 | INFO | Starting SRG.ai Server...
+2026-07-25 00:43:49,354 | INFO | ============================================================
+2026-07-25 00:43:49,354 | INFO | SRG.ai Backend Started
+2026-07-25 00:43:49,354 | INFO | ============================================================
+2026-07-25 00:43:49,354 | INFO | Version   : 2.0
+2026-07-25 00:43:49,354 | INFO | Host      : 0.0.0.0
+2026-07-25 00:43:49,354 | INFO | Port      : 5000
+2026-07-25 00:43:49,354 | INFO | Debug     : True
+2026-07-25 00:43:49,355 | INFO | Templates : C:\Users\S.RAKESH GOUD\Desktop\SRG\SRG_AI\frontend\templates
+2026-07-25 00:43:49,355 | INFO | Static    : C:\Users\S.RAKESH GOUD\Desktop\SRG\SRG_AI\frontend\static
+2026-07-25 00:43:49,355 | INFO | ============================================================
+2026-07-25 00:43:49,355 | INFO | Starting SRG.ai Server...
+2026-07-25 00:44:50,576 | INFO | User: Explain Electronics.
+2026-07-25 00:44:50,577 | INFO | User Message: Explain Electronics.
+2026-07-25 00:45:07,860 | INFO | Gemini response generated successfully.
+2026-07-25 00:45:07,861 | INFO | Chat response generated successfully.
+2026-07-25 00:45:45,152 | INFO | User: hi
+2026-07-25 00:45:45,152 | INFO | User Message: hi
+2026-07-25 00:45:46,461 | INFO | Gemini response generated successfully.
+2026-07-25 00:45:46,461 | INFO | Chat response generated successfully.
+2026-07-25 00:46:09,342 | INFO | User: how areyou
+2026-07-25 00:46:09,342 | INFO | User Message: how areyou
+2026-07-25 00:46:10,886 | INFO | Gemini response generated successfully.
+2026-07-25 00:46:10,886 | INFO | Chat response generated successfully.
+2026-07-25 00:46:14,911 | INFO | User: how areyou
+2026-07-25 00:46:14,911 | INFO | User Message: how areyou
+2026-07-25 00:46:16,973 | INFO | Gemini response generated successfully.
+2026-07-25 00:46:16,973 | INFO | Chat response generated successfully.
+2026-07-25 01:44:50,741 | INFO | ============================================================
+2026-07-25 01:44:50,741 | INFO | SRG.ai Backend Started
+2026-07-25 01:44:50,741 | INFO | ============================================================
+2026-07-25 01:44:50,741 | INFO | Version   : 2.0
+2026-07-25 01:44:50,742 | INFO | Host      : 0.0.0.0
+2026-07-25 01:44:50,742 | INFO | Port      : 5000
+2026-07-25 01:44:50,742 | INFO | Debug     : True
+2026-07-25 01:44:50,742 | INFO | Templates : C:\Users\S.RAKESH GOUD\Desktop\SRG\SRG_AI\frontend\templates
+2026-07-25 01:44:50,742 | INFO | Static    : C:\Users\S.RAKESH GOUD\Desktop\SRG\SRG_AI\frontend\static
+2026-07-25 01:44:50,742 | INFO | ============================================================
+2026-07-25 01:44:50,742 | INFO | Starting SRG.ai Server...
+2026-07-25 01:44:51,793 | INFO | ============================================================
+2026-07-25 01:44:51,793 | INFO | SRG.ai Backend Started
+2026-07-25 01:44:51,793 | INFO | ============================================================
+2026-07-25 01:44:51,793 | INFO | Version   : 2.0
+2026-07-25 01:44:51,793 | INFO | Host      : 0.0.0.0
+2026-07-25 01:44:51,793 | INFO | Port      : 5000
+2026-07-25 01:44:51,793 | INFO | Debug     : True
+2026-07-25 01:44:51,793 | INFO | Templates : C:\Users\S.RAKESH GOUD\Desktop\SRG\SRG_AI\frontend\templates
+2026-07-25 01:44:51,794 | INFO | Static    : C:\Users\S.RAKESH GOUD\Desktop\SRG\SRG_AI\frontend\static
+2026-07-25 01:44:51,794 | INFO | ============================================================
+2026-07-25 01:44:51,794 | INFO | Starting SRG.ai Server...
+2026-07-26 23:20:57,990 | INFO | ============================================================
+2026-07-26 23:20:57,992 | INFO | SRG.ai Backend Started
+2026-07-26 23:20:57,992 | INFO | ============================================================
+2026-07-26 23:20:57,992 | INFO | Version   : 2.0
+2026-07-26 23:20:57,992 | INFO | Host      : 0.0.0.0
+2026-07-26 23:20:57,992 | INFO | Port      : 5000
+2026-07-26 23:20:57,992 | INFO | Debug     : True
+2026-07-26 23:20:57,992 | INFO | Templates : C:\Users\S.RAKESH GOUD\Desktop\SRG\SRG_AI\frontend\templates
+2026-07-26 23:20:57,992 | INFO | Static    : C:\Users\S.RAKESH GOUD\Desktop\SRG\SRG_AI\frontend\static
+2026-07-26 23:20:57,992 | INFO | ============================================================
+2026-07-26 23:20:57,992 | INFO | Starting SRG.ai Server...
+2026-07-26 23:20:59,165 | INFO | ============================================================
+2026-07-26 23:20:59,165 | INFO | SRG.ai Backend Started
+2026-07-26 23:20:59,165 | INFO | ============================================================
+2026-07-26 23:20:59,165 | INFO | Version   : 2.0
+2026-07-26 23:20:59,165 | INFO | Host      : 0.0.0.0
+2026-07-26 23:20:59,166 | INFO | Port      : 5000
+2026-07-26 23:20:59,166 | INFO | Debug     : True
+2026-07-26 23:20:59,166 | INFO | Templates : C:\Users\S.RAKESH GOUD\Desktop\SRG\SRG_AI\frontend\templates
+2026-07-26 23:20:59,166 | INFO | Static    : C:\Users\S.RAKESH GOUD\Desktop\SRG\SRG_AI\frontend\static
+2026-07-26 23:20:59,166 | INFO | ============================================================
+2026-07-26 23:20:59,166 | INFO | Starting SRG.ai Server...

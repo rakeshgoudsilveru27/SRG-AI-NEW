@@ -1,0 +1,583 @@
+/* ==========================================================
+   SRG.ai Frontend V2
+   Sidebar
+========================================================== */
+
+/* ==========================
+   Sidebar Container
+========================== */
+
+.sidebar{
+
+    padding:22px 18px;
+
+}
+
+/* ==========================
+   Logo
+========================== */
+
+.logo{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    padding-bottom:25px;
+
+    border-bottom:1px solid var(--border);
+
+}
+
+.logo img{
+
+    width:46px;
+
+    height:46px;
+
+    border-radius:12px;
+
+    object-fit:cover;
+
+    box-shadow:0 0 18px rgba(59,130,246,.35);
+
+}
+
+.logo h2{
+
+    font-size:24px;
+
+    font-weight:700;
+
+    letter-spacing:.5px;
+
+}
+
+/* ==========================
+   New Chat Button
+========================== */
+
+.new-chat{
+
+    width:100%;
+
+    margin-top:25px;
+
+    height:52px;
+
+    border-radius:14px;
+
+    background:linear-gradient(
+        135deg,
+        #2563eb,
+        #3b82f6
+    );
+
+    color:white;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:10px;
+
+    transition:.25s;
+
+}
+
+.new-chat:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 10px 25px rgba(59,130,246,.35);
+
+}
+
+/* ==========================
+   Search Box
+========================== */
+
+.search-box{
+
+    margin-top:22px;
+
+}
+
+.search-box input{
+
+    width:100%;
+
+    height:46px;
+
+    border-radius:12px;
+
+    background:var(--surface-light);
+
+    color:var(--text);
+
+    padding:0 18px;
+
+    border:1px solid transparent;
+
+    transition:.25s;
+
+}
+
+.search-box input:focus{
+
+    border-color:var(--primary);
+
+}
+
+.search-box input::placeholder{
+
+    color:var(--text-secondary);
+
+}
+
+/* ==========================
+   Chat History
+========================== */
+
+.chat-history{
+
+    flex:1;
+
+    overflow-y:auto;
+
+    overflow-x:visible;
+
+    margin-top:22px;
+
+    padding-right:6px;
+
+}
+
+/* Section Title */
+
+.history-title{
+
+    color:var(--text-secondary);
+
+    font-size:13px;
+
+    margin-bottom:12px;
+
+    text-transform:uppercase;
+
+    letter-spacing:1px;
+
+}
+
+/* History Item */
+
+.chat-item{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    width:100%;
+
+    padding:13px 14px;
+
+    margin-bottom:8px;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    color:var(--text-secondary);
+
+}
+
+.chat-item i{
+
+    width:18px;
+
+    text-align:center;
+
+}
+
+/* Hover */
+
+.chat-item:hover{
+
+    background:var(--surface-light);
+
+    color:white;
+
+}
+
+/* Active Chat */
+
+.chat-item.active{
+
+    background:rgba(59,130,246,.15);
+
+    color:white;
+
+    border:1px solid rgba(59,130,246,.35);
+
+}
+
+/* Chat Name */
+
+.chat-name{
+
+    flex:1;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+    white-space:nowrap;
+
+    font-size:14px;
+
+}
+
+/* ==========================
+   Bottom Area
+========================== */
+
+.sidebar-bottom{
+
+    border-top:1px solid var(--border);
+
+    padding-top:20px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:12px;
+
+}
+
+/* Bottom Buttons */
+
+.sidebar-bottom button{
+
+    width:48px;
+
+    height:48px;
+
+    border-radius:12px;
+
+    background:var(--surface-light);
+
+    color:var(--text);
+
+    font-size:17px;
+
+    transition:.25s;
+
+}
+
+.sidebar-bottom button:hover{
+
+    background:var(--primary);
+
+    color:white;
+
+}
+
+/* ==========================
+   User Card
+========================== */
+
+.user-card{
+
+    margin-top:18px;
+
+    padding:12px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    border-radius:14px;
+
+    background:var(--surface-light);
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.user-card:hover{
+
+    transform:translateY(-2px);
+
+}
+
+.user-avatar{
+
+    width:44px;
+
+    height:44px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+}
+
+.user-info{
+
+    flex:1;
+
+}
+
+.user-info h4{
+
+    font-size:14px;
+
+    font-weight:600;
+
+}
+
+.user-info p{
+
+    font-size:12px;
+
+    color:var(--text-secondary);
+
+    margin-top:3px;
+
+}
+
+/* ==========================
+   Sidebar Divider
+========================== */
+
+.divider{
+
+    height:1px;
+
+    background:var(--border);
+
+    margin:18px 0;
+
+}
+
+/* ==========================
+   Notification Badge
+========================== */
+
+.badge{
+
+    min-width:20px;
+
+    height:20px;
+
+    padding:0 6px;
+
+    border-radius:20px;
+
+    background:var(--primary);
+
+    color:white;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:11px;
+
+    font-weight:600;
+
+}
+
+/* ==========================
+   Sidebar Animation
+========================== */
+
+.chat-item,
+.new-chat,
+.sidebar-bottom button,
+.user-card{
+
+    transition:all .25s ease;
+
+}
+
+/* ==========================================================
+   History Menu
+========================================================== */
+
+.chat-item{
+
+    position:relative;
+
+    justify-content:space-between;
+
+}
+
+.chat-left{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    flex:1;
+
+    overflow:hidden;
+
+}
+
+.chat-right{
+
+    display:flex;
+
+    align-items:center;
+
+}
+
+.chat-title{
+
+    flex:1;
+
+    overflow:hidden;
+
+    white-space:nowrap;
+
+    text-overflow:ellipsis;
+
+    font-size:14px;
+
+}
+
+.chat-menu-btn{
+
+    width:34px;
+
+    height:34px;
+
+    border-radius:8px;
+
+    background:transparent;
+
+    color:var(--text-secondary);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    transition:.2s;
+
+}
+
+.chat-menu-btn:hover{
+
+    background:var(--surface-light);
+
+    color:white;
+
+}
+
+.history-menu{
+
+    position:absolute;
+
+    right:10px;
+
+    top:48px;
+
+    width:180px;
+
+    background:var(--surface);
+
+    border:1px solid var(--border);
+
+    border-radius:12px;
+
+        opacity:0;
+
+    visibility:hidden;
+
+    transform:translateY(-8px);
+
+    pointer-events:none;
+
+    transition:
+        opacity .2s,
+        transform .2s,
+        visibility .2s;
+
+    flex-direction:column;
+
+    overflow:hidden;
+
+    z-index:9999;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.35);
+
+}
+
+.history-menu.show{
+
+    display:flex;
+
+    opacity:1;
+
+    visibility:visible;
+
+    transform:translateY(0);
+
+    pointer-events:auto;
+
+}
+.history-menu button{
+
+    width:100%;
+
+    background:none;
+
+    border:none;
+
+    padding:12px 16px;
+
+    text-align:left;
+
+    cursor:pointer;
+
+    color:var(--text);
+
+    transition:.2s;
+
+    font-size:14px;
+
+}
+
+.history-menu button:hover{
+
+    background:var(--surface-light);
+
+    color:var(--primary);
+
+}

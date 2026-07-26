@@ -1,0 +1,565 @@
+/* ==========================================================
+   SRG.ai Frontend V2
+   Chat Styles
+==========================================================*/
+
+/* ==========================
+   Chat Container
+==========================*/
+
+.chat-area{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:28px;
+
+    padding:40px;
+
+    overflow-y:auto;
+
+}
+
+/* ==========================
+   Message Row
+==========================*/
+
+.message{
+
+    display:flex;
+
+    width:100%;
+
+    animation:messageFade .35s ease;
+
+}
+
+/* ==========================
+   User Message
+==========================*/
+
+.message.user{
+
+    justify-content:flex-end;
+
+}
+
+.message.user .bubble{
+
+    background:linear-gradient(
+        135deg,
+        #2563eb,
+        #3b82f6
+    );
+
+    color:white;
+
+    border-radius:22px 22px 6px 22px;
+
+}
+
+/* ==========================
+   AI Message
+==========================*/
+
+.message.ai{
+
+    justify-content:flex-start;
+
+}
+
+.message.ai .bubble{
+
+    background:var(--surface);
+
+    border:1px solid var(--border);
+
+    border-radius:22px 22px 22px 6px;
+
+}
+
+/* ==========================
+   Bubble
+==========================*/
+
+.bubble{
+
+    max-width:78%;
+
+    padding:20px 24px;
+
+    font-size:16px;
+
+    line-height:1.8;
+
+    position:relative;
+
+    word-wrap:break-word;
+
+    box-shadow:0 8px 25px rgba(0,0,0,.18);
+
+}
+
+/* ==========================
+   Avatar
+==========================*/
+
+.avatar{
+
+    width:42px;
+
+    height:42px;
+
+    border-radius:50%;
+
+    overflow:hidden;
+
+    margin-right:15px;
+
+    flex-shrink:0;
+
+}
+
+.avatar img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+}
+
+/* ==========================
+   AI Layout
+==========================*/
+
+.ai-wrapper{
+
+    display:flex;
+
+    align-items:flex-start;
+
+}
+
+/* ==========================
+   Markdown
+==========================*/
+
+.bubble h1,
+.bubble h2,
+.bubble h3{
+
+    margin-bottom:16px;
+
+}
+
+.bubble p{
+
+    margin-bottom:15px;
+
+}
+
+.bubble ul{
+
+    margin-left:22px;
+
+    margin-bottom:15px;
+
+}
+
+.bubble ol{
+
+    margin-left:22px;
+
+    margin-bottom:15px;
+
+}
+
+.bubble li{
+
+    margin-bottom:8px;
+
+}
+
+/* ==========================
+   Links
+==========================*/
+
+.bubble a{
+
+    color:#60a5fa;
+
+}
+
+.bubble a:hover{
+
+    text-decoration:underline;
+
+}
+
+/* ==========================
+   Inline Code
+==========================*/
+
+.bubble code{
+
+    background:#111827;
+
+    color:#60a5fa;
+
+    padding:3px 8px;
+
+    border-radius:6px;
+
+    font-size:14px;
+
+}
+
+/* ==========================
+   Code Block
+==========================*/
+
+.bubble pre{
+
+    margin-top:18px;
+
+    margin-bottom:18px;
+
+    background:#050816;
+
+    border-radius:14px;
+
+    overflow:auto;
+
+    padding:20px;
+
+    border:1px solid rgba(255,255,255,.06);
+
+}
+
+.bubble pre code{
+
+    background:none;
+
+    padding:0;
+
+    color:#f8fafc;
+
+    font-size:14px;
+
+    line-height:1.7;
+
+}
+
+/* ==========================
+   Images
+==========================*/
+
+.chat-image{
+
+    max-width:320px;
+
+    border-radius:16px;
+
+    margin-top:12px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.chat-image:hover{
+
+    transform:scale(1.02);
+
+}
+
+/* ==========================
+   Time
+==========================*/
+
+.time{
+
+    margin-top:10px;
+
+    font-size:12px;
+
+    color:var(--text-secondary);
+
+}
+
+/* ==========================
+   Actions
+==========================*/
+
+.actions{
+
+    display:flex;
+
+    gap:10px;
+
+    margin-top:15px;
+
+}
+
+.actions button{
+
+    width:34px;
+
+    height:34px;
+
+    border-radius:10px;
+
+    background:var(--surface-light);
+
+    color:var(--text-secondary);
+
+    transition:.25s;
+
+}
+
+.actions button:hover{
+
+    background:var(--primary);
+
+    color:white;
+
+}
+
+/* ==========================
+   Typing
+==========================*/
+
+.typing{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    margin-top:10px;
+
+}
+
+.dot{
+
+    width:10px;
+
+    height:10px;
+
+    border-radius:50%;
+
+    background:#60a5fa;
+
+    animation:typing 1.2s infinite;
+
+}
+
+.dot:nth-child(2){
+
+    animation-delay:.2s;
+
+}
+
+.dot:nth-child(3){
+
+    animation-delay:.4s;
+
+}
+
+@keyframes typing{
+
+    0%{
+
+        transform:translateY(0);
+
+        opacity:.4;
+
+    }
+
+    50%{
+
+        transform:translateY(-6px);
+
+        opacity:1;
+
+    }
+
+    100%{
+
+        transform:translateY(0);
+
+        opacity:.4;
+
+    }
+
+}
+
+/* ==========================
+   Fade Animation
+==========================*/
+
+@keyframes messageFade{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(20px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* ==========================
+   Mobile
+==========================*/
+
+@media(max-width:768px){
+
+    .chat-area{
+
+        padding:20px;
+
+    }
+
+    .bubble{
+
+        max-width:95%;
+
+        font-size:15px;
+
+        padding:16px;
+
+    }
+
+    .avatar{
+
+        width:36px;
+
+        height:36px;
+
+    }
+
+}
+/* ==========================================================
+   Markdown
+========================================================== */
+
+.markdown-body{
+
+    line-height:1.8;
+
+    color:var(--text-color);
+
+}
+
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3{
+
+    margin:18px 0 10px;
+
+}
+
+.markdown-body p{
+
+    margin:10px 0;
+
+}
+
+.markdown-body ul,
+.markdown-body ol{
+
+    margin-left:22px;
+
+}
+
+.markdown-body li{
+
+    margin:6px 0;
+
+}
+
+.markdown-body code{
+
+    padding:3px 6px;
+
+    border-radius:6px;
+
+    background:rgba(255,255,255,.08);
+
+    font-family:Consolas, monospace;
+
+}
+
+.markdown-body pre{
+
+    overflow:auto;
+
+    border-radius:12px;
+
+    padding:16px;
+
+    background:#0d1117;
+
+    margin:15px 0;
+
+}
+
+.markdown-body pre code{
+
+    background:none;
+
+    padding:0;
+
+}
+
+.markdown-body blockquote{
+
+    border-left:4px solid var(--primary);
+
+    padding-left:14px;
+
+    margin:14px 0;
+
+    color:var(--text-secondary);
+
+}
+
+.markdown-body table{
+
+    border-collapse:collapse;
+
+    width:100%;
+
+    margin:16px 0;
+
+}
+
+.markdown-body th,
+.markdown-body td{
+
+    border:1px solid var(--border);
+
+    padding:10px;
+
+}
+
+.markdown-body th{
+
+    background:var(--surface-light);
+
+}

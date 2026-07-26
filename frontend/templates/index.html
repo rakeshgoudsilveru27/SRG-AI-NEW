@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>SRG.ai</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/base.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/layout.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/sidebar.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/chat.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/input.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/responsive.css') }}">
+
+</head>
+
+<body>
+
+<div
+    class="sidebar-overlay"
+    id="sidebarOverlay">
+</div>
+
+<div class="app">
+
+    <!-- Loading Screen -->
+<div id="loadingScreen" class="loading-screen">
+
+    <img src="{{ url_for('static', filename='images/logo.png') }}"
+         alt="SRG.ai Logo">
+
+    <h2>SRG.ai</h2>
+
+    <p>Initializing...</p>
+
+</div>
+
+    <!-- ========================= -->
+    <!-- Sidebar -->
+    <!-- ========================= -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <img src="{{ url_for('static', filename='images/logo.png') }}"
+                 alt="SRG.ai Logo">
+
+            <h2>SRG.ai</h2>
+
+        </div>
+
+        <button class="new-chat" id="newChatBtn">
+
+            <i class="fa-solid fa-plus"></i>
+
+            New Chat
+
+        </button>
+
+        <div class="search-box">
+
+    <i class="fa-solid fa-magnifying-glass"></i>
+
+    <input
+        id="searchChats"
+        type="text"
+        placeholder="Search chats...">
+
+</div>
+
+        <div
+            class="chat-history"
+            id="chatHistory">
+
+        </div>
+
+        <div class="sidebar-bottom">
+
+           <button
+id="themeBtn"
+title="Toggle Theme"
+aria-label="Toggle Theme">
+
+                <i class="fa-solid fa-moon"></i>
+
+            </button>
+
+            <button
+    id="settingsBtn"
+    title="Settings">
+
+    <i class="fa-solid fa-gear"></i>
+
+</button>
+
+        </div>
+
+    </aside>
+
+    <!-- ========================= -->
+    <!-- Main -->
+    <!-- ========================= -->
+
+    <main class="main">
+
+        <!-- Navbar -->
+
+        <header class="navbar">
+
+    <button
+    class="menu-btn"
+    id="menuBtn"
+    aria-label="Open Menu">
+
+        <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <h1>SRG.ai</h1>
+
+    <div class="profile">
+
+    <img
+        id="profileImage"
+        src="{{ url_for('static', filename='images/logo.png') }}"
+        alt="Profile">
+
+</div>
+
+</header>
+
+        <!-- Welcome -->
+
+        <section
+            class="welcome"
+            id="welcomeScreen">
+
+            <h1>
+
+                Welcome to
+
+                <span>SRG.ai</span>
+
+            </h1>
+
+            <p>
+
+                Electronics • Embedded AI • Robotics • Programming
+
+            </p>
+
+            <div class="prompt-grid">
+
+                <button
+    class="quick-prompt"
+    data-prompt="Explain Embedded Systems">
+
+    ⚡ Embedded Systems
+
+</button>
+
+                <button
+    class="quick-prompt"
+    data-prompt="Explain Robotics.">
+
+    🤖 Robotics
+
+</button>
+
+<button
+    class="quick-prompt"
+    data-prompt="Teach me Programming.">
+
+    💻 Programming
+
+</button>
+
+<button
+    class="quick-prompt"
+    data-prompt="Explain Electronics.">
+
+    📡 Electronics
+
+</button>
+
+<button
+    class="quick-prompt"
+    data-prompt="Explain Artificial Intelligence.">
+
+    🧠 Artificial Intelligence
+
+</button>
+
+<button
+    class="quick-prompt"
+    data-prompt="Help me with research.">
+
+    🔍 Research
+
+</button>
+
+            </div>
+
+        </section>
+
+        <!-- Messages -->
+
+        <section
+    class="chat-area"
+    id="chatArea"
+    aria-live="polite">
+
+    <!-- AI and User messages will be added dynamically -->
+
+</section>
+
+        <!-- Typing -->
+
+        <div
+    class="typing"
+    id="typing"
+    style="display:none;">
+
+    SRG.ai is thinking...
+
+</div>
+
+        <!-- Input -->
+
+        <!-- ========================= -->
+<!-- Input -->
+<!-- ========================= -->
+
+<section class="input-container">
+
+    <div class="input-wrapper">
+
+        <button
+    class="icon-btn"
+    id="uploadBtn"
+    aria-label="Upload Image">
+
+            <i class="fa-solid fa-paperclip"></i>
+
+        </button>
+
+        <textarea
+    id="messageInput"
+    rows="1"
+    placeholder="Message SRG.ai..."
+    autocomplete="off"
+    spellcheck="false"></textarea>
+
+        <button
+    class="icon-btn"
+    id="voiceBtn"
+    aria-label="Voice Input">
+
+            <i class="fa-solid fa-microphone"></i>
+
+        </button>
+
+    </div>
+
+    <button
+    class="send-btn"
+    id="sendBtn"
+    aria-label="Send Message">
+
+        <i class="fa-solid fa-paper-plane"></i>
+
+    </button>
+
+</section>
+
+<footer class="chat-footer">
+
+    <p>
+    SRG.ai may generate inaccurate responses. Always verify important technical, engineering, and safety information.
+</p>
+
+</footer>        
+
+    </main>
+
+    <input
+    type="file"
+    id="imageInput"
+    accept="image/*"
+    hidden>
+
+</div>
+
+<!-- JS -->
+
+<script type="module"
+        src="{{ url_for('static', filename='js/app.js') }}">
+</script>
+
+<div id="toast" class="toast"></div>
+
+</body>
+
+</html>
