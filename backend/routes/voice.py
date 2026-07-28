@@ -100,7 +100,7 @@ def glasses_voice():
         # Speech To Text
         # ---------------------------------------------
 
-        transcript = DeepgramService.transcribe_audio(audio_data)
+        transcript = DeepgramService.transcribe(audio_data)
 
         if transcript is None:
 
